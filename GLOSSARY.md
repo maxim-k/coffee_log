@@ -28,6 +28,22 @@ _Avoid_: Cup, session, recipe
 A specific coffee grinder I own; each Brew uses exactly one.
 _Avoid_: Mill
 
+**Grind setting**:
+A position on one Grinder, written in that Grinder's own notation, such as
+`2-2-3` (two full rotations, then number 2, then three more Clicks).
+_Avoid_: Grind size (a Grind setting means nothing without its Grinder)
+
+**Click**:
+The smallest step a Grinder's adjustment can move.
+_Avoid_: Step, notch
+
+**Burr gap**:
+The real distance between a Grinder's burrs. It is the only measure that
+compares across Grinders, and it can differ from how far the adjustment
+moves the burr: on my A2 one Click moves the burr 18 µm but changes the Burr
+gap by 11 µm.
+_Avoid_: Grind size, burr travel
+
 **Brewer**:
 The device a Brew is made with, such as a V60; it stands for the brewing
 method.
