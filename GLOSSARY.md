@@ -11,6 +11,11 @@ of the same coffee vary, so the Bag, not the product, is the unit I rate and
 brew from.
 _Avoid_: Coffee (when meaning the thing I bought), purchase
 
+**Rating**:
+My score from 1 to 5, given to a Brew for that cup or to a Bag for the coffee
+as a whole.
+_Avoid_: Score, stars
+
 **Roaster**:
 The company that roasted and sold the coffee, such as SEY or Passenger.
 _Avoid_: Producer, brand
