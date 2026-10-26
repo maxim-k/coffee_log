@@ -52,7 +52,7 @@ _Avoid_: Step, notch
 The real distance between a Grinder's burrs. It is the only measure that
 compares across Grinders, and it can differ from how far the adjustment
 moves the burr: on my A2 one Click moves the burr 18 µm but changes the Burr
-gap by 11 µm.
+gap by roughly 11 µm, by my own estimate.
 _Avoid_: Grind size, burr travel
 
 **Brewer**:
