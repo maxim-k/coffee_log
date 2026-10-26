@@ -26,7 +26,7 @@ _Avoid_: Roaster, farmer
 
 **Brew**:
 One cup I made from a Bag, with its brewing parameters: dose, water
-temperature, grind setting, Grinder, Brewer and total brew time.
+temperature, grind setting, Grinder, Brewer, Water and total brew time.
 _Avoid_: Cup, session, recipe
 
 **Grinder**:
@@ -34,9 +34,15 @@ A specific coffee grinder I own; each Brew uses exactly one.
 _Avoid_: Mill
 
 **Grind setting**:
-A position on one Grinder, written in that Grinder's own notation, such as
-`2-2-3` (two full rotations, then number 2, then three more Clicks).
+A position on one Grinder, written as rotations-number-clicks, such as
+`2-2-3` (two full rotations, then number 2, then three more Clicks), together
+with the total Clicks from True zero.
 _Avoid_: Grind size (a Grind setting means nothing without its Grinder)
+
+**True zero**:
+The Click position where a Grinder's burrs just touch, counted from the
+Grinder's own 0 mark; negative when it sits before the mark (my A2's is −7).
+_Avoid_: Zero point, burr touch (when meaning the dial's 0 mark)
 
 **Click**:
 The smallest step a Grinder's adjustment can move.
@@ -53,3 +59,8 @@ _Avoid_: Grind size, burr travel
 The device a Brew is made with, such as a V60; it stands for the brewing
 method.
 _Avoid_: Dripper, method
+
+**Water**:
+A named water I brew with, such as NYC tap, distilled, or distilled with a
+mineral recipe added; each Brew uses one.
+_Avoid_: Water profile, recipe (a recipe is how a Water is made)
