@@ -35,8 +35,8 @@ _Avoid_: Mill
 
 **Grind setting**:
 A position on one Grinder, written as rotations-number-clicks, such as
-`2-2-3` (two full rotations, then number 2, then three more Clicks), together
-with the total Clicks from True zero.
+`2-2-3` (two full rotations, then number 2, then three more Clicks). Total
+Clicks from True zero follow from it and the Grinder.
 _Avoid_: Grind size (a Grind setting means nothing without its Grinder)
 
 **True zero**:
