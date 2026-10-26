@@ -1,0 +1,30 @@
+{
+  "types": {
+    "date": "date",
+    "roast_date": "date",
+    "open_date": "date",
+    "variety": "multitext",
+    "rating": "number",
+    "price_paid": "number",
+    "bag_size_g": "number",
+    "dose_g": "number",
+    "water_g": "number",
+    "temperature_c": "number",
+    "true_zero": "number",
+    "clicks_per_rotation": "number",
+    "clicks_per_number": "number",
+    "travel_per_click_um": "number",
+    "burr_gap_per_click_um": "number",
+    "hardness_caco3_mg_l": "number",
+    "alkalinity_caco3_mg_l": "number",
+    "calcium_mg_l": "number",
+    "magnesium_mg_l": "number",
+    "sodium_mg_l": "number",
+    "potassium_mg_l": "number",
+    "bicarbonate_mg_l": "number",
+    "sulfate_mg_l": "number",
+    "chloride_mg_l": "number",
+    "tds_mg_l": "number",
+    "ph": "number"
+  }
+}
