@@ -56,8 +56,8 @@ gap by roughly 11 µm, by my own estimate.
 _Avoid_: Grind size, burr travel
 
 **Brewer**:
-The device a Brew is made with, such as a V60; it stands for the brewing
-method.
+The device I make a Brew with, such as a Hario V60 or an Orea O1; it stands
+for the brewing method.
 _Avoid_: Dripper, method
 
 **Water**:

@@ -1,5 +1,6 @@
 ---
-shape:
+manufacturer:
+model:
 material:
 ---
 
