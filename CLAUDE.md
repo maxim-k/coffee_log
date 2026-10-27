@@ -8,7 +8,9 @@ before changing how a note kind is structured, and keep them current.
 
 One folder per note kind, one template per kind in `Templates/`. A new note
 starts from its template. Photos and PDFs are saved into `Attachments/`, never
-hot-linked.
+hot-linked. `00_Meta/` holds upkeep tools: open `00_Meta/Unfilled fields.base`
+to see which notes still have empty properties, and add a property there when
+a template gains one.
 
 ## Conventions
 
@@ -27,8 +29,8 @@ hot-linked.
 
 ## Not now
 
-- Bases views: the user is collecting data first. Bases, not Dataview, when
-  the time comes.
+- Bases views for analysis: the user is collecting data first. Bases, not
+  Dataview, when the time comes. The `00_Meta` report is the one exception.
 - Normalizing roaster text into numbers (elevation ranges, prices).
 - Water notes beyond NYC Tap and Distilled.
 

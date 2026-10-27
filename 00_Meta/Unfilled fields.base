@@ -1,0 +1,157 @@
+# Notes with at least one empty property, one view per note kind.
+# A blank cell is the missing field.
+views:
+  - type: table
+    name: Bags
+    filters:
+      and:
+        - 'file.inFolder("Bags")'
+        - or:
+            - 'roaster.isEmpty()'
+            - 'name.isEmpty()'
+            - 'product_url.isEmpty()'
+            - 'photo.isEmpty()'
+            - 'roast_date.isEmpty()'
+            - 'open_date.isEmpty()'
+            - 'bag_size_g.isEmpty()'
+            - 'price_paid.isEmpty()'
+            - 'rating.isEmpty()'
+            - 'producer.isEmpty()'
+            - 'country.isEmpty()'
+            - 'region.isEmpty()'
+            - 'farm.isEmpty()'
+            - 'lot.isEmpty()'
+            - 'variety.isEmpty()'
+            - 'process.isEmpty()'
+            - 'elevation.isEmpty()'
+            - 'roast_level.isEmpty()'
+            - 'tasting_notes.isEmpty()'
+    order:
+      - file.name
+      - roaster
+      - name
+      - product_url
+      - photo
+      - roast_date
+      - open_date
+      - bag_size_g
+      - price_paid
+      - rating
+      - producer
+      - country
+      - region
+      - farm
+      - lot
+      - variety
+      - process
+      - elevation
+      - roast_level
+      - tasting_notes
+  - type: table
+    name: Brews
+    filters:
+      and:
+        - 'file.inFolder("Brews")'
+        - or:
+            - 'bag.isEmpty()'
+            - 'grinder.isEmpty()'
+            - 'grind.isEmpty()'
+            - 'brewer.isEmpty()'
+            - 'water.isEmpty()'
+            - 'filter_paper.isEmpty()'
+            - 'dose_g.isEmpty()'
+            - 'water_g.isEmpty()'
+            - 'ratio.isEmpty()'
+            - 'temperature_c.isEmpty()'
+            - 'total_time.isEmpty()'
+            - 'pour.isEmpty()'
+            - 'rating.isEmpty()'
+    order:
+      - file.name
+      - bag
+      - grinder
+      - grind
+      - brewer
+      - water
+      - filter_paper
+      - dose_g
+      - water_g
+      - ratio
+      - temperature_c
+      - total_time
+      - pour
+      - rating
+  - type: table
+    name: Roasters
+    filters:
+      and:
+        - 'file.inFolder("Roasters")'
+        - or:
+            - 'website.isEmpty()'
+            - 'city.isEmpty()'
+            - 'country.isEmpty()'
+    order:
+      - file.name
+      - website
+      - city
+      - country
+  - type: table
+    name: Producers
+    filters:
+      and:
+        - 'file.inFolder("Producers")'
+        - or:
+            - 'country.isEmpty()'
+            - 'region.isEmpty()'
+    order:
+      - file.name
+      - country
+      - region
+  - type: table
+    name: Brewers
+    filters:
+      and:
+        - 'file.inFolder("Brewers")'
+        - or:
+            - 'manufacturer.isEmpty()'
+            - 'model.isEmpty()'
+            - 'material.isEmpty()'
+    order:
+      - file.name
+      - manufacturer
+      - model
+      - material
+  - type: table
+    name: Grinders
+    filters:
+      and:
+        - 'file.inFolder("Grinders")'
+        - or:
+            - 'burr_type.isEmpty()'
+            - 'true_zero.isEmpty()'
+            - 'clicks_per_rotation.isEmpty()'
+            - 'clicks_per_number.isEmpty()'
+            - 'travel_per_click_um.isEmpty()'
+            - 'burr_gap_per_click_um.isEmpty()'
+    order:
+      - file.name
+      - burr_type
+      - true_zero
+      - clicks_per_rotation
+      - clicks_per_number
+      - travel_per_click_um
+      - burr_gap_per_click_um
+  - type: table
+    name: Waters
+    filters:
+      and:
+        - 'file.inFolder("Waters")'
+        - or:
+            - 'kind.isEmpty()'
+            - 'hardness_caco3_mg_l.isEmpty()'
+            - 'alkalinity_caco3_mg_l.isEmpty()'
+    order:
+      - file.name
+      - kind
+      - hardness_caco3_mg_l
+      - alkalinity_caco3_mg_l
