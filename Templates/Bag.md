@@ -7,7 +7,6 @@ roast_date:
 open_date:
 bag_size_g:
 price_paid:
-currency:
 rating:
 producer:
 country:
@@ -25,9 +24,9 @@ tasting_notes:
 
 %% Name the note `Roaster – Coffee – roast date`. Copy the roaster's text exactly as the product page writes it, and leave fields empty when the page doesn't publish them. %%
 
-## Sourcing
+## Details
 
-%% One `Label: value` line for each detail the roaster publishes, as written: importer, harvest, farm gate price, FOB, DDP, `We Paid`, `Our Price`, contract date, frozen date, release date, lot volume, accolades. %%
+%% One `Label: value` line, as written, for each labeled detail on the page that has no property: importer, harvest, prices, dates, fermentation, and so on. %%
 
 ## Story
 

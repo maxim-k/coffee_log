@@ -6,27 +6,26 @@ photo: "[[Regalia Coffee – Chiroso Lot 7 – 2026-09-30.png]]"
 roast_date: 2026-09-30
 open_date:
 bag_size_g: 150
-price_paid:
-currency:
+price_paid: 23
 rating:
 producer: "[[Jorge Rojas]]"
 country: Colombia
 region: Planadas, Tolima, Colombia
 farm: Finca El Jardín
-lot:
+lot: Lot 7
 variety:
   - Chiroso
 process: Washed
 elevation: 2050 MASL
 roast_level:
-tasting_notes:
+tasting_notes: green apple and star fruit, with a lingering sweet caramel finish
 ---
 
 # Regalia Coffee – Chiroso Lot 7 – 2026-09-30
 
 ![[Regalia Coffee – Chiroso Lot 7 – 2026-09-30.png]]
 
-## Sourcing
+## Details
 
 Harvest: April 2026
 Fermentation: 12h in cherry, 16h in mucilage
