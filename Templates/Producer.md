@@ -1,7 +1,6 @@
 ---
 country:
 region:
-farm:
 ---
 
 # {{title}}
