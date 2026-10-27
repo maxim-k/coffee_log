@@ -16,9 +16,8 @@ The user gives one of: a product URL, a roaster plus a coffee name, or a photo
 of the bag (read the roaster, coffee and roast date off it). They may add the
 roast date, bag size and price paid.
 
-Done when you know the roaster, the coffee and the roast date. The roast date
-is printed on the bag and names the note, so ask for it when it's missing.
-This is the only question the skill asks.
+Done when you know the roaster and the coffee. Everything else is optional:
+write the note with what you have and ask nothing.
 
 ## 2. Find the product page
 
@@ -66,7 +65,9 @@ comments.
   fermentation, and the rest.
 - **Story:** the roaster's whole narrative, as written.
 
-Save it as `Bags/<Roaster> – <Coffee> – <YYYY-MM-DD>.md`, with en dashes.
+Save it as `Bags/<Roaster> – <Coffee> – <YYYY-MM-DD>.md`, with en dashes. With
+no roast date, save it as `Bags/<Roaster> – <Coffee>.md`; the user renames it
+in Obsidian once the date turns up.
 
 Done when every property and Details line traces back to the page or the
 user.
@@ -89,6 +90,6 @@ under the H1.
 
 ## 6. Report
 
-In a few lines: the note's name, the product page URL, any Roaster or
-Producer notes created, and a bare list of properties the page doesn't
-answer. Keep fetch mechanics out of the report.
+In a few lines: the note's name, the product page URL, and any Roaster or
+Producer notes created. Keep fetch mechanics out of the report; gaps show up
+in `00_Meta/Unfilled fields.base`.
