@@ -22,9 +22,20 @@ This is the only question the skill asks.
 
 ## 2. Find the product page
 
-Search for the coffee on the roaster's own site first. If the roaster has no
-page for it (sold out, removed), search the web for `beanbook <roaster>
-<coffee>` and use that page.
+Take the first source that has this coffee:
+
+1. The roaster's own product page.
+2. An archived copy of that page: query
+   `https://web.archive.org/cdx/search/cdx?url=<roaster-domain>/*&fl=original,timestamp&filter=statuscode:200`,
+   grep for the coffee, and fetch a hit as `https://web.archive.org/web/<timestamp>id_/<url>`
+   (the response may be gzipped). Try every snapshot of a page: one can hold
+   the description another lacks.
+3. every.coffee (`https://every.coffee/roaster/<roaster>/<coffee>`). It
+   blocks curl and WebFetch with a bot check, so read it in Chrome.
+4. Beanbook.
+
+Third-party sites that rewrite the roaster's text in their own words, such
+as The Way to Coffee, are not sources.
 
 Fetch the page with `curl -sL` into the scratchpad and read its text there.
 WebFetch returns a summary, which loses the exact wording. On Shopify sites
