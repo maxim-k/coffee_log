@@ -1,0 +1,151 @@
+# Quartz 5 config for the Coffee Log site. The Pages workflow copies this
+# file into a Quartz checkout as quartz.config.yaml.
+configuration:
+  pageTitle: Coffee Log
+  pageTitleSuffix: ""
+  enableSPA: true
+  enablePopovers: true
+  analytics: null
+  locale: en-US
+  baseUrl: maxim-k.github.io/coffee_log
+  ignorePatterns: []
+  defaultDateType: modified
+  theme:
+    fontOrigin: googleFonts
+    cdnCaching: true
+    typography:
+      header: Inter
+      body: Inter
+      code: IBM Plex Mono
+    # The design-system palette. Dark mode has the same colors, because
+    # the site has one light theme only.
+    colors:
+      lightMode: &colors
+        light: "#ffffff"
+        lightgray: "#dddddd"
+        gray: "#000000"
+        darkgray: "#000000"
+        dark: "#000000"
+        secondary: "#0064f0"
+        tertiary: "#0064f0"
+        highlight: rgba(0, 0, 0, 0)
+        textHighlight: "#ffe100"
+      darkMode: *colors
+plugins:
+  - source: github:quartz-community/created-modified-date
+    enabled: true
+    options:
+      # The build copies the notes out of git, so git has no dates for them.
+      priority:
+        - frontmatter
+        - filesystem
+    order: 10
+  - source: github:quartz-community/obsidian-flavored-markdown
+    enabled: true
+    options:
+      enableInHtmlEmbed: false
+      enableCheckbox: true
+    order: 30
+  - source: github:quartz-community/github-flavored-markdown
+    enabled: true
+    order: 40
+  - source: github:quartz-community/crawl-links
+    enabled: true
+    options:
+      markdownLinkResolution: shortest
+    order: 60
+  - source: github:quartz-community/description
+    enabled: true
+    order: 70
+  - source: github:quartz-community/remove-draft
+    enabled: true
+  - source: github:quartz-community/alias-redirects
+    enabled: true
+  - source: github:quartz-community/content-index
+    enabled: true
+    options:
+      enableSiteMap: true
+      enableRSS: false
+  - source: github:quartz-community/favicon
+    enabled: true
+  - source: github:quartz-community/content-page
+    enabled: true
+  - source: github:quartz-community/folder-page
+    enabled: true
+  - source: github:quartz-community/explorer
+    enabled: true
+    layout:
+      position: left
+      priority: 50
+  - source: github:quartz-community/search
+    enabled: true
+    layout:
+      position: left
+      priority: 20
+      group: toolbar
+      groupOptions:
+        grow: true
+  - source: github:quartz-community/article-title
+    enabled: true
+    layout:
+      position: beforeBody
+      priority: 10
+  - source: github:quartz-community/page-title
+    enabled: true
+    layout:
+      position: left
+      priority: 10
+  - source: github:quartz-community/breadcrumbs
+    enabled: true
+    layout:
+      position: beforeBody
+      priority: 5
+      condition: not-index
+  - source: github:quartz-community/spacer
+    enabled: true
+    options: {}
+    order: 25
+    layout:
+      position: left
+      priority: 25
+      display: mobile-only
+  # Quartz needs a footer component; custom.scss hides it.
+  - source: github:quartz-community/footer
+    enabled: true
+    options:
+      links: {}
+  - source: github:quartz-community/note-properties
+    enabled: true
+    options:
+      includeAll: true
+      includedProperties: []
+      # created-modified-date adds these; the vault never sets them.
+      excludedProperties:
+        - title
+        - created
+        - modified
+        - published
+      hidePropertiesView: false
+      delimiters: ---
+      language: yaml
+    order: 5
+    layout:
+      position: beforeBody
+      priority: 15
+      display: all
+layout:
+  groups:
+    toolbar:
+      priority: 35
+      direction: row
+      gap: 0.5rem
+  byPageType:
+    "404":
+      positions:
+        beforeBody: []
+        left: []
+        right: []
+    content: {}
+    folder:
+      positions:
+        right: []

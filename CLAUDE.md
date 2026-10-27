@@ -12,6 +12,11 @@ hot-linked. `00_Meta/` holds upkeep tools: open `00_Meta/Unfilled fields.base`
 to see which notes still have empty properties, and add a property there when
 a template gains one.
 
+Every push to `main` publishes the coffee folders and photos as a read-only
+Quartz site at https://maxim-k.github.io/coffee_log/ (`.github/workflows/pages.yml`).
+Its config, stylesheet and `prepare.py` live in `.github/quartz/`; a new note
+folder must be added to `FOLDERS` in `prepare.py` to appear on the site.
+
 ## Conventions
 
 - Property names are snake_case with the unit in the name: `dose_g`,
