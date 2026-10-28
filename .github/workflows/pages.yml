@@ -30,7 +30,7 @@ jobs:
         working-directory: .site
         run: |
           npm ci
-          node build.mjs .. dist
+          node build.mjs
       - uses: actions/upload-pages-artifact@v3
         with:
           path: .site/dist

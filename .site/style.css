@@ -3,9 +3,6 @@
 :root {
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --muted: oklch(0.97 0 0);
   --muted-foreground: oklch(0.556 0 0);
   --border: oklch(0.922 0 0);
   --radius: 0.625rem;
@@ -35,27 +32,26 @@ a { color: inherit; text-underline-offset: 4px; }
 .prose p, .prose ul, .prose ol { margin: 1.25rem 0 0; line-height: 1.75rem; }
 .prose ul, .prose ol { padding-left: 1.5rem; }
 .prose li + li { margin-top: 0.5rem; }
+.prose img { max-width: 100%; height: auto; }
 
 img.photo { display: block; width: 100%; max-width: 24rem; height: auto; border-radius: var(--radius); }
 
 /* Table */
-.table { position: relative; width: 100%; overflow-x: auto; }
+.table { width: 100%; overflow-x: auto; }
 table { width: 100%; border-collapse: collapse; font-size: 0.875rem; line-height: 1.25rem; }
-thead tr { border-bottom: 1px solid var(--border); }
-tbody tr { border-bottom: 1px solid var(--border); }
+tr { border-bottom: 1px solid var(--border); }
 tbody tr:last-child { border-bottom: 0; }
 th { height: 2.5rem; padding: 0 0.5rem; text-align: left; vertical-align: middle; font-weight: 500; white-space: nowrap; }
 td { padding: 0.5rem; vertical-align: top; }
 /* A URL has no spaces to wrap at, and would push the table past the screen. */
 td a[href^="http"] { overflow-wrap: anywhere; }
-/* The property table has no header row; its first column holds the keys. */
-table:not(:has(thead)) td:first-child { color: var(--muted-foreground); white-space: nowrap; }
+/* The property table: its first column holds the keys. */
+.props td:first-child { color: var(--muted-foreground); white-space: nowrap; }
 
 /* Card */
 .cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr)); gap: 1rem; }
 .card {
-  display: flex; flex-direction: column; overflow: hidden;
-  background: var(--card); color: var(--card-foreground);
+  display: block; overflow: hidden;
   border: 1px solid var(--border); border-radius: calc(var(--radius) + 4px);
   box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
   text-decoration: none;
