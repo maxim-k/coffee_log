@@ -18,10 +18,12 @@ const esc = (s) =>
   String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
 const isEmpty = (v) => v == null || v === "" || (Array.isArray(v) && v.length === 0);
 const links = (v) => [...String(v).matchAll(WIKILINK)].map((m) => m[1]);
-const title = (note) => note.props.name ?? note.name;
+const title = (note) => note.props.name || note.name;
 
 // Read every note: its properties, its body, and the path of its page.
-const notes = new Map();
+// The failsafe schema keeps every value as the text written: 21.50 stays
+// 21.50, and lot 0012 stays 0012.
+const all = [];
 for (const folder of FOLDERS) {
   const dir = path.join(vault, folder);
   if (!fs.existsSync(dir)) continue;
@@ -29,20 +31,33 @@ for (const folder of FOLDERS) {
     const text = fs.readFileSync(path.join(dir, file), "utf8");
     const [, yaml = "", body = text] = text.match(/^---\n([\s\S]*?)\n---\n?([\s\S]*)$/) ?? [];
     const name = file.slice(0, -3);
-    notes.set(name, { name, folder, props: parse(yaml) ?? {}, body, page: `${folder}/${name}.html` });
+    all.push({ name, folder, props: parse(yaml, { schema: "failsafe" }) ?? {}, body, page: `${folder}/${name}.html` });
   }
 }
+// Links name a note, not its folder. Two notes with one name both get a page,
+// and a link to the name goes to the first in FOLDERS order.
+const notes = new Map();
+for (const note of all) if (!notes.has(note.name)) notes.set(note.name, note);
 
 // The URL of `target` relative to the page at `from`.
 const rel = (from, target) =>
   path.posix.relative(path.posix.dirname(from), target).split("/").map(encodeURIComponent).join("/");
-// The URL of a note's page, or of a file in Attachments.
-const href = (from, name) => rel(from, notes.get(name)?.page ?? `Attachments/${name}`);
-const noteLink = (from, note) => `<a href="${href(from, note.name)}">${esc(title(note))}</a>`;
+// The URL of a note's page or of a file in Attachments. Null when neither
+// exists, such as a link to a note not written yet: it shows as plain text.
+function href(from, name) {
+  const target = notes.get(name)?.page ??
+    (fs.existsSync(path.join(vault, "Attachments", name)) ? `Attachments/${name}` : null);
+  return target && rel(from, target);
+}
+function link(from, name, text) {
+  const url = href(from, name);
+  return url ? `<a href="${url}">${esc(text)}</a>` : esc(text);
+}
+const noteLink = (from, note) => `<a href="${rel(from, note.page)}">${esc(title(note))}</a>`;
 
 // For each note, the notes whose properties link to it, and through which key.
 const incoming = new Map();
-for (const note of notes.values())
+for (const note of all)
   for (const [key, v] of Object.entries(note.props))
     for (const target of [v].flat().flatMap(links)) {
       if (!incoming.has(target)) incoming.set(target, []);
@@ -58,7 +73,7 @@ function value(from, v) {
   let html = "";
   let last = 0;
   for (const m of s.matchAll(WIKILINK)) {
-    html += esc(s.slice(last, m.index)) + `<a href="${href(from, m[1])}">${esc(m[2] ?? m[1])}</a>`;
+    html += esc(s.slice(last, m.index)) + link(from, m[1], m[2] ?? m[1]);
     last = m.index + m[0].length;
   }
   return html + esc(s.slice(last));
@@ -69,9 +84,14 @@ function value(from, v) {
 function body(from, md, photo) {
   md = md
     .replace(/%%[\s\S]*?%%/g, "")
-    .replace(/!\[\[([^\]|]+)(?:\|[^\]]*)?\]\]/g, (_, n) =>
-      n === photo ? "" : IMAGE.test(n) ? `![](${href(from, n)})` : `[${n}](${href(from, n)})`)
-    .replace(WIKILINK, (_, n, alias) => `[${alias ?? n}](${href(from, n)})`);
+    .replace(/!\[\[([^\]|]+)(?:\|[^\]]*)?\]\]/g, (_, n) => {
+      const url = n === photo ? "" : href(from, n);
+      return !url ? "" : IMAGE.test(n) ? `![](${url})` : `[${n}](${url})`;
+    })
+    .replace(WIKILINK, (_, n, alias) => {
+      const url = href(from, n);
+      return url ? `[${alias ?? n}](${url})` : alias ?? n;
+    });
   const tokens = marked.lexer(md);
   const blocks = tokens.filter((t) => t.type !== "space");
   if (blocks[0]?.type === "heading" && blocks[0].depth === 1) blocks.shift();
@@ -120,14 +140,16 @@ ${main}
 function notePage(note) {
   const { page, props } = note;
   const photo = links(props.photo ?? "")[0];
+  const src = photo && href(page, photo);
   const rows = Object.entries(props)
     .filter(([k, v]) => k !== "photo" && !isEmpty(v))
     .map(([k, v]) => [esc(k.replaceAll("_", " ")), value(page, v)]);
   let html = `<h1>${esc(note.name)}</h1>`;
-  if (photo) html += `<img class="photo" src="${href(page, photo)}" alt="">`;
+  if (src) html += `<img class="photo" src="${src}" alt="">`;
   if (rows.length) html += table(null, rows, "props");
   html += `<div class="prose">${body(page, note.body, photo)}</div>`;
-  const byFolder = Object.groupBy(incoming.get(note.name) ?? [], ({ note: n }) => n.folder);
+  const linked = notes.get(note.name) === note ? incoming.get(note.name) ?? [] : [];
+  const byFolder = Object.groupBy(linked, ({ note: n }) => n.folder);
   for (const [folder, list] of Object.entries(byFolder)) {
     // The key that links here would repeat this page's name in every row.
     const keys = new Set(list.map(({ key }) => key));
@@ -144,7 +166,7 @@ function addedDates() {
   let log = "";
   try {
     log = execFileSync("git", ["-c", "core.quotePath=false", "log", "--reverse", "--format=%x00%ct",
-      "--name-status", "--diff-filter=AR"], { cwd: vault, encoding: "utf8" });
+      "--name-status", "--diff-filter=AR"], { cwd: vault, encoding: "utf8", stdio: ["ignore", "pipe", "ignore"] });
   } catch {} // Not a git checkout: every bag counts as new.
   const dates = new Map();
   for (const commit of log.split("\0").slice(1)) {
@@ -157,14 +179,15 @@ function addedDates() {
 
 function homePage() {
   const dates = addedDates();
-  const bags = [...notes.values()].filter((n) => n.folder === "Bags")
+  const bags = all.filter((n) => n.folder === "Bags")
     .map((n) => ({ n, added: dates.get(`Bags/${n.name}.md`) ?? Infinity, roast: String(n.props.roast_date ?? "") }))
     .sort((a, b) => b.added - a.added || b.roast.localeCompare(a.roast))
     .map(({ n }) => n);
   const cards = bags.slice(0, 3).map((n) => {
     const photo = links(n.props.photo ?? "")[0];
-    return `<a class="card" href="${href("index.html", n.name)}">` +
-      (photo ? `<img src="${href("index.html", photo)}" alt="">` : "") +
+    const src = photo && href("index.html", photo);
+    return `<a class="card" href="${rel("index.html", n.page)}">` +
+      (src ? `<img src="${src}" alt="">` : "") +
       `<div class="card-body"><div class="card-title">${esc(title(n))}</div>` +
       `<div class="card-description">${esc(links(n.props.roaster ?? "")[0] ?? "")}</div></div></a>`;
   });
@@ -190,7 +213,7 @@ function checkLinks() {
 }
 
 fs.rmSync(out, { recursive: true, force: true });
-for (const note of notes.values()) {
+for (const note of all) {
   fs.mkdirSync(path.join(out, note.folder), { recursive: true });
   fs.writeFileSync(path.join(out, note.page), notePage(note));
 }
@@ -199,4 +222,4 @@ fs.cpSync(path.join(vault, "Attachments"), path.join(out, "Attachments"),
   { recursive: true, filter: (s) => !path.basename(s).startsWith(".") });
 fs.copyFileSync(path.join(import.meta.dirname, "style.css"), path.join(out, "style.css"));
 checkLinks();
-console.log(`Wrote ${notes.size} notes and the home page to ${out}`);
+console.log(`Wrote ${all.length} notes and the home page to ${out}`);
