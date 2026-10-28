@@ -1,6 +1,5 @@
-# Build the coffee notes into a Quartz site and publish it on GitHub Pages.
-# The vault holds only the config, the stylesheet and prepare.py, in
-# .github/quartz/; each run downloads a fixed Quartz release.
+# Build the coffee notes into static pages with .site/build.mjs and publish
+# them on GitHub Pages.
 name: Pages
 
 on:
@@ -17,41 +16,24 @@ concurrency:
   group: pages
   cancel-in-progress: false
 
-env:
-  QUARTZ_VERSION: v5.0.0
-
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
-          path: vault
-      - uses: actions/checkout@v4
-        with:
-          repository: jackyzha0/quartz
-          ref: ${{ env.QUARTZ_VERSION }}
-          path: quartz
+          fetch-depth: 0 # The home page orders bags by the date they were added.
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-          cache: npm
-          cache-dependency-path: quartz/package-lock.json
-      - name: Prepare content
-        run: |
-          (cd vault/.github/quartz && python3 test_prepare.py)
-          python3 vault/.github/quartz/prepare.py vault quartz/content
-          cp vault/.github/quartz/quartz.config.yaml quartz/
-          cp vault/.github/quartz/custom.scss quartz/quartz/styles/custom.scss
       - name: Build
-        working-directory: quartz
+        working-directory: .site
         run: |
           npm ci
-          npx quartz plugin restore
-          npx quartz build
+          node build.mjs .. dist
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: quartz/public
+          path: .site/dist
 
   deploy:
     needs: build

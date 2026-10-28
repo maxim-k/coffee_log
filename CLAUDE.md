@@ -12,10 +12,14 @@ hot-linked. `00_Meta/` holds upkeep tools: open `00_Meta/Unfilled fields.base`
 to see which notes still have empty properties, and add a property there when
 a template gains one.
 
-Every push to `main` publishes the coffee folders and photos as a read-only
-Quartz site at https://maxim-k.github.io/coffee_log/ (`.github/workflows/pages.yml`).
-Its config, stylesheet and `prepare.py` live in `.github/quartz/`; a new note
-folder must be added to `FOLDERS` in `prepare.py` to appear on the site.
+Every push to `main` publishes a read-only site at
+https://maxim-k.github.io/coffee_log/ (`.github/workflows/pages.yml`).
+`.site/build.mjs` writes one static HTML page per note plus a home page
+("Last bags" tiles and an "All bags" table); `.site/style.css` holds the
+shadcn-style CSS. No framework and no browser JavaScript: the user rejected
+Quartz and a React app as far too heavy for one template. A new note folder
+must be added to `FOLDERS` in `build.mjs`. Before pushing a site change,
+serve `.site/dist` under a `/coffee_log/` path and check it in a browser.
 
 ## Conventions
 
