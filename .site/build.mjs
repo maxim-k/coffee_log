@@ -13,8 +13,6 @@ const FOLDERS = ["Bags", "Brews", "Roasters", "Producers", "Varieties", "Flavors
 const COLUMNS = { Bags: ["Roaster", "Country", "Process", "Rating"], Brews: ["Date", "Bag", "Rating"],
   Roasters: ["City", "Country"], Producers: ["Country", "Region"], Varieties: ["Genetic group", "Parent"],
   Flavors: ["Parent"] };
-// The property a page shows under its title instead of in its list.
-const BYLINE = { Bags: "Roaster" };
 const LABELS = { aliases: "Also known as" };
 const WIKILINK = /\[\[([^\]|]+)(?:\|([^\]]+))?\]\]/g;
 const IMAGE = /\.(png|jpe?g|gif|webp|svg)$/i;
@@ -214,12 +212,10 @@ ${main}
 function notePage(note) {
   const { page, props, folder } = note;
   const { photo, src } = photoOf(page, note);
-  const byline = BYLINE[folder];
   const rows = Object.entries(props)
-    .filter(([k, v]) => !["Name", "Photo", byline].includes(k) && !isEmpty(v))
+    .filter(([k, v]) => k !== "Photo" && !isEmpty(v))
     .map(([k, v]) => [labelHtml(split(k).label), value(page, v, split(k).unit)]);
-  let html = `<h2>${text(title(note))}</h2>`;
-  if (byline && !isEmpty(props[byline])) html += `<p class="byline">${value(page, props[byline])}</p>`;
+  let html = `<h2>${text(note.name)}</h2>`;
   if (src) html += `<img class="photo" src="${src}" alt="">`;
   if (rows.length) html += dl(rows);
   html += `<div class="prose">${body(page, note.body, photo)}</div>`;
@@ -231,7 +227,7 @@ function notePage(note) {
     const columns = (COLUMNS[group] ?? []).filter((k) => !keys.has(k));
     html += `<h3>${esc(group)}</h3>${noteTable(page, list.map(({ note: n }) => n), columns)}`;
   }
-  return layout(page, title(note), html, folder);
+  return layout(page, note.name, html, folder);
 }
 
 // When each note file was first committed, keyed by its path in the vault.

@@ -78,9 +78,7 @@ main > h3, .prose > h3 { margin-top: 2.5rem; }
 main > h3 + *, .prose > h3 + * { margin-top: 0.75rem; }
 .prose > h4 { margin-top: 2rem; }
 .prose > h4 + * { margin-top: 0.5rem; }
-h2 + .byline { margin-top: 0.25rem; }
 sub { font-size: 0.75em; line-height: 0; }
-.byline { margin-bottom: 0; color: var(--muted-foreground); font-size: 1.125rem; }
 
 a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: 3px; text-decoration-color: var(--muted-foreground); }
 a:hover { text-decoration-color: currentColor; }
