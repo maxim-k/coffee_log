@@ -95,7 +95,7 @@ a:hover { text-decoration-color: currentColor; }
 img.photo { display: block; width: 100%; max-width: 20rem; height: auto; border-radius: var(--radius); }
 
 /* Label and value pairs: the properties, and the Details section. */
-dl.props { max-width: var(--measure); margin-bottom: 0; border-block: 1px solid var(--border); padding: 0.5rem 0; }
+dl.props { max-width: var(--measure); margin-bottom: 0; }
 dl.props > div { display: grid; grid-template-columns: 9rem 1fr; gap: 1rem; padding: 0.25rem 0; }
 dl.props dt { color: var(--muted-foreground); }
 dl.props dd { margin: 0; font-variant-numeric: tabular-nums; }
