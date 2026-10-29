@@ -161,10 +161,10 @@ views:
         - 'file.inFolder("Waters")'
         - or:
             - 'note["Kind"].isEmpty()'
-            - 'note["hardness_caco3_mg_l"].isEmpty()'
-            - 'note["alkalinity_caco3_mg_l"].isEmpty()'
+            - 'note["Hardness as CaCO3 (mg/L)"].isEmpty()'
+            - 'note["Alkalinity as CaCO3 (mg/L)"].isEmpty()'
     order:
       - file.name
       - note.Kind
-      - note.hardness_caco3_mg_l
-      - note.alkalinity_caco3_mg_l
+      - note.Hardness as CaCO3 (mg/L)
+      - note.Alkalinity as CaCO3 (mg/L)

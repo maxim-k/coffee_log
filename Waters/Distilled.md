@@ -1,7 +1,7 @@
 ---
 Kind: distilled
-hardness_caco3_mg_l: 0
-alkalinity_caco3_mg_l: 0
+Hardness as CaCO3 (mg/L): 0
+Alkalinity as CaCO3 (mg/L): 0
 TDS (mg/L): 0
 ---
 
