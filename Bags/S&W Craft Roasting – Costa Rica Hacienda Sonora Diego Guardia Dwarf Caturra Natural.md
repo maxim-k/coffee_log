@@ -20,7 +20,10 @@ Variety:
 Process: Natural
 Elevation: 1300 MASL
 Roast level:
-Tasting notes: mixed fruits, oak barrel, wine
+Tasting notes:
+  - "[[Fruity|mixed fruits]]"
+  - "[[Woody|oak barrel]]"
+  - "[[Winey|wine]]"
 ---
 
 # S&W Craft Roasting – Costa Rica Hacienda Sonora Diego Guardia Dwarf Caturra Natural

@@ -3,6 +3,8 @@ Parent:
   - "[[Ethiopian Landrace]]"
 aliases:
   - Bourbon Rosado
+Genetic group: Ethiopian landrace
+Breeder:
 ---
 
 # Pink Bourbon

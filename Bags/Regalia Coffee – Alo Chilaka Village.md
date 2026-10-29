@@ -18,7 +18,12 @@ Variety:
 Process: Anaerobic natural
 Elevation: 2360-2480 MASL
 Roast level:
-Tasting notes: smooth, sweet, floral, yubari melon, bright zest
+Tasting notes:
+  - smooth
+  - "[[Sweet|sweet]]"
+  - "[[Floral|floral]]"
+  - "[[Other Fruit|yubari melon]]"
+  - "[[Citrus Fruit|bright zest]]"
 ---
 
 # Regalia Coffee – Alo Chilaka Village

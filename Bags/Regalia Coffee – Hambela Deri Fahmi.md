@@ -18,7 +18,12 @@ Variety:
 Process: Natural
 Elevation: 1900-2000 MASL
 Roast level:
-Tasting notes: clean, floral, blueberry, black tea, ripe apple
+Tasting notes:
+  - clean
+  - "[[Floral|floral]]"
+  - "[[Blueberry|blueberry]]"
+  - "[[Black Tea|black tea]]"
+  - "[[Apple|ripe apple]]"
 ---
 
 # Regalia Coffee – Hambela Deri Fahmi

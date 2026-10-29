@@ -18,7 +18,12 @@ Variety:
 Process: Red honey
 Elevation: 2000 MASL
 Roast level:
-Tasting notes: tropical, fruit punch, creamy body, delicate, floral finish
+Tasting notes:
+  - "[[Other Fruit|tropical]]"
+  - fruit punch
+  - creamy body
+  - delicate
+  - "[[Floral|floral finish]]"
 ---
 
 # Regalia Coffee – Koke Red Honey

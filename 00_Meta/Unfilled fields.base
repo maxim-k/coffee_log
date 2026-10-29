@@ -115,9 +115,11 @@ views:
         - 'file.inFolder("Varieties")'
         - or:
             - 'note["Parent"].isEmpty()'
+            - 'note["Genetic group"].isEmpty()'
     order:
       - file.name
       - note.Parent
+      - note.Genetic group
   - type: table
     name: Brewers
     filters:

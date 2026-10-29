@@ -18,7 +18,12 @@ Variety:
 Process: Honey
 Elevation: 1850 MASL
 Roast level:
-Tasting notes: winey, pineapple juice, deep sweetness, dates, mulled wine
+Tasting notes:
+  - "[[Winey|winey]]"
+  - pineapple juice
+  - "[[Sweet|deep sweetness]]"
+  - "[[Dried Fruit|dates]]"
+  - mulled wine
 ---
 
 # Regalia Coffee – El Espejo
