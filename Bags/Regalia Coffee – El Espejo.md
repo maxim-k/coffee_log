@@ -18,7 +18,7 @@ Variety:
 Process: Honey
 Elevation: 1850 MASL
 Roast level:
-Tasting notes: delicate wininess in this cup. It is playful but clean and balanced like pineapple juice, with deep sweetness and subtle spices like dates and mulled wine.
+Tasting notes: winey, pineapple juice, deep sweetness, dates, mulled wine
 ---
 
 # Regalia Coffee – El Espejo

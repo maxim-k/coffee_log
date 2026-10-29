@@ -17,10 +17,10 @@ Farm:
 Lot:
 Variety:
   - "[[Kartika]]"
-Process: Yeast-inoculated Extended Fermentation Anaerobic Natural
-Elevation: 1200-1300 masl
+Process: Yeast-inoculated extended fermentation anaerobic natural
+Elevation: 1200-1300 MASL
 Roast level:
-Tasting notes: Red and Blue berries galore!
+Tasting notes: red berries, blue berries
 ---
 
 # S&W Craft Roasting – Bali Batukaang Karana Extended Fermentation Anaerobic Natural

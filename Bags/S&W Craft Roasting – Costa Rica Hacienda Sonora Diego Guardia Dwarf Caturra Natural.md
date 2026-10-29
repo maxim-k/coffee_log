@@ -17,10 +17,10 @@ Farm: Hacienda Sonora
 Lot:
 Variety:
   - "[[Dwarf Caturra]]"
-Process: Natural process, dried in warehouse and mechanical (using renewable energy)
-Elevation: 1300 masl
+Process: Natural
+Elevation: 1300 MASL
 Roast level:
-Tasting notes: mixed fruits on an oak barrel. Think like wine without the ferment.
+Tasting notes: mixed fruits, oak barrel, wine
 ---
 
 # S&W Craft Roasting – Costa Rica Hacienda Sonora Diego Guardia Dwarf Caturra Natural

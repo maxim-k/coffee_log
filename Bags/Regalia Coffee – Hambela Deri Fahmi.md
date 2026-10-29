@@ -10,15 +10,15 @@ Price paid ($): 21.25
 Rating:
 Producer: "[[Testi Specialty Coffee]]"
 Country: Ethiopia
-Region: Deri Kidame < Hambela Womena < West Guji < Ethiopia
+Region: Deri Kidame, Hambela Womena, West Guji
 Farm:
 Lot:
 Variety:
   - "[[Ethiopian Landrace]]"
 Process: Natural
-Elevation: 1900 - 2000 MASL
+Elevation: 1900-2000 MASL
 Roast level:
-Tasting notes: very clean, floral and blueberry-driven cup. The cup is enhanced by black tea and ripe apple in the perimeter of the profile.
+Tasting notes: clean, floral, blueberry, black tea, ripe apple
 ---
 
 # Regalia Coffee – Hambela Deri Fahmi

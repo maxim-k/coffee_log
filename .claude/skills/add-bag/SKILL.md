@@ -7,8 +7,10 @@ description: Create a Bag note from the roaster's product page, with the photo s
 
 A Bag is one physical bag (see `GLOSSARY.md`). Fill every property the page
 answers: a labeled field first, then the coffee's name, then the narrative.
-Copy the roaster's words **as written**: same words, units, capitals and
-punctuation. A property stays empty only when the page says nothing about it.
+The body copies the roaster's words **as written**: same words, units,
+capitals and punctuation. Properties hold the same facts **harmonized**, by
+the rules in step 3 (see `docs/adr/0003-bag-properties-hold-harmonized-values.md`).
+A property stays empty only when the page says nothing about it.
 
 ## 1. Gather the input
 
@@ -52,9 +54,18 @@ comments.
 
 - **Properties:**
   - `Variety` is a list of links to `Varieties/` notes (step 4).
-  - `Tasting notes`: the labeled field, or else the flavor phrase from the
-    narrative, such as `green apple and star fruit, with a lingering sweet
-    caramel finish`.
+  - `Tasting notes`: short notes, lowercase except proper nouns,
+    comma-separated: `tropical, fruit punch, creamy body, floral finish`.
+    Take the page's own list when it has one. Otherwise pick the notes out of
+    the narrative (`green apple and star fruit, with a lingering sweet
+    caramel finish` → `green apple, star fruit, sweet caramel`); the prose
+    stays in Story.
+  - `Elevation`: `<n> MASL` or `<n>-<n> MASL`, without a thousands separator
+    (`2,000 m.a.s.l.` → `2000 MASL`, `1900 - 2000 masl` → `1900-2000 MASL`).
+  - `Region`: from the smallest area to the largest, comma-separated, without
+    the country (`Bensa < Sidama < Ethiopia` → `Bensa, Sidama`).
+  - `Process`: the process name in sentence case, without how it was done
+    (`Natural, Anaerobic fermentation` → `Anaerobic natural`).
   - `Lot`: the labeled field, or else from the coffee's name (`Lot 7`).
   - `Roast date` (`YYYY-MM-DD`) and `Bag size (g)` come from the user.
   - `Price paid ($)`: the user's price if given, or else the page's price for
@@ -62,7 +73,10 @@ comments.
   - `Open date` and `Rating` stay empty for the user.
 - **Details:** one `Label: value` line, as written, for every labeled detail
   on the page that has no property: importer, harvest, prices, dates,
-  fermentation, and the rest.
+  fermentation, and the rest. When harmonizing a property dropped the
+  roaster's words, not only their format, add them here too
+  (`Process: Natural, Anaerobic fermentation`), unless Story already holds
+  them.
 - **Story:** the roaster's whole narrative, as written.
 
 Save it as `Bags/<Roaster> – <Coffee> – <YYYY-MM-DD>.md`, with en dashes. With

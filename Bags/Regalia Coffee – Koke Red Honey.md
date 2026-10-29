@@ -10,13 +10,13 @@ Price paid ($): 28.75
 Rating:
 Producer: "[[Konga Washing Station]]"
 Country: Ethiopia
-Region: Gedeo < Yirgacheffe
+Region: Koke, Yirgacheffe, Gedeo
 Farm:
 Lot:
 Variety:
   - "[[Ethiopian Landrace]]"
-Process: Honey
-Elevation: 2,000 m.a.s.l.
+Process: Red honey
+Elevation: 2000 MASL
 Roast level:
 Tasting notes: tropical, fruit punch, creamy body, delicate, floral finish
 ---

@@ -10,7 +10,7 @@ Price paid ($): 23
 Rating:
 Producer: "[[Jorge Rojas]]"
 Country: Colombia
-Region: Planadas, Tolima, Colombia
+Region: Planadas, Tolima
 Farm: Finca El Jardín
 Lot: Lot 7
 Variety:
@@ -18,7 +18,7 @@ Variety:
 Process: Washed
 Elevation: 2050 MASL
 Roast level:
-Tasting notes: green apple and star fruit, with a lingering sweet caramel finish
+Tasting notes: green apple, star fruit, sweet caramel
 ---
 
 # Regalia Coffee – Chiroso Lot 7 – 2026-09-30

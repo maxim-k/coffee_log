@@ -10,15 +10,15 @@ Price paid ($): 21.50
 Rating:
 Producer: "[[Alo Coffee]]"
 Country: Ethiopia
-Region: Bensa < Sidama < Ethiopia
+Region: Bensa, Sidama
 Farm:
 Lot:
 Variety:
   - "[[74158]]"
-Process: Natural, Anaerobic fermentation
+Process: Anaerobic natural
 Elevation: 2360-2480 MASL
 Roast level:
-Tasting notes: smooth, sweet, and floral like a delicate yubari melon. A bright zest lingers in the finish.
+Tasting notes: smooth, sweet, floral, yubari melon, bright zest
 ---
 
 # Regalia Coffee – Alo Chilaka Village
@@ -27,6 +27,7 @@ Tasting notes: smooth, sweet, and floral like a delicate yubari melon. A bright 
 
 ## Details
 
+Process: Natural, Anaerobic fermentation
 Sorting Level: 9.5-10%
 
 ## Story

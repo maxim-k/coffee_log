@@ -17,7 +17,9 @@ a template gains one.
 - Property names are human-readable, in sentence case, with the unit in
   parentheses: `Dose (g)`, `Hardness as CaCO3 (mg/L)`. Obsidian's own
   `aliases` stays lowercase.
-- Roaster text is copied as written: no normalization, no conflict notes.
+- A Bag's body copies the roaster's text as written; its properties hold
+  the same facts harmonized (`docs/adr/0003`), so they read alike across
+  bags. The user wants roaster data kept and technical details neat.
 - `Varieties/` is the dictionary of varieties: a Bag's `Variety` links its
   canonical notes, and the roaster's own wording goes to Details.
 - Brew notes stay uncluttered: one `Grind` field as dialed (`1-2-1`), nothing
@@ -34,7 +36,7 @@ a template gains one.
 
 - Bases views for analysis: the user is collecting data first. Bases, not
   Dataview, when the time comes. The `00_Meta` report is the one exception.
-- Normalizing roaster text into numbers (elevation ranges, prices).
+- Turning harmonized text into numbers (elevation ranges into two numbers).
 - Water notes beyond NYC Tap and Distilled.
 
 ## Open items

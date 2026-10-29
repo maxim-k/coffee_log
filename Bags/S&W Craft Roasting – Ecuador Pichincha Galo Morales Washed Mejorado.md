@@ -16,9 +16,9 @@ Lot:
 Variety:
   - "[[Typica Mejorado]]"
 Process: Washed
-Elevation: 1450 masl
+Elevation: 1450 MASL
 Roast level:
-Tasting notes: Light bodied, notes of Orange sherbet, nectarine, and marshmallow, with a hint of cinnamon here and there and heavy floral in the finish.
+Tasting notes: light bodied, orange sherbet, nectarine, marshmallow, cinnamon, floral
 ---
 
 # S&W Craft Roasting – Ecuador Pichincha Galo Morales Washed Mejorado
