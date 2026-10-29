@@ -10,6 +10,9 @@
   --border: oklch(0.922 0 0);
   --rule: oklch(0.96 0 0);
   --accent: oklch(0.97 0 0);
+  --index-width: 13rem;
+  --gutter: 4rem;
+  --page-pad: 4rem;
   --radius: 0.625rem;
   --measure: 36rem;
 }
@@ -22,13 +25,17 @@ body {
   font: 16px/1.6 Inter, ui-sans-serif, system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
 }
-/* Page: the folder menu on the left, the content column beside it. */
-body { display: grid; grid-template-columns: 13rem minmax(0, 48rem); justify-content: center; column-gap: 2rem; }
-main { min-width: 0; padding: 2rem 1rem 4rem; }
+/* Page, after the design system's layout: main is centered in the window and the
+   menu sits at the window's left edge. The side columns are equal, so main stays
+   centered; the left one never gets narrower than the menu plus the gutter, so on a
+   narrower window main moves right instead of covering the menu. */
+body { display: grid; padding: 0 var(--page-pad);
+  grid-template-columns: minmax(calc(var(--index-width) + var(--gutter)), 1fr) minmax(0, 48rem) 1fr; }
+main { min-width: 0; padding: 2rem 0 4rem; }
 main > * + * { margin-top: 1.5rem; }
 
 /* Menu, after shadcn's Sidebar: plain rows, the current one shaded. */
-.menu { position: sticky; top: 0; align-self: start; padding: 2rem 0 2rem 1rem; }
+.menu { position: sticky; top: 0; align-self: start; width: var(--index-width); padding: 2rem 0; }
 .menu a { display: flex; justify-content: space-between; gap: 0.5rem; padding: 0.375rem 0.5rem;
   border-radius: calc(var(--radius) - 2px); color: var(--foreground); text-decoration: none; }
 .menu a:hover, .menu a[aria-current] { background: var(--accent); }
@@ -37,10 +44,10 @@ main > * + * { margin-top: 1.5rem; }
 .menu ul { margin: 0.5rem 0 0; padding: 0; list-style: none; font-size: 0.875rem; }
 .menu span { color: var(--muted-foreground); font-variant-numeric: tabular-nums; }
 
-/* Phone: the menu goes on top, its folders in a wrapping row. */
-@media (max-width: 48rem) {
-  body { display: block; }
-  .menu { position: static; padding: 1rem 1rem 0; }
+/* Narrow screens: the menu goes above the content, its folders in a wrapping row. */
+@media (max-width: 1000px) {
+  body { display: block; padding: 0 1rem; }
+  .menu { position: static; width: auto; padding: 1rem 0 0; }
   .menu .site { display: inline-flex; }
   .menu ul { display: flex; flex-wrap: wrap; gap: 0.25rem; }
   main { padding-top: 1.5rem; }
