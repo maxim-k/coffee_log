@@ -1,5 +1,2 @@
 .DS_Store
 .obsidian/workspace*.json
-__pycache__/
-.site/node_modules/
-.site/dist/
