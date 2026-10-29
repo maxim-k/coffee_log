@@ -1,7 +1,7 @@
 ---
-Manufacturer: Gabi
+Manufacturer: The Gabi
 Model: Master A
 Material: PC1220R plastic
 ---
 
-# Gabi Master A
+# The Gabi Master A
