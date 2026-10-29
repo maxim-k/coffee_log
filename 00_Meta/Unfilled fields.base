@@ -1,5 +1,6 @@
 # Notes with at least one empty property, one view per note kind.
-# A blank cell is the missing field.
+# A blank cell is the missing field. Add a property here when a template
+# gains one.
 views:
   - type: table
     name: Bags
@@ -7,151 +8,151 @@ views:
       and:
         - 'file.inFolder("Bags")'
         - or:
-            - 'roaster.isEmpty()'
-            - 'name.isEmpty()'
-            - 'product_url.isEmpty()'
-            - 'photo.isEmpty()'
-            - 'roast_date.isEmpty()'
-            - 'open_date.isEmpty()'
-            - 'bag_size_g.isEmpty()'
-            - 'price_paid.isEmpty()'
-            - 'rating.isEmpty()'
-            - 'producer.isEmpty()'
-            - 'country.isEmpty()'
-            - 'region.isEmpty()'
-            - 'farm.isEmpty()'
-            - 'lot.isEmpty()'
-            - 'variety.isEmpty()'
-            - 'process.isEmpty()'
-            - 'elevation.isEmpty()'
-            - 'roast_level.isEmpty()'
-            - 'tasting_notes.isEmpty()'
+            - 'note["Roaster"].isEmpty()'
+            - 'note["Name"].isEmpty()'
+            - 'note["Product page"].isEmpty()'
+            - 'note["Photo"].isEmpty()'
+            - 'note["Roast date"].isEmpty()'
+            - 'note["Open date"].isEmpty()'
+            - 'note["Bag size (g)"].isEmpty()'
+            - 'note["Price paid ($)"].isEmpty()'
+            - 'note["Rating"].isEmpty()'
+            - 'note["Producer"].isEmpty()'
+            - 'note["Country"].isEmpty()'
+            - 'note["Region"].isEmpty()'
+            - 'note["Farm"].isEmpty()'
+            - 'note["Lot"].isEmpty()'
+            - 'note["Variety"].isEmpty()'
+            - 'note["Process"].isEmpty()'
+            - 'note["Elevation"].isEmpty()'
+            - 'note["Roast level"].isEmpty()'
+            - 'note["Tasting notes"].isEmpty()'
     order:
       - file.name
-      - roaster
-      - name
-      - product_url
-      - photo
-      - roast_date
-      - open_date
-      - bag_size_g
-      - price_paid
-      - rating
-      - producer
-      - country
-      - region
-      - farm
-      - lot
-      - variety
-      - process
-      - elevation
-      - roast_level
-      - tasting_notes
+      - note.Roaster
+      - note.Name
+      - note.Product page
+      - note.Photo
+      - note.Roast date
+      - note.Open date
+      - note.Bag size (g)
+      - note.Price paid ($)
+      - note.Rating
+      - note.Producer
+      - note.Country
+      - note.Region
+      - note.Farm
+      - note.Lot
+      - note.Variety
+      - note.Process
+      - note.Elevation
+      - note.Roast level
+      - note.Tasting notes
   - type: table
     name: Brews
     filters:
       and:
         - 'file.inFolder("Brews")'
         - or:
-            - 'bag.isEmpty()'
-            - 'grinder.isEmpty()'
-            - 'grind.isEmpty()'
-            - 'brewer.isEmpty()'
-            - 'water.isEmpty()'
-            - 'filter_paper.isEmpty()'
-            - 'dose_g.isEmpty()'
-            - 'water_g.isEmpty()'
-            - 'ratio.isEmpty()'
-            - 'temperature_c.isEmpty()'
-            - 'total_time.isEmpty()'
-            - 'pour.isEmpty()'
-            - 'rating.isEmpty()'
+            - 'note["Bag"].isEmpty()'
+            - 'note["Grinder"].isEmpty()'
+            - 'note["Grind"].isEmpty()'
+            - 'note["Brewer"].isEmpty()'
+            - 'note["Water"].isEmpty()'
+            - 'note["Filter paper"].isEmpty()'
+            - 'note["Dose (g)"].isEmpty()'
+            - 'note["Water weight (g)"].isEmpty()'
+            - 'note["Ratio"].isEmpty()'
+            - 'note["Temperature (°C)"].isEmpty()'
+            - 'note["Total time"].isEmpty()'
+            - 'note["Pour"].isEmpty()'
+            - 'note["Rating"].isEmpty()'
     order:
       - file.name
-      - bag
-      - grinder
-      - grind
-      - brewer
-      - water
-      - filter_paper
-      - dose_g
-      - water_g
-      - ratio
-      - temperature_c
-      - total_time
-      - pour
-      - rating
+      - note.Bag
+      - note.Grinder
+      - note.Grind
+      - note.Brewer
+      - note.Water
+      - note.Filter paper
+      - note.Dose (g)
+      - note.Water weight (g)
+      - note.Ratio
+      - note.Temperature (°C)
+      - note.Total time
+      - note.Pour
+      - note.Rating
   - type: table
     name: Roasters
     filters:
       and:
         - 'file.inFolder("Roasters")'
         - or:
-            - 'website.isEmpty()'
-            - 'city.isEmpty()'
-            - 'country.isEmpty()'
+            - 'note["Website"].isEmpty()'
+            - 'note["City"].isEmpty()'
+            - 'note["Country"].isEmpty()'
     order:
       - file.name
-      - website
-      - city
-      - country
+      - note.Website
+      - note.City
+      - note.Country
   - type: table
     name: Producers
     filters:
       and:
         - 'file.inFolder("Producers")'
         - or:
-            - 'country.isEmpty()'
-            - 'region.isEmpty()'
+            - 'note["Country"].isEmpty()'
+            - 'note["Region"].isEmpty()'
     order:
       - file.name
-      - country
-      - region
+      - note.Country
+      - note.Region
   - type: table
     name: Brewers
     filters:
       and:
         - 'file.inFolder("Brewers")'
         - or:
-            - 'manufacturer.isEmpty()'
-            - 'model.isEmpty()'
-            - 'material.isEmpty()'
+            - 'note["Manufacturer"].isEmpty()'
+            - 'note["Model"].isEmpty()'
+            - 'note["Material"].isEmpty()'
     order:
       - file.name
-      - manufacturer
-      - model
-      - material
+      - note.Manufacturer
+      - note.Model
+      - note.Material
   - type: table
     name: Grinders
     filters:
       and:
         - 'file.inFolder("Grinders")'
         - or:
-            - 'burr_type.isEmpty()'
-            - 'true_zero.isEmpty()'
-            - 'clicks_per_rotation.isEmpty()'
-            - 'clicks_per_number.isEmpty()'
-            - 'travel_per_click_um.isEmpty()'
-            - 'burr_gap_per_click_um.isEmpty()'
+            - 'note["Burr type"].isEmpty()'
+            - 'note["True zero"].isEmpty()'
+            - 'note["Clicks per rotation"].isEmpty()'
+            - 'note["Clicks per number"].isEmpty()'
+            - 'note["Travel per click (µm)"].isEmpty()'
+            - 'note["Burr gap per click (µm)"].isEmpty()'
     order:
       - file.name
-      - burr_type
-      - true_zero
-      - clicks_per_rotation
-      - clicks_per_number
-      - travel_per_click_um
-      - burr_gap_per_click_um
+      - note.Burr type
+      - note.True zero
+      - note.Clicks per rotation
+      - note.Clicks per number
+      - note.Travel per click (µm)
+      - note.Burr gap per click (µm)
   - type: table
     name: Waters
     filters:
       and:
         - 'file.inFolder("Waters")'
         - or:
-            - 'kind.isEmpty()'
-            - 'hardness_caco3_mg_l.isEmpty()'
-            - 'alkalinity_caco3_mg_l.isEmpty()'
+            - 'note["Kind"].isEmpty()'
+            - 'note["hardness_caco3_mg_l"].isEmpty()'
+            - 'note["alkalinity_caco3_mg_l"].isEmpty()'
     order:
       - file.name
-      - kind
-      - hardness_caco3_mg_l
-      - alkalinity_caco3_mg_l
+      - note.Kind
+      - note.hardness_caco3_mg_l
+      - note.alkalinity_caco3_mg_l

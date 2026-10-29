@@ -1,24 +1,24 @@
 ---
-roaster: "[[S&W Craft Roasting]]"
-name: Ecuador Pichincha Galo Morales Washed Mejorado
-product_url: https://www.swroasting.coffee/product/ecuador-pichincha-galo-morales-washed-mejorado/65
-photo: "[[S&W Craft Roasting – Ecuador Pichincha Galo Morales Washed Mejorado.jpeg]]"
-roast_date:
-open_date:
-bag_size_g: 300
-price_paid: 21.68
-rating:
-producer: "[[Galo Fernando Morales Flores]]"
-country: Ecuador
-region: San José de Minas, Pichincha Province
-farm: Finca Cruz Loma
-lot:
-variety:
+Roaster: "[[S&W Craft Roasting]]"
+Name: Ecuador Pichincha Galo Morales Washed Mejorado
+Product page: https://www.swroasting.coffee/product/ecuador-pichincha-galo-morales-washed-mejorado/65
+Photo: "[[S&W Craft Roasting – Ecuador Pichincha Galo Morales Washed Mejorado.jpeg]]"
+Roast date:
+Open date:
+Bag size (g): 300
+Price paid ($): 21.68
+Rating:
+Producer: "[[Galo Fernando Morales Flores]]"
+Country: Ecuador
+Region: San José de Minas, Pichincha Province
+Farm: Finca Cruz Loma
+Lot:
+Variety:
   - Typica Mejorado
-process: Washed
-elevation: 1450 masl
-roast_level:
-tasting_notes: Light bodied, notes of Orange sherbet, nectarine, and marshmallow, with a hint of cinnamon here and there and heavy floral in the finish.
+Process: Washed
+Elevation: 1450 masl
+Roast level:
+Tasting notes: Light bodied, notes of Orange sherbet, nectarine, and marshmallow, with a hint of cinnamon here and there and heavy floral in the finish.
 ---
 
 # S&W Craft Roasting – Ecuador Pichincha Galo Morales Washed Mejorado

@@ -1,6 +1,6 @@
 ---
-country: Ecuador
-region: Pichincha
+Country: Ecuador
+Region: Pichincha
 ---
 
 # Galo Fernando Morales Flores

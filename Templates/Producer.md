@@ -1,6 +1,6 @@
 ---
-country:
-region:
+Country:
+Region:
 ---
 
 # {{title}}

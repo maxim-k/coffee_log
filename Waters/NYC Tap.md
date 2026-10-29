@@ -1,13 +1,13 @@
 ---
-kind: tap
+Kind: tap
 hardness_caco3_mg_l: 32
 alkalinity_caco3_mg_l: 25
-calcium_mg_l: 9
-magnesium_mg_l: 2.4
-sodium_mg_l: 16
-tds_mg_l: 73
-ph: 7.3
-source_url: https://www.nyc.gov/assets/dep/downloads/pdf/water/drinking-water/drinking-water-supply-quality-report/2025-drinking-water-supply-quality-report.pdf
+Calcium (mg/L): 9
+Magnesium (mg/L): 2.4
+Sodium (mg/L): 16
+TDS (mg/L): 73
+pH: 7.3
+Source: https://www.nyc.gov/assets/dep/downloads/pdf/water/drinking-water/drinking-water-supply-quality-report/2025-drinking-water-supply-quality-report.pdf
 ---
 
 # NYC Tap

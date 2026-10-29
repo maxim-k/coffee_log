@@ -1,6 +1,6 @@
 ---
-country: Colombia
-region: Huila
+Country: Colombia
+Region: Huila
 ---
 
 # Reinel Borbon

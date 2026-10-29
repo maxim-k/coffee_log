@@ -14,10 +14,11 @@ a template gains one.
 
 ## Conventions
 
-- Property names are snake_case with the unit in the name: `dose_g`,
-  `hardness_caco3_mg_l`.
+- Property names are human-readable, in sentence case, with the unit in
+  parentheses: `Dose (g)`, `Hardness as CaCO3 (mg/L)`. Obsidian's own
+  `aliases` stays lowercase.
 - Roaster text is copied as written: no normalization, no conflict notes.
-- Brew notes stay uncluttered: one `grind` field as dialed (`1-2-1`), nothing
+- Brew notes stay uncluttered: one `Grind` field as dialed (`1-2-1`), nothing
   derived from it. The user feels strongly about this.
 - Where a Water's numbers came from (published, calculated, measured) goes in
   the note body, not a property.

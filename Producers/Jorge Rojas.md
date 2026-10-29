@@ -1,6 +1,6 @@
 ---
-country: Colombia
-region: Planadas, Tolima
+Country: Colombia
+Region: Planadas, Tolima
 ---
 
 # Jorge Rojas

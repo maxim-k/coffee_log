@@ -1,6 +1,6 @@
 ---
-country: Indonesia
-region: Bali
+Country: Indonesia
+Region: Bali
 ---
 
 # Karana Global

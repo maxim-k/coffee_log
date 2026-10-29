@@ -1,24 +1,24 @@
 ---
-roaster: "[[Regalia Coffee]]"
-name: Alo Chilaka Village
-product_url: https://regaliacoffee.com/products/alo-chilaka-village
-photo: "[[Regalia Coffee – Alo Chilaka Village.png]]"
-roast_date:
-open_date:
-bag_size_g: 150
-price_paid: 21.50
-rating:
-producer: "[[Alo Coffee]]"
-country: Ethiopia
-region: Bensa < Sidama < Ethiopia
-farm:
-lot:
-variety:
+Roaster: "[[Regalia Coffee]]"
+Name: Alo Chilaka Village
+Product page: https://regaliacoffee.com/products/alo-chilaka-village
+Photo: "[[Regalia Coffee – Alo Chilaka Village.png]]"
+Roast date:
+Open date:
+Bag size (g): 150
+Price paid ($): 21.50
+Rating:
+Producer: "[[Alo Coffee]]"
+Country: Ethiopia
+Region: Bensa < Sidama < Ethiopia
+Farm:
+Lot:
+Variety:
   - "74158"
-process: Natural, Anaerobic fermentation
-elevation: 2360-2480 MASL
-roast_level:
-tasting_notes: smooth, sweet, and floral like a delicate yubari melon. A bright zest lingers in the finish.
+Process: Natural, Anaerobic fermentation
+Elevation: 2360-2480 MASL
+Roast level:
+Tasting notes: smooth, sweet, and floral like a delicate yubari melon. A bright zest lingers in the finish.
 ---
 
 # Regalia Coffee – Alo Chilaka Village

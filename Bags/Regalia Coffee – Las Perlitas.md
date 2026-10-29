@@ -1,26 +1,26 @@
 ---
-roaster: "[[Regalia Coffee]]"
-name: Las Perlitas
-product_url: https://every.coffee/roaster/regalia-coffee/las-perlitas
-photo: "[[Regalia Coffee – Las Perlitas.webp]]"
-roast_date:
-open_date:
-bag_size_g: 300
-price_paid: 27.50
-rating:
-producer:
-country: Colombia
-region: Huila
-farm:
-lot:
-variety:
+Roaster: "[[Regalia Coffee]]"
+Name: Las Perlitas
+Product page: https://every.coffee/roaster/regalia-coffee/las-perlitas
+Photo: "[[Regalia Coffee – Las Perlitas.webp]]"
+Roast date:
+Open date:
+Bag size (g): 300
+Price paid ($): 27.50
+Rating:
+Producer:
+Country: Colombia
+Region: Huila
+Farm:
+Lot:
+Variety:
   - Pink bourbon
   - Caturra
   - Gesha
-process:
-elevation: 1600-2000 MASL
-roast_level:
-tasting_notes: Winey, Caramelized sweetness, Baked peaches
+Process:
+Elevation: 1600-2000 MASL
+Roast level:
+Tasting notes: Winey, Caramelized sweetness, Baked peaches
 ---
 
 # Regalia Coffee – Las Perlitas

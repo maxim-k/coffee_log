@@ -1,7 +1,7 @@
 ---
-manufacturer: Orea
-model: O1
-material: steel
+Manufacturer: Orea
+Model: O1
+Material: steel
 ---
 
 # Orea O1

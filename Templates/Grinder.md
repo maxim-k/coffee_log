@@ -1,12 +1,12 @@
 ---
-burr_type:
-true_zero:
-clicks_per_rotation:
-clicks_per_number:
-travel_per_click_um:
-burr_gap_per_click_um:
+Burr type:
+True zero:
+Clicks per rotation:
+Clicks per number:
+Travel per click (µm):
+Burr gap per click (µm):
 ---
 
 # {{title}}
 
-%% Total clicks = `−true_zero + rotations × clicks_per_rotation + number × clicks_per_number + extra clicks`. Convert between grinders by burr gap; use travel when the gap is missing. %%
+%% Total clicks = −True zero + rotations × Clicks per rotation + number × Clicks per number + extra clicks. Convert between grinders by burr gap; use travel when the gap is missing. %%

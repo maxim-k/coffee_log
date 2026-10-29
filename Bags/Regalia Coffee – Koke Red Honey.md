@@ -1,24 +1,24 @@
 ---
-roaster: "[[Regalia Coffee]]"
-name: Koke Red Honey
-product_url: https://every.coffee/roaster/regalia-coffee/koke-red-honey-3de5083b80
-photo: "[[Regalia Coffee – Koke Red Honey.webp]]"
-roast_date:
-open_date:
-bag_size_g: 300
-price_paid: 28.75
-rating:
-producer: "[[Konga Washing Station]]"
-country: Ethiopia
-region: Gedeo < Yirgacheffe
-farm:
-lot:
-variety:
+Roaster: "[[Regalia Coffee]]"
+Name: Koke Red Honey
+Product page: https://every.coffee/roaster/regalia-coffee/koke-red-honey-3de5083b80
+Photo: "[[Regalia Coffee – Koke Red Honey.webp]]"
+Roast date:
+Open date:
+Bag size (g): 300
+Price paid ($): 28.75
+Rating:
+Producer: "[[Konga Washing Station]]"
+Country: Ethiopia
+Region: Gedeo < Yirgacheffe
+Farm:
+Lot:
+Variety:
   - Heirloom Koke Red
-process: Honey
-elevation: 2,000 m.a.s.l.
-roast_level:
-tasting_notes: tropical, fruit punch, creamy body, delicate, floral finish
+Process: Honey
+Elevation: 2,000 m.a.s.l.
+Roast level:
+Tasting notes: tropical, fruit punch, creamy body, delicate, floral finish
 ---
 
 # Regalia Coffee – Koke Red Honey

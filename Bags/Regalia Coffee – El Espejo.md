@@ -1,24 +1,24 @@
 ---
-roaster: "[[Regalia Coffee]]"
-name: El Espejo
-product_url: https://regaliacoffee.com/products/el-espejo
-photo: "[[Regalia Coffee – El Espejo.png]]"
-roast_date:
-open_date:
-bag_size_g: 300
-price_paid: 29.00
-rating:
-producer: "[[Reinel Borbon]]"
-country: Colombia
-region: Huila
-farm: Finca El Espejo
-lot:
-variety:
+Roaster: "[[Regalia Coffee]]"
+Name: El Espejo
+Product page: https://regaliacoffee.com/products/el-espejo
+Photo: "[[Regalia Coffee – El Espejo.png]]"
+Roast date:
+Open date:
+Bag size (g): 300
+Price paid ($): 29.00
+Rating:
+Producer: "[[Reinel Borbon]]"
+Country: Colombia
+Region: Huila
+Farm: Finca El Espejo
+Lot:
+Variety:
   - Pink Bourbon
-process: Honey
-elevation: 1850 MASL
-roast_level:
-tasting_notes: delicate wininess in this cup. It is playful but clean and balanced like pineapple juice, with deep sweetness and subtle spices like dates and mulled wine.
+Process: Honey
+Elevation: 1850 MASL
+Roast level:
+Tasting notes: delicate wininess in this cup. It is playful but clean and balanced like pineapple juice, with deep sweetness and subtle spices like dates and mulled wine.
 ---
 
 # Regalia Coffee – El Espejo

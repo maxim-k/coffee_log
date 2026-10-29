@@ -1,23 +1,23 @@
 ---
-roaster:
-name:
-product_url:
-photo:
-roast_date:
-open_date:
-bag_size_g:
-price_paid:
-rating:
-producer:
-country:
-region:
-farm:
-lot:
-variety:
-process:
-elevation:
-roast_level:
-tasting_notes:
+Roaster:
+Name:
+Product page:
+Photo:
+Roast date:
+Open date:
+Bag size (g):
+Price paid ($):
+Rating:
+Producer:
+Country:
+Region:
+Farm:
+Lot:
+Variety:
+Process:
+Elevation:
+Roast level:
+Tasting notes:
 ---
 
 # {{title}}

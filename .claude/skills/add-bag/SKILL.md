@@ -51,15 +51,15 @@ Start from `Templates/Bag.md`. Set the H1 to the note name and drop the `%%`
 comments.
 
 - **Properties:**
-  - `variety` is a list.
-  - `tasting_notes`: the labeled field, or else the flavor phrase from the
+  - `Variety` is a list.
+  - `Tasting notes`: the labeled field, or else the flavor phrase from the
     narrative, such as `green apple and star fruit, with a lingering sweet
     caramel finish`.
-  - `lot`: the labeled field, or else from the coffee's name (`Lot 7`).
-  - `roast_date` (`YYYY-MM-DD`) and `bag_size_g` come from the user.
-  - `price_paid`: the user's price if given, or else the page's price for
+  - `Lot`: the labeled field, or else from the coffee's name (`Lot 7`).
+  - `Roast date` (`YYYY-MM-DD`) and `Bag size (g)` come from the user.
+  - `Price paid ($)`: the user's price if given, or else the page's price for
     that bag size, as a number.
-  - `open_date` and `rating` stay empty for the user.
+  - `Open date` and `Rating` stay empty for the user.
 - **Details:** one `Label: value` line, as written, for every labeled detail
   on the page that has no property: importer, harvest, prices, dates,
   fermentation, and the rest.
@@ -74,18 +74,18 @@ user.
 
 ## 4. Link the Roaster and Producer
 
-Set `roaster` and `producer` to `"[[Name]]"`, using the names as the roaster
+Set `Roaster` and `Producer` to `"[[Name]]"`, using the names as the roaster
 writes them; several producers become a list of links. For each name with no
 note in `Roasters/` or `Producers/`, create one from its template. Fill a
-Roaster's `website`, `city` and `country` from its site, and a Producer's
-`country` and `region` from the product page.
+Roaster's `Website`, `City` and `Country` from its site, and a Producer's
+`Country` and `Region` from the product page.
 
 ## 5. Save the photo
 
 Take the main product image: the page's `og:image` meta tag, or the first
 image in the JSON. Download it with `curl -sL` to
 `Attachments/<note name>.<ext>`, and check with `file` that it is an image.
-Set `photo: "[[<file name>]]"` and put `![[<file name>]]` as the first line
+Set `Photo: "[[<file name>]]"` and put `![[<file name>]]` as the first line
 under the H1.
 
 ## 6. Report

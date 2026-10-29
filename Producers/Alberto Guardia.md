@@ -1,6 +1,6 @@
 ---
-country: Costa Rica
-region: Alajuela
+Country: Costa Rica
+Region: Alajuela
 ---
 
 # Alberto Guardia
