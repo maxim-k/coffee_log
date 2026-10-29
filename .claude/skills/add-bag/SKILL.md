@@ -51,7 +51,7 @@ Start from `Templates/Bag.md`. Set the H1 to the note name and drop the `%%`
 comments.
 
 - **Properties:**
-  - `Variety` is a list.
+  - `Variety` is a list of links to `Varieties/` notes (step 4).
   - `Tasting notes`: the labeled field, or else the flavor phrase from the
     narrative, such as `green apple and star fruit, with a lingering sweet
     caramel finish`.
@@ -72,13 +72,29 @@ in Obsidian once the date turns up.
 Done when every property and Details line traces back to the page or the
 user.
 
-## 4. Link the Roaster and Producer
+## 4. Link the Roaster, Producer and Varieties
 
 Set `Roaster` and `Producer` to `"[[Name]]"`, using the names as the roaster
 writes them; several producers become a list of links. For each name with no
 note in `Roasters/` or `Producers/`, create one from its template. Fill a
 Roaster's `Website`, `City` and `Country` from its site, and a Producer's
 `Country` and `Region` from the product page.
+
+`Varieties/` is the dictionary of varieties. Split the roaster's variety text
+into its parts:
+
+- A variety name: match it against each note's name and `aliases`, ignoring
+  case, and link the note by its own name (`Heirloom` → `"[[Ethiopian
+  Landrace]]"`).
+- A place, station or farm (`Koke` in `Heirloom Koke Red`): `Region`, `Farm`
+  or `Producer`.
+- A process (`Red Honey`): `Process`.
+
+When the roaster's wording differs from the linked names by more than case,
+add a `Variety: <as written>` line to Details. A variety with no note gets
+one from `Templates/Variety.md`: fill `Parent` from the World Coffee Research
+catalog (https://varieties.worldcoffeeresearch.org/) or a genetic study, cite
+the source in the body, and leave `Parent` empty when neither has it.
 
 ## 5. Save the photo
 
@@ -90,6 +106,6 @@ under the H1.
 
 ## 6. Report
 
-In a few lines: the note's name, the product page URL, and any Roaster or
-Producer notes created. Keep fetch mechanics out of the report; gaps show up
+In a few lines: the note's name, the product page URL, and any Roaster,
+Producer or Variety notes created. Keep fetch mechanics out of the report; gaps show up
 in `00_Meta/Unfilled fields.base`.

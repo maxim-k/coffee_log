@@ -14,7 +14,7 @@ Region: Gedeo < Yirgacheffe
 Farm:
 Lot:
 Variety:
-  - Heirloom Koke Red
+  - "[[Ethiopian Landrace]]"
 Process: Honey
 Elevation: 2,000 m.a.s.l.
 Roast level:
@@ -26,6 +26,8 @@ Tasting notes: tropical, fruit punch, creamy body, delicate, floral finish
 ![[Regalia Coffee – Koke Red Honey.webp]]
 
 ## Details
+
+Variety: Heirloom Koke Red
 
 ## Story
 

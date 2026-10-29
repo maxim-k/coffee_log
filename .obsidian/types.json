@@ -25,6 +25,7 @@
     "Sulfate (mg/L)": "number",
     "Chloride (mg/L)": "number",
     "TDS (mg/L)": "number",
-    "pH": "number"
+    "pH": "number",
+    "Parent": "multitext"
   }
 }

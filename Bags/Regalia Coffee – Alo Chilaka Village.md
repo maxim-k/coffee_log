@@ -14,7 +14,7 @@ Region: Bensa < Sidama < Ethiopia
 Farm:
 Lot:
 Variety:
-  - "74158"
+  - "[[74158]]"
 Process: Natural, Anaerobic fermentation
 Elevation: 2360-2480 MASL
 Roast level:

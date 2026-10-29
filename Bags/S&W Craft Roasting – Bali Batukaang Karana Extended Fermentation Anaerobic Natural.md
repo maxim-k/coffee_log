@@ -16,7 +16,7 @@ Region: Bali
 Farm:
 Lot:
 Variety:
-  - Kartika
+  - "[[Kartika]]"
 Process: Yeast-inoculated Extended Fermentation Anaerobic Natural
 Elevation: 1200-1300 masl
 Roast level:

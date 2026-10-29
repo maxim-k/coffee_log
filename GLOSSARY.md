@@ -24,6 +24,12 @@ _Avoid_: Producer, brand
 The person, farm or co-op that grew the coffee, as printed by the Roaster.
 _Avoid_: Roaster, farmer
 
+**Variety**:
+A genetic line of the coffee plant, such as Gesha or Caturra, with its parent
+varieties and the other names roasters print for it. A Bag names its
+Varieties by their one canonical name.
+_Avoid_: Varietal, cultivar
+
 **Brew**:
 One cup I made from a Bag, with its brewing parameters: dose, water
 temperature, grind setting, Grinder, Brewer, Water and total brew time.

@@ -18,6 +18,8 @@ a template gains one.
   parentheses: `Dose (g)`, `Hardness as CaCO3 (mg/L)`. Obsidian's own
   `aliases` stays lowercase.
 - Roaster text is copied as written: no normalization, no conflict notes.
+- `Varieties/` is the dictionary of varieties: a Bag's `Variety` links its
+  canonical notes, and the roaster's own wording goes to Details.
 - Brew notes stay uncluttered: one `Grind` field as dialed (`1-2-1`), nothing
   derived from it. The user feels strongly about this.
 - Where a Water's numbers came from (published, calculated, measured) goes in

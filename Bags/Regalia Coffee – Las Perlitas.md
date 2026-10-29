@@ -14,9 +14,9 @@ Region: Huila
 Farm:
 Lot:
 Variety:
-  - Pink bourbon
-  - Caturra
-  - Gesha
+  - "[[Pink Bourbon]]"
+  - "[[Caturra]]"
+  - "[[Gesha]]"
 Process:
 Elevation: 1600-2000 MASL
 Roast level:

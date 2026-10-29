@@ -14,7 +14,7 @@ Region: San José de Minas, Pichincha Province
 Farm: Finca Cruz Loma
 Lot:
 Variety:
-  - Typica Mejorado
+  - "[[Typica Mejorado]]"
 Process: Washed
 Elevation: 1450 masl
 Roast level:

@@ -14,7 +14,7 @@ Region: Deri Kidame < Hambela Womena < West Guji < Ethiopia
 Farm:
 Lot:
 Variety:
-  - Heirloom
+  - "[[Ethiopian Landrace]]"
 Process: Natural
 Elevation: 1900 - 2000 MASL
 Roast level:
@@ -26,6 +26,8 @@ Tasting notes: very clean, floral and blueberry-driven cup. The cup is enhanced 
 ![[Regalia Coffee – Hambela Deri Fahmi.png]]
 
 ## Details
+
+Variety: Heirloom
 
 ## Story
 

@@ -14,7 +14,7 @@ Region: Huila
 Farm: Finca El Espejo
 Lot:
 Variety:
-  - Pink Bourbon
+  - "[[Pink Bourbon]]"
 Process: Honey
 Elevation: 1850 MASL
 Roast level:

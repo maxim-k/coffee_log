@@ -16,7 +16,7 @@ Region: Carrillos Alto de Poás, Alajuela
 Farm: Hacienda Sonora
 Lot:
 Variety:
-  - Dwarf Caturra
+  - "[[Dwarf Caturra]]"
 Process: Natural process, dried in warehouse and mechanical (using renewable energy)
 Elevation: 1300 masl
 Roast level:

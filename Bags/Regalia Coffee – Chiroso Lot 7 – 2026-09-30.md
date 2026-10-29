@@ -14,7 +14,7 @@ Region: Planadas, Tolima, Colombia
 Farm: Finca El Jardín
 Lot: Lot 7
 Variety:
-  - Chiroso
+  - "[[Chiroso]]"
 Process: Washed
 Elevation: 2050 MASL
 Roast level:

@@ -109,6 +109,16 @@ views:
       - note.Country
       - note.Region
   - type: table
+    name: Varieties
+    filters:
+      and:
+        - 'file.inFolder("Varieties")'
+        - or:
+            - 'note["Parent"].isEmpty()'
+    order:
+      - file.name
+      - note.Parent
+  - type: table
     name: Brewers
     filters:
       and:
