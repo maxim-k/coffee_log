@@ -1,9 +1,15 @@
 ---
 Parent:
-  - "[[Catuai]]"
+  - "[[Timor Hybrid]]"
+  - "[[Caturra]]"
 aliases:
+  - Kartika 1
+Genetic group: Introgressed (Catimor related)
+Breeder: Indonesian Coffee and Cocoa Research Institute (ICCRI)
 ---
 
 # Kartika
 
-A Catuaí population selected in Indonesia; the name stands for Kopi Arabika Tipe Katai. Source: [Royal Coffee, Indonesian cultivars](https://cdn.royalcoffee.com/wp-content/uploads/2025/10/02083855/Indonesian-Cultivars-v2.1-blog-ready.pdf).
+Lineage: Timor Hybrid 832/1 x Caturra
+
+Source: [[WCR_Coffee_Varieties_Catalog.pdf|World Coffee Research, Coffee Varieties Catalog]] (2025).

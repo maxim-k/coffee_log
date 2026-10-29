@@ -2,6 +2,8 @@
 Parent:
 aliases:
   - Mejorado
+Genetic group:
+Breeder:
 ---
 
 # Typica Mejorado
