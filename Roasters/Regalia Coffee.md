@@ -1,7 +1,7 @@
 ---
-website: https://regaliacoffee.com
-city: New York City
-country: United States
+Website: https://regaliacoffee.com
+City: New York City
+Country: United States
 ---
 
 # Regalia Coffee

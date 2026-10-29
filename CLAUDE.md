@@ -12,12 +12,28 @@ hot-linked. `00_Meta/` holds upkeep tools: open `00_Meta/Unfilled fields.base`
 to see which notes still have empty properties, and add a property there when
 a template gains one.
 
+## Branches
+
+`main` holds the vault. The read-only site at
+https://maxim-k.github.io/coffee_log/ lives on the `site` branch: `main` plus
+`.site/` and `.github/`, nothing else, and every push to `site` deploys it.
+Commit vault changes on `main`, then run
+`git switch site && git merge main -m "chore: merge main into site"` and push
+both branches. Commit front-end changes on `site` only; `.site/CLAUDE.md`
+describes the site. Never `git add -A` on `main`: the ignored-on-`site` build
+folders show up there as untracked.
+
 ## Conventions
 
-- Property names are snake_case with the unit in the name: `dose_g`,
-  `hardness_caco3_mg_l`.
-- Roaster text is copied as written: no normalization, no conflict notes.
-- Brew notes stay uncluttered: one `grind` field as dialed (`1-2-1`), nothing
+- Property names are human-readable, in sentence case, with the unit in
+  parentheses: `Dose (g)`, `Hardness as CaCO3 (mg/L)`. Obsidian's own
+  `aliases` stays lowercase.
+- A Bag's body copies the roaster's text as written; its properties hold
+  the same facts harmonized (`docs/adr/0003`), so they read alike across
+  bags. The user wants roaster data kept and technical details neat.
+- `Varieties/` is the dictionary of varieties: a Bag's `Variety` links its
+  canonical notes, and the roaster's own wording goes to Details.
+- Brew notes stay uncluttered: one `Grind` field as dialed (`1-2-1`), nothing
   derived from it. The user feels strongly about this.
 - Where a Water's numbers came from (published, calculated, measured) goes in
   the note body, not a property.
@@ -31,7 +47,7 @@ a template gains one.
 
 - Bases views for analysis: the user is collecting data first. Bases, not
   Dataview, when the time comes. The `00_Meta` report is the one exception.
-- Normalizing roaster text into numbers (elevation ranges, prices).
+- Turning harmonized text into numbers (elevation ranges into two numbers).
 - Water notes beyond NYC Tap and Distilled.
 
 ## Open items

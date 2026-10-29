@@ -1,6 +1,6 @@
 ---
-country: Ethiopia
-region: Guji
+Country: Ethiopia
+Region: Guji
 ---
 
 # Testi Specialty Coffee

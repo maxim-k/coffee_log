@@ -1,6 +1,6 @@
 ---
-country: Ethiopia
-region: Sidama
+Country: Ethiopia
+Region: Sidama
 ---
 
 # Alo Coffee

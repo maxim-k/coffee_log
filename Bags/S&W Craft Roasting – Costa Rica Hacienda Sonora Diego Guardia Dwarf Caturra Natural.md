@@ -1,26 +1,26 @@
 ---
-roaster: "[[S&W Craft Roasting]]"
-name: Costa Rica Hacienda Sonora Diego Guardia Dwarf Caturra Natural
-product_url: https://www.swroasting.coffee/product/costa-rica-hacienda-sonora-diego-guardia-dwarf-caturra-natural/EWTVVRZX6G6JD2EZP2DFGAPI
-photo: "[[S&W Craft Roasting – Costa Rica Hacienda Sonora Diego Guardia Dwarf Caturra Natural.jpeg]]"
-roast_date:
-open_date:
-bag_size_g: 100
-price_paid: 9.65
-rating:
-producer:
+Roaster: "[[S&W Craft Roasting]]"
+Name: Costa Rica Hacienda Sonora Diego Guardia Dwarf Caturra Natural
+Product page: https://www.swroasting.coffee/product/costa-rica-hacienda-sonora-diego-guardia-dwarf-caturra-natural/EWTVVRZX6G6JD2EZP2DFGAPI
+Photo: "[[S&W Craft Roasting – Costa Rica Hacienda Sonora Diego Guardia Dwarf Caturra Natural.jpeg]]"
+Roast date:
+Open date:
+Bag size (g): 100
+Price paid ($): 9.65
+Rating:
+Producer:
   - "[[Alberto Guardia]]"
   - "[[Diego Guardia]]"
-country: Costa Rica
-region: Carrillos Alto de Poás, Alajuela
-farm: Hacienda Sonora
-lot:
-variety:
-  - Dwarf Caturra
-process: Natural process, dried in warehouse and mechanical (using renewable energy)
-elevation: 1300 masl
-roast_level:
-tasting_notes: mixed fruits on an oak barrel. Think like wine without the ferment.
+Country: Costa Rica
+Region: Carrillos Alto de Poás, Alajuela
+Farm: Hacienda Sonora
+Lot:
+Variety:
+  - "[[Dwarf Caturra]]"
+Process: Natural
+Elevation: 1300 MASL
+Roast level:
+Tasting notes: mixed fruits, oak barrel, wine
 ---
 
 # S&W Craft Roasting – Costa Rica Hacienda Sonora Diego Guardia Dwarf Caturra Natural

@@ -7,8 +7,10 @@ description: Create a Bag note from the roaster's product page, with the photo s
 
 A Bag is one physical bag (see `GLOSSARY.md`). Fill every property the page
 answers: a labeled field first, then the coffee's name, then the narrative.
-Copy the roaster's words **as written**: same words, units, capitals and
-punctuation. A property stays empty only when the page says nothing about it.
+The body copies the roaster's words **as written**: same words, units,
+capitals and punctuation. Properties hold the same facts **harmonized**, by
+the rules in step 3 (see `docs/adr/0003-bag-properties-hold-harmonized-values.md`).
+A property stays empty only when the page says nothing about it.
 
 ## 1. Gather the input
 
@@ -51,18 +53,30 @@ Start from `Templates/Bag.md`. Set the H1 to the note name and drop the `%%`
 comments.
 
 - **Properties:**
-  - `variety` is a list.
-  - `tasting_notes`: the labeled field, or else the flavor phrase from the
-    narrative, such as `green apple and star fruit, with a lingering sweet
-    caramel finish`.
-  - `lot`: the labeled field, or else from the coffee's name (`Lot 7`).
-  - `roast_date` (`YYYY-MM-DD`) and `bag_size_g` come from the user.
-  - `price_paid`: the user's price if given, or else the page's price for
+  - `Variety` is a list of links to `Varieties/` notes (step 4).
+  - `Tasting notes`: short notes, lowercase except proper nouns,
+    comma-separated: `tropical, fruit punch, creamy body, floral finish`.
+    Take the page's own list when it has one. Otherwise pick the notes out of
+    the narrative (`green apple and star fruit, with a lingering sweet
+    caramel finish` → `green apple, star fruit, sweet caramel`); the prose
+    stays in Story.
+  - `Elevation`: `<n> MASL` or `<n>-<n> MASL`, without a thousands separator
+    (`2,000 m.a.s.l.` → `2000 MASL`, `1900 - 2000 masl` → `1900-2000 MASL`).
+  - `Region`: from the smallest area to the largest, comma-separated, without
+    the country (`Bensa < Sidama < Ethiopia` → `Bensa, Sidama`).
+  - `Process`: the process name in sentence case, without how it was done
+    (`Natural, Anaerobic fermentation` → `Anaerobic natural`).
+  - `Lot`: the labeled field, or else from the coffee's name (`Lot 7`).
+  - `Roast date` (`YYYY-MM-DD`) and `Bag size (g)` come from the user.
+  - `Price paid ($)`: the user's price if given, or else the page's price for
     that bag size, as a number.
-  - `open_date` and `rating` stay empty for the user.
+  - `Open date` and `Rating` stay empty for the user.
 - **Details:** one `Label: value` line, as written, for every labeled detail
   on the page that has no property: importer, harvest, prices, dates,
-  fermentation, and the rest.
+  fermentation, and the rest. When harmonizing a property dropped the
+  roaster's words, not only their format, add them here too
+  (`Process: Natural, Anaerobic fermentation`), unless Story already holds
+  them.
 - **Story:** the roaster's whole narrative, as written.
 
 Save it as `Bags/<Roaster> – <Coffee> – <YYYY-MM-DD>.md`, with en dashes. With
@@ -72,24 +86,40 @@ in Obsidian once the date turns up.
 Done when every property and Details line traces back to the page or the
 user.
 
-## 4. Link the Roaster and Producer
+## 4. Link the Roaster, Producer and Varieties
 
-Set `roaster` and `producer` to `"[[Name]]"`, using the names as the roaster
+Set `Roaster` and `Producer` to `"[[Name]]"`, using the names as the roaster
 writes them; several producers become a list of links. For each name with no
 note in `Roasters/` or `Producers/`, create one from its template. Fill a
-Roaster's `website`, `city` and `country` from its site, and a Producer's
-`country` and `region` from the product page.
+Roaster's `Website`, `City` and `Country` from its site, and a Producer's
+`Country` and `Region` from the product page.
+
+`Varieties/` is the dictionary of varieties. Split the roaster's variety text
+into its parts:
+
+- A variety name: match it against each note's name and `aliases`, ignoring
+  case, and link the note by its own name (`Heirloom` → `"[[Ethiopian
+  Landrace]]"`).
+- A place, station or farm (`Koke` in `Heirloom Koke Red`): `Region`, `Farm`
+  or `Producer`.
+- A process (`Red Honey`): `Process`.
+
+When the roaster's wording differs from the linked names by more than case,
+add a `Variety: <as written>` line to Details. A variety with no note gets
+one from `Templates/Variety.md`: fill `Parent` from the World Coffee Research
+catalog (https://varieties.worldcoffeeresearch.org/) or a genetic study, cite
+the source in the body, and leave `Parent` empty when neither has it.
 
 ## 5. Save the photo
 
 Take the main product image: the page's `og:image` meta tag, or the first
 image in the JSON. Download it with `curl -sL` to
 `Attachments/<note name>.<ext>`, and check with `file` that it is an image.
-Set `photo: "[[<file name>]]"` and put `![[<file name>]]` as the first line
+Set `Photo: "[[<file name>]]"` and put `![[<file name>]]` as the first line
 under the H1.
 
 ## 6. Report
 
-In a few lines: the note's name, the product page URL, and any Roaster or
-Producer notes created. Keep fetch mechanics out of the report; gaps show up
+In a few lines: the note's name, the product page URL, and any Roaster,
+Producer or Variety notes created. Keep fetch mechanics out of the report; gaps show up
 in `00_Meta/Unfilled fields.base`.

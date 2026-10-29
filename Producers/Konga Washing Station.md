@@ -1,6 +1,6 @@
 ---
-country: Ethiopia
-region: Yirgacheffe
+Country: Ethiopia
+Region: Yirgacheffe
 ---
 
 # Konga Washing Station

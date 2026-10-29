@@ -1,24 +1,24 @@
 ---
-roaster: "[[Regalia Coffee]]"
-name: Hambela Deri Fahmi
-product_url: https://web.archive.org/web/20260902055654/https://regaliacoffee.com/products/hambela-deri-fahmi
-photo: "[[Regalia Coffee – Hambela Deri Fahmi.png]]"
-roast_date:
-open_date:
-bag_size_g: 150
-price_paid: 21.25
-rating:
-producer: "[[Testi Specialty Coffee]]"
-country: Ethiopia
-region: Deri Kidame < Hambela Womena < West Guji < Ethiopia
-farm:
-lot:
-variety:
-  - Heirloom
-process: Natural
-elevation: 1900 - 2000 MASL
-roast_level:
-tasting_notes: very clean, floral and blueberry-driven cup. The cup is enhanced by black tea and ripe apple in the perimeter of the profile.
+Roaster: "[[Regalia Coffee]]"
+Name: Hambela Deri Fahmi
+Product page: https://web.archive.org/web/20260902055654/https://regaliacoffee.com/products/hambela-deri-fahmi
+Photo: "[[Regalia Coffee – Hambela Deri Fahmi.png]]"
+Roast date:
+Open date:
+Bag size (g): 150
+Price paid ($): 21.25
+Rating:
+Producer: "[[Testi Specialty Coffee]]"
+Country: Ethiopia
+Region: Deri Kidame, Hambela Womena, West Guji
+Farm:
+Lot:
+Variety:
+  - "[[Ethiopian Landrace]]"
+Process: Natural
+Elevation: 1900-2000 MASL
+Roast level:
+Tasting notes: clean, floral, blueberry, black tea, ripe apple
 ---
 
 # Regalia Coffee – Hambela Deri Fahmi
@@ -26,6 +26,8 @@ tasting_notes: very clean, floral and blueberry-driven cup. The cup is enhanced 
 ![[Regalia Coffee – Hambela Deri Fahmi.png]]
 
 ## Details
+
+Variety: Heirloom
 
 ## Story
 

@@ -1,26 +1,26 @@
 ---
-roaster: "[[S&W Craft Roasting]]"
-name: Bali Batukaang Karana Extended Fermentation Anaerobic Natural
-product_url: https://www.swroasting.coffee/product/bali-batukaang-karana-extended-fermentation-anaerobic-natural/JIXIN4INED5HNOVRCGEXBLRZ
-photo: "[[S&W Craft Roasting – Bali Batukaang Karana Extended Fermentation Anaerobic Natural.jpeg]]"
-roast_date:
-open_date:
-bag_size_g: 100
-price_paid: 11.25
-rating:
-producer:
+Roaster: "[[S&W Craft Roasting]]"
+Name: Bali Batukaang Karana Extended Fermentation Anaerobic Natural
+Product page: https://www.swroasting.coffee/product/bali-batukaang-karana-extended-fermentation-anaerobic-natural/JIXIN4INED5HNOVRCGEXBLRZ
+Photo: "[[S&W Craft Roasting – Bali Batukaang Karana Extended Fermentation Anaerobic Natural.jpeg]]"
+Roast date:
+Open date:
+Bag size (g): 100
+Price paid ($): 11.25
+Rating:
+Producer:
   - "[[Pak Parum]]"
   - "[[Karana Global]]"
-country: Indonesia
-region: Bali
-farm:
-lot:
-variety:
-  - Kartika
-process: Yeast-inoculated Extended Fermentation Anaerobic Natural
-elevation: 1200-1300 masl
-roast_level:
-tasting_notes: Red and Blue berries galore!
+Country: Indonesia
+Region: Bali
+Farm:
+Lot:
+Variety:
+  - "[[Kartika]]"
+Process: Yeast-inoculated extended fermentation anaerobic natural
+Elevation: 1200-1300 MASL
+Roast level:
+Tasting notes: red berries, blue berries
 ---
 
 # S&W Craft Roasting – Bali Batukaang Karana Extended Fermentation Anaerobic Natural

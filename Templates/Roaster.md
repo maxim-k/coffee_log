@@ -1,7 +1,7 @@
 ---
-website:
-city:
-country:
+Website:
+City:
+Country:
 ---
 
 # {{title}}

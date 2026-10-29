@@ -1,7 +1,7 @@
 ---
-manufacturer:
-model:
-material:
+Manufacturer:
+Model:
+Material:
 ---
 
 # {{title}}

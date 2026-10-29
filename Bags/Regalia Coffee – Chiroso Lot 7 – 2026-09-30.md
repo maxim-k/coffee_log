@@ -1,24 +1,24 @@
 ---
-roaster: "[[Regalia Coffee]]"
-name: Chiroso Lot 7
-product_url: https://regaliacoffee.com/products/el-jardin-chiroso-lot-7
-photo: "[[Regalia Coffee – Chiroso Lot 7 – 2026-09-30.png]]"
-roast_date: 2026-09-30
-open_date:
-bag_size_g: 150
-price_paid: 23
-rating:
-producer: "[[Jorge Rojas]]"
-country: Colombia
-region: Planadas, Tolima, Colombia
-farm: Finca El Jardín
-lot: Lot 7
-variety:
-  - Chiroso
-process: Washed
-elevation: 2050 MASL
-roast_level:
-tasting_notes: green apple and star fruit, with a lingering sweet caramel finish
+Roaster: "[[Regalia Coffee]]"
+Name: Chiroso Lot 7
+Product page: https://regaliacoffee.com/products/el-jardin-chiroso-lot-7
+Photo: "[[Regalia Coffee – Chiroso Lot 7 – 2026-09-30.png]]"
+Roast date: 2026-09-30
+Open date:
+Bag size (g): 150
+Price paid ($): 23
+Rating:
+Producer: "[[Jorge Rojas]]"
+Country: Colombia
+Region: Planadas, Tolima
+Farm: Finca El Jardín
+Lot: Lot 7
+Variety:
+  - "[[Chiroso]]"
+Process: Washed
+Elevation: 2050 MASL
+Roast level:
+Tasting notes: green apple, star fruit, sweet caramel
 ---
 
 # Regalia Coffee – Chiroso Lot 7 – 2026-09-30
