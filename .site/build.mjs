@@ -70,7 +70,7 @@ function link(from, name, label) {
   const url = href(from, name);
   return url ? `<a href="${url}">${text(label)}</a>` : text(label);
 }
-const noteLink = (from, note) => `<a href="${rel(from, note.page)}">${text(title(note))}</a>`;
+const noteLink = (from, note) => `<a href="${rel(from, note.page)}">${text(note.name)}</a>`;
 const photoOf = (from, note) => {
   const photo = links(note.props.Photo ?? "")[0];
   return { photo, src: photo && href(from, photo) };
@@ -95,8 +95,6 @@ const split = (key) => {
   const [, label = key, unit] = key.match(/^(.*?)\s*\(([^)]+)\)$/) ?? [];
   return { label: LABELS[label] ?? label, unit };
 };
-// A brew is named by its date; its title spells the date out.
-const title = (note) => note.props.Name || (DATE.test(note.name) ? longDate(note.name) : note.name);
 function longDate(s) {
   return new Date(`${s}T00:00:00Z`)
     .toLocaleDateString("en-US", { timeZone: "UTC", month: "long", day: "numeric", year: "numeric" });
@@ -120,14 +118,8 @@ function value(from, v, unit) {
   return unit === "$" ? `$${html}` : `${html} ${esc(unit)}`;
 }
 
-// A definition list of label and value pairs.
-const dl = (rows) =>
-  `<dl class="props">${rows.map(([k, v]) => `<div><dt>${k}</dt><dd>${v}</dd></div>`).join("")}</dl>`;
-
 // Render the body without the leading H1 (the page prints the name), the
 // embed of the photo the page already shows, comments, and empty sections.
-// Details holds `Label: value` lines; they become the same list as the
-// properties instead of running together into one paragraph.
 function body(from, md, photo) {
   md = md
     .replace(/%%[\s\S]*?%%/g, "")
@@ -152,22 +144,13 @@ function body(from, md, photo) {
   }
   // The page's name is its h2, so the note's own ## sections render as h3.
   for (const t of kept) if (t.type === "heading") t.depth += 1;
-  let section = "";
-  const html = kept.map((t) => {
-    if (t.type === "heading") section = t.text;
-    const lines = t.type === "paragraph" ? t.text.split("\n") : [];
-    if (section !== "Details" || !lines.length || !lines.every((l) => /^[^:]+:\s/.test(l))) return marked.parser([t]);
-    return dl(lines.map((l) => {
-      const at = l.indexOf(": ");
-      return [text(l.slice(0, at)), marked.parseInline(l.slice(at + 2))];
-    }));
-  });
-  return html.join("");
+  kept.links = tokens.links;
+  return marked.parser(kept);
 }
 
 const table = (head, rows) =>
   `<div class="table"><table>` +
-  `<thead><tr>${head.map((h) => `<th>${h}</th>`).join("")}</tr></thead>` +
+  (head ? `<thead><tr>${head.map((h) => `<th>${h}</th>`).join("")}</tr></thead>` : "") +
   `<tbody>${rows.map((r) => `<tr>${r.map((c) => `<td>${c}</td>`).join("")}</tr>`).join("")}</tbody></table></div>`;
 
 // A table of notes: the name links to the note, `columns` are properties.
@@ -217,7 +200,7 @@ function notePage(note) {
     .map(([k, v]) => [labelHtml(split(k).label), value(page, v, split(k).unit)]);
   let html = `<h2>${text(note.name)}</h2>`;
   if (src) html += `<img class="photo" src="${src}" alt="">`;
-  if (rows.length) html += dl(rows);
+  if (rows.length) html += table(null, rows);
   html += `<div class="prose">${body(page, note.body, photo)}</div>`;
   const linked = notes.get(note.name) === note ? incoming.get(note.name) ?? [] : [];
   const byFolder = Object.groupBy(linked, ({ note: n }) => n.folder);
@@ -271,7 +254,7 @@ const card = (note, photoNote, cardTitle, description) => {
 function folderPage(folder) {
   const from = `${folder}/index.html`;
   const list = folder === "Bags" ? newest("Bags", "", dates) : folder === "Brews" ? newest("Brews", "Date", dates)
-    : byFolder[folder].toSorted((a, b) => title(a).localeCompare(title(b)));
+    : byFolder[folder].toSorted((a, b) => a.name.localeCompare(b.name));
   return layout(from, folder, `<h2>${esc(folder)}</h2>${noteTable(from, list, COLUMNS[folder] ?? [])}`, folder);
 }
 
@@ -279,12 +262,12 @@ function homePage() {
   const brews = newest("Brews", "Date", dates).slice(0, 3).map((n) => {
     const bag = notes.get(links(n.props.Bag ?? "")[0]);
     const brewer = links(n.props.Brewer ?? "")[0];
-    const when = DATE.test(n.props.Date ?? "") ? longDate(n.props.Date) : n.name;
-    return card(n, bag ?? n, bag ? title(bag) : n.name, text([when, brewer].filter(Boolean).join(", ")));
+    const when = n.props.Date || n.name;
+    return card(n, bag ?? n, bag ? bag.name : n.name, text([when, brewer].filter(Boolean).join(", ")));
   });
   // Bags are ordered by date added only: most have no roast date.
   const bags = newest("Bags", "", dates);
-  const bagCards = bags.slice(0, 3).map((n) => card(n, n, title(n), text(links(n.props.Roaster ?? "")[0] ?? "")));
+  const bagCards = bags.slice(0, 3).map((n) => card(n, n, n.name, text(links(n.props.Roaster ?? "")[0] ?? "")));
   let html = "";
   if (brews.length) html += `<h2>Last brews</h2><div class="cards">${brews.join("")}</div>`;
   html += `<h2>Last bags</h2><div class="cards">${bagCards.join("")}</div>`;
