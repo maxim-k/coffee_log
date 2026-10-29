@@ -8,9 +8,10 @@ import { parse } from "yaml";
 
 const vault = path.resolve(import.meta.dirname, "..");
 const out = path.resolve(import.meta.dirname, "dist");
-const FOLDERS = ["Bags", "Brews", "Roasters", "Producers", "Varieties", "Grinders", "Brewers", "Waters"];
+const FOLDERS = ["Bags", "Brews", "Roasters", "Producers", "Varieties", "Flavors", "Grinders", "Brewers", "Waters"];
 // The properties shown as columns when a table lists notes of a folder.
-const COLUMNS = { Bags: ["Roaster", "Country", "Process", "Rating"], Brews: ["Date", "Bag", "Rating"] };
+const COLUMNS = { Bags: ["Roaster", "Country", "Process", "Rating"], Brews: ["Date", "Bag", "Rating"],
+  Varieties: ["Genetic group"] };
 // The property a page shows under its title instead of in its list.
 const BYLINE = { Bags: "Roaster" };
 const LABELS = { aliases: "Also known as" };
