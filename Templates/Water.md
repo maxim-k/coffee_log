@@ -1,8 +1,8 @@
 ---
 Kind:
 Base:
-hardness_caco3_mg_l:
-alkalinity_caco3_mg_l:
+Hardness as CaCO3 (mg/L):
+Alkalinity as CaCO3 (mg/L):
 Calcium (mg/L):
 Magnesium (mg/L):
 Sodium (mg/L):
