@@ -17,7 +17,7 @@ Farm: Hacienda Sonora
 Lot:
 Variety:
   - "[[Dwarf Caturra]]"
-Process: Natural
+Process: Natural process, dried in warehouse and mechanical (using renewable energy)
 Elevation: 1300 MASL
 Roast level:
 Tasting notes:
@@ -29,13 +29,6 @@ Tasting notes:
 # S&W Craft Roasting – Costa Rica Hacienda Sonora Diego Guardia Dwarf Caturra Natural
 
 ![[S&W Craft Roasting – Costa Rica Hacienda Sonora Diego Guardia Dwarf Caturra Natural.jpeg]]
-
-## Details
-
-What's in the cup?: This bean requires heavy extraction. If you underextract it, it'll taste like a bush. If you push it hard enough, it will taste like mixed fruits on an oak barrel. Think like wine without the ferment.
-Will it Spro?: I do not expect this one to lend itself to espresso well, it's pretty wild. If you turbo min it, maybe.
-Roast Color: 132.8 (higher is lighter)
-Recommended Minimum Rest: 2 weeks
 
 ## Story
 

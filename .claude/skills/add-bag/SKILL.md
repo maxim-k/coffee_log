@@ -78,27 +78,19 @@ comments.
     (`2,000 m.a.s.l.` → `2000 MASL`, `1900 - 2000 masl` → `1900-2000 MASL`).
   - `Region`: from the smallest area to the largest, comma-separated, without
     the country (`Bensa < Sidama < Ethiopia` → `Bensa, Sidama`).
-  - `Process`: the process name in sentence case, without how it was done
-    (`Natural, Anaerobic fermentation` → `Anaerobic natural`).
+  - `Process`: as the roaster writes it.
   - `Lot`: the labeled field, or else from the coffee's name (`Lot 7`).
   - `Roast date` (`YYYY-MM-DD`) and `Bag size (g)` come from the user.
   - `Price paid ($)`: the user's price if given, or else the page's price for
     that bag size, as a number.
   - `Open date` and `Rating` stay empty for the user.
-- **Details:** one `Label: value` line, as written, for every labeled detail
-  on the page that has no property: importer, harvest, prices, dates,
-  fermentation, and the rest. When harmonizing a property dropped the
-  roaster's words, not only their format, add them here too
-  (`Process: Natural, Anaerobic fermentation`), unless Story already holds
-  them.
 - **Story:** the roaster's whole narrative, as written.
 
 Save it as `Bags/<Roaster> – <Coffee> – <YYYY-MM-DD>.md`, with en dashes. With
 no roast date, save it as `Bags/<Roaster> – <Coffee>.md`; the user renames it
 in Obsidian once the date turns up.
 
-Done when every property and Details line traces back to the page or the
-user.
+Done when every property traces back to the page or the user.
 
 ## 4. Link the Roaster, Producer and Varieties
 
@@ -118,8 +110,7 @@ into its parts:
   or `Producer`.
 - A process (`Red Honey`): `Process`.
 
-When the roaster's wording differs from the linked names by more than case,
-add a `Variety: <as written>` line to Details. A variety with no note gets
+A variety with no note gets
 one from `Templates/Variety.md`: fill `Parent` from the World Coffee Research
 catalog (https://varieties.worldcoffeeresearch.org/) or a genetic study, cite
 the source in the body, and leave `Parent` empty when neither has it.

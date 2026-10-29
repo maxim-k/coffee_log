@@ -31,13 +31,6 @@ Tasting notes:
 
 ![[S&W Craft Roasting – Ecuador Pichincha Galo Morales Washed Mejorado.jpeg]]
 
-## Details
-
-What's in the cup?: Light bodied, notes of Orange sherbet, nectarine, and marshmallow, with a hint of cinnamon here and there and heavy floral in the finish. A much more elegant and refined cup than the powerhouse we had the first time. With longer rest, notes of citrus, light peach, and more florals appear.
-Will it Spro?: Turbos are bright and tasty, but I had to dial my grind size up a bit to keep extraction where I wanted it.
-Roast Color: 129.4 (higher is lighter)
-Recommended Minimum Rest: 3 weeks, but it will open up more at 4-5 weeks
-
 ## Story
 
 Typica Mejorado varietal grown by Galo Fernando Morales Flores at Finca Cruz Loma (2022 COE winner) in San José de Minas, Pichincha Province. Washed process, 1450 masl.
