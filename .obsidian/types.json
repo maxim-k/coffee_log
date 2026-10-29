@@ -26,6 +26,7 @@
     "Chloride (mg/L)": "number",
     "TDS (mg/L)": "number",
     "pH": "number",
-    "Parent": "multitext"
+    "Parent": "multitext",
+    "Tasting notes": "multitext"
   }
 }

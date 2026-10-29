@@ -20,7 +20,9 @@ Variety:
 Process: Yeast-inoculated extended fermentation anaerobic natural
 Elevation: 1200-1300 MASL
 Roast level:
-Tasting notes: red berries, blue berries
+Tasting notes:
+  - "[[Berry|red berries]]"
+  - "[[Blueberry|blue berries]]"
 ---
 
 # S&W Craft Roasting – Bali Batukaang Karana Extended Fermentation Anaerobic Natural

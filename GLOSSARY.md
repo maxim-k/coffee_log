@@ -30,6 +30,12 @@ varieties and the other names roasters print for it. A Bag names its
 Varieties by their one canonical name.
 _Avoid_: Varietal, cultivar
 
+**Flavor**:
+One attribute of the World Coffee Research Sensory Lexicon, such as Apple or
+Black Tea, or one of its sections, such as Other Fruit. A roaster's tasting
+note links to the Flavor it names.
+_Avoid_: Note (when meaning a Flavor), descriptor
+
 **Brew**:
 One cup I made from a Bag, with its brewing parameters: dose, water
 temperature, grind setting, Grinder, Brewer, Water and total brew time.

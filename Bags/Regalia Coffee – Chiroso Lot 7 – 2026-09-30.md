@@ -18,7 +18,10 @@ Variety:
 Process: Washed
 Elevation: 2050 MASL
 Roast level:
-Tasting notes: green apple, star fruit, sweet caramel
+Tasting notes:
+  - "[[Apple|green apple]]"
+  - "[[Other Fruit|star fruit]]"
+  - "[[Caramelized|sweet caramel]]"
 ---
 
 # Regalia Coffee – Chiroso Lot 7 – 2026-09-30

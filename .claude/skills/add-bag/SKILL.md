@@ -54,12 +54,26 @@ comments.
 
 - **Properties:**
   - `Variety` is a list of links to `Varieties/` notes (step 4).
-  - `Tasting notes`: short notes, lowercase except proper nouns,
-    comma-separated: `tropical, fruit punch, creamy body, floral finish`.
+  - `Tasting notes`: a list of short notes, lowercase except proper nouns.
     Take the page's own list when it has one. Otherwise pick the notes out of
     the narrative (`green apple and star fruit, with a lingering sweet
-    caramel finish` → `green apple, star fruit, sweet caramel`); the prose
-    stays in Story.
+    caramel finish` → `green apple`, `star fruit`, `sweet caramel`); the
+    prose stays in Story. Link each note to a `Flavors/` note, keeping the
+    roaster's words as the shown text (`"[[Apple|green apple]]"`):
+    - A Flavor, alone or with a describing word, links that Flavor: `red
+      apple`, `ripe apple` → Apple; `sweet caramel` → Caramelized.
+    - A real food or smell that has no Flavor links the closest section
+      above it: `star fruit`, `yubari melon`, `nectarine` → Other Fruit;
+      `dates` → Dried Fruit; `buckwheat` → Cereal.
+    - A product made from a food stays plain text, with no link: candy,
+      gummies, juice, jam, soda, sherbet, `peach rings`, `fruit punch`,
+      `mulled wine`. These point to co-ferments and flavorings, not to
+      the fruit.
+    - A word about texture or quality (`clean`, `delicate`, `creamy
+      body`) stays plain text unless a Flavor names it.
+
+    Match against each Flavor's name and `aliases`. Never create a Flavor
+    note: the set is the WCR Sensory Lexicon, fixed.
   - `Elevation`: `<n> MASL` or `<n>-<n> MASL`, without a thousands separator
     (`2,000 m.a.s.l.` → `2000 MASL`, `1900 - 2000 masl` → `1900-2000 MASL`).
   - `Region`: from the smallest area to the largest, comma-separated, without

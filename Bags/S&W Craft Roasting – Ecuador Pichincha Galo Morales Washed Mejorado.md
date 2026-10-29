@@ -18,7 +18,13 @@ Variety:
 Process: Washed
 Elevation: 1450 MASL
 Roast level:
-Tasting notes: light bodied, orange sherbet, nectarine, marshmallow, cinnamon, floral
+Tasting notes:
+  - light bodied
+  - orange sherbet
+  - "[[Other Fruit|nectarine]]"
+  - marshmallow
+  - "[[Cinnamon|cinnamon]]"
+  - "[[Floral|floral]]"
 ---
 
 # S&W Craft Roasting – Ecuador Pichincha Galo Morales Washed Mejorado

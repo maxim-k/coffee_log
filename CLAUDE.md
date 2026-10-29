@@ -31,6 +31,8 @@ folders show up there as untracked.
 - A Bag's body copies the roaster's text as written; its properties hold
   the same facts harmonized (`docs/adr/0003`), so they read alike across
   bags. The user wants roaster data kept and technical details neat.
+- `Flavors/` is the WCR Sensory Lexicon, fixed: a Bag's `Tasting notes` keep
+  the roaster's words and link the Flavor each one names (rules in `add-bag`).
 - `Attachments/WCR_Coffee_Varieties_Catalog.pdf` is © World Coffee Research,
   CC BY-NC-ND 4.0: share it unchanged and credit WCR. Variety notes copy its
   facts and cite it. `Attachments/WCR_Sensory_Lexicon_2.0.pdf` is all rights

@@ -20,7 +20,10 @@ Variety:
 Process:
 Elevation: 1600-2000 MASL
 Roast level:
-Tasting notes: winey, caramelized sweetness, baked peaches
+Tasting notes:
+  - "[[Winey|winey]]"
+  - "[[Caramelized|caramelized sweetness]]"
+  - "[[Peach|baked peaches]]"
 ---
 
 # Regalia Coffee – Las Perlitas
