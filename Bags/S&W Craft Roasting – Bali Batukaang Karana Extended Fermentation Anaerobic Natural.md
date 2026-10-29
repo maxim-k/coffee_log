@@ -17,7 +17,7 @@ Farm:
 Lot:
 Variety:
   - "[[Kartika]]"
-Process: Yeast-inoculated extended fermentation anaerobic natural
+Process: Yeast-inoculated Extended Fermentation Anaerobic Natural
 Elevation: 1200-1300 MASL
 Roast level:
 Tasting notes:
@@ -28,13 +28,6 @@ Tasting notes:
 # S&W Craft Roasting – Bali Batukaang Karana Extended Fermentation Anaerobic Natural
 
 ![[S&W Craft Roasting – Bali Batukaang Karana Extended Fermentation Anaerobic Natural.jpeg]]
-
-## Details
-
-What's in the cup?: Red and Blue berries galore! Avoid heavier extractions, as they can bring some ferment flavors to the cup.
-Will it Spro?: Juicy Turbos.
-Roast Color: 129.6 (higher is lighter)
-Recommended Minimum Rest: 4 weeks
 
 ## Story
 

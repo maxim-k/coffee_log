@@ -28,12 +28,6 @@ Tasting notes:
 
 ![[Regalia Coffee – Chiroso Lot 7 – 2026-09-30.png]]
 
-## Details
-
-Harvest: April 2026
-Fermentation: 12h in cherry, 16h in mucilage
-Sorting Level: 7-8%
-
 ## Story
 
 Jorge Rojas has dedicated his life to coffee since he was 12 years old, and was always focused on producing high-quality coffee while keeping ecological farming practices at the forefront. Rojas received his organic BIO certificate through ASEPOP Planadas,a 275-member coop in which provides its members with processing and QC resources, educational training, and various opportunities to travel to trade shows around the country.

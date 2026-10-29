@@ -30,10 +30,6 @@ Tasting notes:
 
 ![[Regalia Coffee – Hambela Deri Fahmi.png]]
 
-## Details
-
-Variety: Heirloom
-
 ## Story
 
 We're really excited for this one: this is a very clean, floral and blueberry-driven cup. The cup is enhanced by black tea and ripe apple in the perimeter of the profile. Definitely one of our top lots of the year.

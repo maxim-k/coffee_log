@@ -15,7 +15,7 @@ Farm:
 Lot:
 Variety:
   - "[[74158]]"
-Process: Anaerobic natural
+Process: Natural, Anaerobic fermentation
 Elevation: 2360-2480 MASL
 Roast level:
 Tasting notes:
@@ -29,11 +29,6 @@ Tasting notes:
 # Regalia Coffee – Alo Chilaka Village
 
 ![[Regalia Coffee – Alo Chilaka Village.png]]
-
-## Details
-
-Process: Natural, Anaerobic fermentation
-Sorting Level: 9.5-10%
 
 ## Story
 

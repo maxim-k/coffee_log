@@ -15,7 +15,7 @@ Farm:
 Lot:
 Variety:
   - "[[Ethiopian Landrace]]"
-Process: Red honey
+Process: Honey
 Elevation: 2000 MASL
 Roast level:
 Tasting notes:
@@ -29,10 +29,6 @@ Tasting notes:
 # Regalia Coffee – Koke Red Honey
 
 ![[Regalia Coffee – Koke Red Honey.webp]]
-
-## Details
-
-Variety: Heirloom Koke Red
 
 ## Story
 
