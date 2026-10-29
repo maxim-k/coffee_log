@@ -12,6 +12,17 @@ hot-linked. `00_Meta/` holds upkeep tools: open `00_Meta/Unfilled fields.base`
 to see which notes still have empty properties, and add a property there when
 a template gains one.
 
+## Branches
+
+`main` holds the vault. The read-only site at
+https://maxim-k.github.io/coffee_log/ lives on the `site` branch: `main` plus
+`.site/` and `.github/`, nothing else, and every push to `site` deploys it.
+Commit vault changes on `main`, then run
+`git switch site && git merge main -m "chore: merge main into site"` and push
+both branches. Commit front-end changes on `site` only; `.site/CLAUDE.md`
+describes the site. Never `git add -A` on `main`: the ignored-on-`site` build
+folders show up there as untracked.
+
 ## Conventions
 
 - Property names are human-readable, in sentence case, with the unit in
