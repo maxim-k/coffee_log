@@ -91,6 +91,8 @@ for (const note of all)
     }
 
 // A key such as `Bag size (g)` reads as the label "Bag size" and the unit "g".
+// A label as HTML: carbonate formulas get their subscript, CaCO3 → CaCO₃.
+const labelHtml = (label) => esc(label).replace(/(CO)3\b/g, "$1<sub>3</sub>");
 const split = (key) => {
   const [, label = key, unit] = key.match(/^(.*?)\s*\(([^)]+)\)$/) ?? [];
   return { label: LABELS[label] ?? label, unit };
@@ -150,6 +152,8 @@ function body(from, md, photo) {
     if (t.type === "heading" && (!next || (next.type === "heading" && next.depth <= t.depth))) continue;
     kept.unshift(t);
   }
+  // The page's name is its h2, so the note's own ## sections render as h3.
+  for (const t of kept) if (t.type === "heading") t.depth += 1;
   let section = "";
   const html = kept.map((t) => {
     if (t.type === "heading") section = t.text;
@@ -172,7 +176,7 @@ const table = (head, rows) =>
 // A column that no note fills is left out.
 function noteTable(from, list, columns) {
   columns = columns.filter((k) => list.some((n) => !isEmpty(n.props[k])));
-  const head = ["Name", ...columns.map((k) => esc(split(k).label))];
+  const head = ["Name", ...columns.map((k) => labelHtml(split(k).label))];
   return table(head, list.map((n) =>
     [noteLink(from, n), ...columns.map((k) => isEmpty(n.props[k]) ? "" : value(from, n.props[k], split(k).unit))]));
 }
@@ -184,7 +188,8 @@ function menu(from, current) {
   const mark = (on, page) => (on ? ` aria-current="${page === from ? "page" : "true"}"` : "");
   const items = FOLDERS.filter((f) => byFolder[f]).map((f) =>
     `<li><a href="${rel(from, `${f}/index.html`)}"${mark(f === current, `${f}/index.html`)}>${esc(f)} <span>${byFolder[f].length}</span></a></li>`);
-  return `<nav class="menu"><a class="site" href="${rel(from, "index.html")}"${mark(!current, "index.html")}>Coffee Log</a>` +
+  // The site name is every page's h1; the page's own name is its h2.
+  return `<nav class="menu"><h1><a class="site" href="${rel(from, "index.html")}"${mark(!current, "index.html")}>Coffee Log</a></h1>` +
     `<ul>${items.join("")}</ul></nav>`;
 }
 
@@ -212,8 +217,8 @@ function notePage(note) {
   const byline = BYLINE[folder];
   const rows = Object.entries(props)
     .filter(([k, v]) => !["Name", "Photo", byline].includes(k) && !isEmpty(v))
-    .map(([k, v]) => [esc(split(k).label), value(page, v, split(k).unit)]);
-  let html = `<h1>${text(title(note))}</h1>`;
+    .map(([k, v]) => [labelHtml(split(k).label), value(page, v, split(k).unit)]);
+  let html = `<h2>${text(title(note))}</h2>`;
   if (byline && !isEmpty(props[byline])) html += `<p class="byline">${value(page, props[byline])}</p>`;
   if (src) html += `<img class="photo" src="${src}" alt="">`;
   if (rows.length) html += dl(rows);
@@ -224,7 +229,7 @@ function notePage(note) {
     // The key that links here would repeat this page's name in every row.
     const keys = new Set(list.map(({ key }) => key));
     const columns = (COLUMNS[group] ?? []).filter((k) => !keys.has(k));
-    html += `<h2>${esc(group)}</h2>${noteTable(page, list.map(({ note: n }) => n), columns)}`;
+    html += `<h3>${esc(group)}</h3>${noteTable(page, list.map(({ note: n }) => n), columns)}`;
   }
   return layout(page, title(note), html, folder);
 }
@@ -271,7 +276,7 @@ function folderPage(folder) {
   const from = `${folder}/index.html`;
   const list = folder === "Bags" ? newest("Bags", "", dates) : folder === "Brews" ? newest("Brews", "Date", dates)
     : byFolder[folder].toSorted((a, b) => title(a).localeCompare(title(b)));
-  return layout(from, folder, `<h1>${esc(folder)}</h1>${noteTable(from, list, COLUMNS[folder] ?? [])}`, folder);
+  return layout(from, folder, `<h2>${esc(folder)}</h2>${noteTable(from, list, COLUMNS[folder] ?? [])}`, folder);
 }
 
 function homePage() {
@@ -284,7 +289,7 @@ function homePage() {
   // Bags are ordered by date added only: most have no roast date.
   const bags = newest("Bags", "", dates);
   const bagCards = bags.slice(0, 3).map((n) => card(n, n, title(n), text(links(n.props.Roaster ?? "")[0] ?? "")));
-  let html = `<h1>Coffee Log</h1>`;
+  let html = "";
   if (brews.length) html += `<h2>Last brews</h2><div class="cards">${brews.join("")}</div>`;
   html += `<h2>Last bags</h2><div class="cards">${bagCards.join("")}</div>`;
   return layout("index.html", "Coffee Log", html, "");

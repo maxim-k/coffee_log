@@ -40,28 +40,35 @@ main > * + * { margin-top: 1.5rem; }
   border-radius: calc(var(--radius) - 2px); color: var(--foreground); text-decoration: none; }
 .menu a:hover, .menu a[aria-current] { background: var(--accent); }
 .menu a[aria-current] { font-weight: 500; }
-.menu .site { font-weight: 600; }
+/* The site name: an h1 the size of the page's h2, on the same top line, so the two align. */
+.menu h1 { margin: 0; }
+.menu h1 a { padding-top: 0; padding-bottom: 0; }
 .menu ul { margin: 0.5rem 0 0; padding: 0; list-style: none; font-size: 0.875rem; }
 .menu span { color: var(--muted-foreground); font-variant-numeric: tabular-nums; }
 
 /* Narrow screens: the menu goes above the content, its folders in a wrapping row. */
 @media (max-width: 1000px) {
   body { display: block; padding: 0 1rem; }
-  .menu { position: static; width: auto; padding: 1rem 0 0; }
+  /* Pull the menu left by its links' padding, so its text lines up with the page's. */
+  .menu { position: static; width: auto; padding: 1rem 0 0; margin-left: -0.5rem; }
   .menu .site { display: inline-flex; }
   .menu ul { display: flex; flex-wrap: wrap; gap: 0.25rem; }
   main { padding-top: 1.5rem; }
 }
 
-h1, h2, h3 { font-weight: 600; letter-spacing: -0.015em; }
-h1 { margin: 0; font-size: 2rem; line-height: 1.2; }
-h2 { font-size: 1.25rem; line-height: 1.4; }
-h3 { font-size: 1rem; line-height: 1.5; }
-main > h2, .prose > h2 { margin-top: 3rem; }
-main > h2 + *, .prose > h2 + * { margin-top: 0.75rem; }
-.prose > h3 { margin-top: 2rem; }
-.prose > h3 + * { margin-top: 0.5rem; }
-h1 + .byline { margin-top: 0.25rem; }
+/* h1 is the site name, h2 the page name, h3 a section in the page, h4 a part of a section. */
+h1, h2, h3, h4 { font-weight: 600; letter-spacing: -0.015em; }
+h1, h2 { margin: 0; font-size: 1.5rem; line-height: 2rem; }
+h3 { font-size: 1.125rem; line-height: 1.5rem; }
+h4 { font-size: 1rem; line-height: 1.5rem; }
+main > * + h2 { margin-top: 3rem; }
+main > h2 + * { margin-top: 1rem; }
+main > h3, .prose > h3 { margin-top: 2.5rem; }
+main > h3 + *, .prose > h3 + * { margin-top: 0.75rem; }
+.prose > h4 { margin-top: 2rem; }
+.prose > h4 + * { margin-top: 0.5rem; }
+h2 + .byline { margin-top: 0.25rem; }
+sub { font-size: 0.75em; line-height: 0; }
 .byline { margin-bottom: 0; color: var(--muted-foreground); font-size: 1.125rem; }
 
 a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: 3px; text-decoration-color: var(--muted-foreground); }
