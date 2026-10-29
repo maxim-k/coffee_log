@@ -11,7 +11,8 @@ const out = path.resolve(import.meta.dirname, "dist");
 const FOLDERS = ["Bags", "Brews", "Roasters", "Producers", "Varieties", "Flavors", "Grinders", "Brewers", "Waters"];
 // The properties shown as columns when a table lists notes of a folder.
 const COLUMNS = { Bags: ["Roaster", "Country", "Process", "Rating"], Brews: ["Date", "Bag", "Rating"],
-  Varieties: ["Genetic group"] };
+  Roasters: ["City", "Country"], Producers: ["Country", "Region"], Varieties: ["Genetic group", "Parent"],
+  Flavors: ["Parent"] };
 // The property a page shows under its title instead of in its list.
 const BYLINE = { Bags: "Roaster" };
 const LABELS = { aliases: "Also known as" };
@@ -76,6 +77,8 @@ const photoOf = (from, note) => {
   const photo = links(note.props.Photo ?? "")[0];
   return { photo, src: photo && href(from, photo) };
 };
+
+const byFolder = Object.groupBy(all, (n) => n.folder);
 
 // For each note, the notes whose properties link to it, and through which key.
 const incoming = new Map();
@@ -174,7 +177,18 @@ function noteTable(from, list, columns) {
     [noteLink(from, n), ...columns.map((k) => isEmpty(n.props[k]) ? "" : value(from, n.props[k], split(k).unit))]));
 }
 
-const layout = (from, pageTitle, main) => `<!doctype html>
+// The menu: the site name, then each folder that has notes, with its count.
+// `current` is the folder the page belongs to, or "" on the home page.
+function menu(from, current) {
+  // "page" on the folder's own page, "true" on a note inside it.
+  const mark = (on, page) => (on ? ` aria-current="${page === from ? "page" : "true"}"` : "");
+  const items = FOLDERS.filter((f) => byFolder[f]).map((f) =>
+    `<li><a href="${rel(from, `${f}/index.html`)}"${mark(f === current, `${f}/index.html`)}>${esc(f)} <span>${byFolder[f].length}</span></a></li>`);
+  return `<nav class="menu"><a class="site" href="${rel(from, "index.html")}"${mark(!current, "index.html")}>Coffee Log</a>` +
+    `<ul>${items.join("")}</ul></nav>`;
+}
+
+const layout = (from, pageTitle, main, current) => `<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -184,7 +198,8 @@ const layout = (from, pageTitle, main) => `<!doctype html>
 <link rel="stylesheet" href="${rel(from, "style.css")}">
 </head>
 <body>
-${from === "index.html" ? "" : `<header><a href="${rel(from, "index.html")}">Coffee Log</a></header>\n`}<main>
+${menu(from, current)}
+<main>
 ${main}
 </main>
 </body>
@@ -211,7 +226,7 @@ function notePage(note) {
     const columns = (COLUMNS[group] ?? []).filter((k) => !keys.has(k));
     html += `<h2>${esc(group)}</h2>${noteTable(page, list.map(({ note: n }) => n), columns)}`;
   }
-  return layout(page, title(note), html);
+  return layout(page, title(note), html, folder);
 }
 
 // When each note file was first committed, keyed by its path in the vault.
@@ -232,6 +247,8 @@ function addedDates() {
   return dates;
 }
 
+const dates = addedDates();
+
 // A folder's notes, newest first: by `key` (a date), then by date added.
 function newest(folder, key, dates) {
   return all.filter((n) => n.folder === folder)
@@ -248,8 +265,16 @@ const card = (note, photoNote, cardTitle, description) => {
     `<div class="card-description">${description}</div></div></a>`;
 };
 
+// A folder's page: every note in it, newest first for Bags and Brews and
+// alphabetical for the rest.
+function folderPage(folder) {
+  const from = `${folder}/index.html`;
+  const list = folder === "Bags" ? newest("Bags", "", dates) : folder === "Brews" ? newest("Brews", "Date", dates)
+    : byFolder[folder].toSorted((a, b) => title(a).localeCompare(title(b)));
+  return layout(from, folder, `<h1>${esc(folder)}</h1>${noteTable(from, list, COLUMNS[folder] ?? [])}`, folder);
+}
+
 function homePage() {
-  const dates = addedDates();
   const brews = newest("Brews", "Date", dates).slice(0, 3).map((n) => {
     const bag = notes.get(links(n.props.Bag ?? "")[0]);
     const brewer = links(n.props.Brewer ?? "")[0];
@@ -261,11 +286,8 @@ function homePage() {
   const bagCards = bags.slice(0, 3).map((n) => card(n, n, title(n), text(links(n.props.Roaster ?? "")[0] ?? "")));
   let html = `<h1>Coffee Log</h1>`;
   if (brews.length) html += `<h2>Last brews</h2><div class="cards">${brews.join("")}</div>`;
-  // Without the full table, a bag that is not among the last three and
-  // shares no roaster with them has no link to it.
-  html += `<h2>Last bags</h2><div class="cards">${bagCards.join("")}</div>` +
-    `<h2>All bags</h2>${noteTable("index.html", bags, COLUMNS.Bags)}`;
-  return layout("index.html", "Coffee Log", html);
+  html += `<h2>Last bags</h2><div class="cards">${bagCards.join("")}</div>`;
+  return layout("index.html", "Coffee Log", html, "");
 }
 
 // Fail the build when a page links to a file that the build did not write.
@@ -287,9 +309,10 @@ for (const note of all) {
   fs.mkdirSync(path.join(out, note.folder), { recursive: true });
   fs.writeFileSync(path.join(out, note.page), notePage(note));
 }
+for (const folder of Object.keys(byFolder)) fs.writeFileSync(path.join(out, folder, "index.html"), folderPage(folder));
 fs.writeFileSync(path.join(out, "index.html"), homePage());
 fs.cpSync(path.join(vault, "Attachments"), path.join(out, "Attachments"),
   { recursive: true, filter: (s) => !path.basename(s).startsWith(".") });
 fs.copyFileSync(path.join(import.meta.dirname, "style.css"), path.join(out, "style.css"));
 checkLinks();
-console.log(`Wrote ${all.length} notes and the home page to ${out}`);
+console.log(`Wrote ${all.length} notes, ${Object.keys(byFolder).length} folder pages and the home page to ${out}`);

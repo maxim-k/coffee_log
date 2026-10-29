@@ -1,7 +1,9 @@
 # Coffee Log site
 
-`build.mjs` writes one static HTML page per note into `dist/`, plus a home
-page with the last three Brews and Bags as cards and an "All bags" table.
+`build.mjs` writes one static HTML page per note into `dist/`, a page per
+folder listing all its notes, and a home page with the last three Brews and
+Bags as cards. Every page has a menu on the left: the site name, then each
+folder that has notes, with its count. On a phone the menu sits on top.
 `style.css` holds shadcn's tokens and Card and Table styles as plain CSS,
 typeset after *The Elements of Typographic Style* and *Words into Type*. No
 framework and no browser JavaScript: the user rejected Quartz and a React app
