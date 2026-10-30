@@ -1,6 +1,10 @@
 ---
 Parent:
   - "[[Cereal]]"
+Wheel:
+  - Roasted
+  - Cereal
+  - Malt
 aliases:
 ---
 

@@ -1,6 +1,10 @@
 ---
 Parent:
   - "[[Alcohol-Fermented]]"
+Wheel:
+  - Sour/Fermented
+  - Alcohol/Fermented
+  - Overripe
 aliases:
   - "Overripe/Near fermented"
 ---

@@ -1,6 +1,10 @@
 ---
 Parent:
   - "[[Dried Fruit]]"
+Wheel:
+  - Fruity
+  - Dried Fruit
+  - Raisin
 aliases:
 ---
 

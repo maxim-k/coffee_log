@@ -1,6 +1,10 @@
 ---
 Parent:
   - "[[Taste Basics]]"
+Wheel:
+  - Other
+  - Chemical
+  - Bitter
 aliases:
 ---
 

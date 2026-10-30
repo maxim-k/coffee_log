@@ -1,6 +1,10 @@
 ---
 Parent:
   - "[[Sour-Acid]]"
+Wheel:
+  - Sour/Fermented
+  - Sour
+  - Isovaleric Acid
 aliases:
 ---
 

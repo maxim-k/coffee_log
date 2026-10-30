@@ -1,6 +1,10 @@
 ---
 Parent:
   - "[[Sour-Acid]]"
+Wheel:
+  - Sour/Fermented
+  - Sour
+  - Sour Aromatics
 aliases:
 ---
 

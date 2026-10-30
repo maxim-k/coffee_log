@@ -1,6 +1,10 @@
 ---
 Parent:
   - "[[Floral]]"
+Wheel:
+  - Floral
+  - Floral
+  - Jasmine
 aliases:
 ---
 

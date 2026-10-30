@@ -1,6 +1,10 @@
 ---
 Parent:
   - "[[Stale-Papery]]"
+Wheel:
+  - Other
+  - Papery/Musty
+  - Stale
 aliases:
 ---
 

@@ -1,6 +1,10 @@
 ---
 Parent:
   - "[[Green-Vegetative]]"
+Wheel:
+  - Green/Vegetative
+  - Green/Vegetative
+  - Herb-like
 aliases:
 ---
 

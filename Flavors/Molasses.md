@@ -1,6 +1,10 @@
 ---
 Parent:
   - "[[Sweet]]"
+Wheel:
+  - Sweet
+  - Brown Sugar
+  - Molasses
 aliases:
 ---
 

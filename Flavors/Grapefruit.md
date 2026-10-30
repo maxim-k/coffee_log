@@ -1,6 +1,10 @@
 ---
 Parent:
   - "[[Citrus Fruit]]"
+Wheel:
+  - Fruity
+  - Citrus Fruit
+  - Grapefruit
 aliases:
 ---
 

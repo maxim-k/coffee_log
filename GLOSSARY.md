@@ -33,7 +33,8 @@ _Avoid_: Varietal, cultivar
 **Flavor**:
 One attribute of the World Coffee Research Sensory Lexicon, such as Apple or
 Black Tea, or one of its sections, such as Other Fruit. A roaster's tasting
-note links to the Flavor it names.
+note links to the Flavor it names. A Flavor also records its place on the
+SCA flavor wheel, which groups the lexicon into nine families.
 _Avoid_: Note (when meaning a Flavor), descriptor
 
 **Brew**:

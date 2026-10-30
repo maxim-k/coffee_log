@@ -1,6 +1,10 @@
 ---
 Parent:
   - "[[Earthy]]"
+Wheel:
+  - Other
+  - Papery/Musty
+  - Moldy/Damp
 aliases:
   - "Moldy/Damp"
 ---

@@ -1,6 +1,7 @@
 ---
 Parent:
   - "[[Mouthfeel]]"
+Wheel:
 aliases:
 ---
 

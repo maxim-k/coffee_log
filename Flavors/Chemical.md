@@ -1,5 +1,8 @@
 ---
 Parent:
+Wheel:
+  - Other
+  - Chemical
 aliases:
 ---
 
