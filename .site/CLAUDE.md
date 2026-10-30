@@ -22,7 +22,8 @@ one template. The only build dependency is `marked`.
 - A third departure, also the user's choice: two folder pages draw a chart
   above their table (`CHARTS` in `build.mjs`, with d3 from jsDelivr, only on
   those pages). Flavors is a zoomable sunburst of the SCA wheel by `Wheel`
-  (`sunburst.js`), with a hue per family in the order `hues` gives.
+  (`sunburst.js`), its families placed and colored in the order `hues`
+  gives.
   Varieties is a chord diagram of `Parent` links (`chord.js`), colored by
   genetic group. Neither uses the `--chart` tokens: five can't tell nine
   families or six groups apart.

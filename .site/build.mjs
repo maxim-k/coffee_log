@@ -28,8 +28,8 @@ const CHARTS = {
     title: "Flavors on the SCA flavor wheel",
     js: SUNBURST_JS,
     // A flavor's Wheel is its path from the centre out; a flavor off the wheel
-    // has none. The families take the rainbow's hues in this order, so
-    // Green/Vegetative gets the green.
+    // has none. The families go round in this order and take the rainbow's
+    // hues in it, so Green/Vegetative gets the green.
     data: (from, list) => ({
       tree: sunburst(from, list.map((note) => ({ note, path: [note.props.Wheel].flat().filter(Boolean) }))
         .filter((e) => e.path.length)),

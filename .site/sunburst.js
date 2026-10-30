@@ -6,9 +6,11 @@ for (const figure of document.querySelectorAll("figure[data-tree]")) {
   const data = JSON.parse(figure.dataset.tree);
   const width = 928;
   const radius = width / 8;
-  // Each top-level arc takes a hue, in the order data-hues gives when the
-  // figure has one; its descendants are tints of it.
+  // The top-level arcs go round in the order data-hues gives, when the figure
+  // has one, and take the rainbow's hues in that order; their descendants
+  // are tints of them.
   const hues = figure.dataset.hues ? JSON.parse(figure.dataset.hues) : data.children.map((d) => d.name);
+  data.children.sort((a, b) => hues.indexOf(a.name) - hues.indexOf(b.name));
   const color = d3.scaleOrdinal(hues, d3.quantize(d3.interpolateRainbow, hues.length + 1));
   const hierarchy = d3.hierarchy(data).count();
   const root = d3.partition().size([2 * Math.PI, hierarchy.height + 1])(hierarchy);
