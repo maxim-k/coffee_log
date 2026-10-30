@@ -1,0 +1,11 @@
+/* Card, after shadcn/ui's Card: an image flush with the top, then a title and a description.
+   The home page's one addition to base.css. */
+.cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr)); gap: 24px;
+         padding: 0; list-style: none; max-width: none; }
+.cards li + li { margin-top: 0; }
+.cards a { display: flex; flex-direction: column; gap: 4px; height: 100%; padding-bottom: 24px;
+           overflow: hidden; border: 1px solid var(--border); border-radius: 12px;
+           color: var(--foreground); text-decoration: none; }
+.cards img { width: 100%; aspect-ratio: 1; object-fit: cover; margin-bottom: 20px; }
+.cards p { padding: 0 24px; }
+.cards a:hover { border-color: var(--foreground); }

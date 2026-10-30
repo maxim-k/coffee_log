@@ -1,13 +1,16 @@
-// Build the Coffee Log site into .site/dist: one HTML page per note, plus a
-// home page with the last three brews and bags and a table of all bags.
+// Build the Coffee Log site into .site/dist: one HTML page per note, a page
+// per folder, and a home page with the last three brews and bags as cards.
+// Pages follow the design-system skill: base.css and page.js go in verbatim.
 import { execFileSync } from "node:child_process";
 import fs from "node:fs";
 import path from "node:path";
 import { marked } from "marked";
-import { parse } from "yaml";
 
-const vault = path.resolve(import.meta.dirname, "..");
-const out = path.resolve(import.meta.dirname, "dist");
+const site = import.meta.dirname;
+const vault = path.resolve(site, "..");
+const out = path.resolve(site, "dist");
+const [BASE_CSS, PAGE_JS, CARD_CSS] = ["base.css", "page.js", "card.css"]
+  .map((f) => fs.readFileSync(path.join(site, f), "utf8"));
 const FOLDERS = ["Bags", "Brews", "Roasters", "Producers", "Varieties", "Flavors", "Grinders", "Brewers", "Waters"];
 // The properties shown as columns when a table lists notes of a folder.
 const COLUMNS = { Bags: ["Roaster", "Country", "Process", "Rating"], Brews: ["Date", "Bag", "Rating"],
@@ -16,7 +19,7 @@ const COLUMNS = { Bags: ["Roaster", "Country", "Process", "Rating"], Brews: ["Da
 const LABELS = { aliases: "Also known as" };
 const WIKILINK = /\[\[([^\]|]+)(?:\|([^\]]+))?\]\]/g;
 const IMAGE = /\.(png|jpe?g|gif|webp|svg)$/i;
-const DATE = /^\d{4}-\d{2}-\d{2}$/;
+const NUMBER = /^[−-]?\d[\d,]*(\.\d+)?$/;
 
 const esc = (s) =>
   String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
@@ -25,18 +28,41 @@ const links = (v) => [...String(v).matchAll(WIKILINK)].map((m) => m[1]);
 
 // Typesetting for display only; the notes keep the text as written. A hyphen
 // between two numbers becomes an en dash (2360–2480), but a chained grind
-// setting such as 1-2-1 and a model such as V60-01 keep theirs.
+// setting such as 1-2-1 and a model such as V60-01 keep theirs. A hyphen
+// before a lone number becomes a minus sign (−7).
 const typo = (s) => String(s)
   .replace(/(?<![\w.-])(\d+(?:[.,]\d+)?) ?- ?(\d+(?:[.,]\d+)?)(?![\w-])/g, "$1–$2")
+  .replace(/(^|[\s(])-(?=\d)/g, "$1−")
   .replace(/([\w.,!?%])'/g, "$1’").replace(/'/g, "‘")
   .replace(/(^|[\s(\[])"/g, "$1“").replace(/"/g, "”");
 const text = (s) => esc(typo(s));
 const typoToken = (t) => { if (t.type === "text" && !t.tokens) t.text = typo(t.text); };
-marked.use({ walkTokens: typoToken });
+// The design system keeps weight for headings, so bold and italic render as plain text.
+marked.use({
+  walkTokens: typoToken,
+  renderer: {
+    strong({ tokens }) { return this.parser.parseInline(tokens); },
+    em({ tokens }) { return this.parser.parseInline(tokens); },
+  },
+});
+
+// The notes' front matter is only `Key: value` lines, and `Key:` lines
+// followed by `  - item` lines. Values stay the text written, without quotes:
+// 21.50 stays 21.50, and lot 0012 stays 0012.
+function frontMatter(yaml) {
+  const props = {};
+  const unquote = (s) => s.trim().replace(/^(["'])(.*)\1$/, "$2");
+  let key;
+  for (const line of yaml.split("\n")) {
+    const item = line.match(/^\s*-\s+(.*)$/);
+    const pair = line.match(/^([^\s:][^:]*):\s*(.*)$/);
+    if (item && key) props[key] = [...[props[key]].flat().filter((v) => !isEmpty(v)), unquote(item[1])];
+    else if (pair) props[(key = pair[1])] = unquote(pair[2]);
+  }
+  return props;
+}
 
 // Read every note: its properties, its body, and the path of its page.
-// The failsafe schema keeps every value as the text written: 21.50 stays
-// 21.50, and lot 0012 stays 0012.
 const all = [];
 for (const folder of FOLDERS) {
   const dir = path.join(vault, folder);
@@ -45,7 +71,7 @@ for (const folder of FOLDERS) {
     const md = fs.readFileSync(path.join(dir, file), "utf8");
     const [, yaml = "", body = md] = md.match(/^---\n([\s\S]*?)\n---\n?([\s\S]*)$/) ?? [];
     const name = file.slice(0, -3);
-    all.push({ name, folder, props: parse(yaml, { schema: "failsafe" }) ?? {}, body, page: `${folder}/${name}.html` });
+    all.push({ name, folder, props: frontMatter(yaml), body, page: `${folder}/${name}.html` });
   }
 }
 // Links name a note, not its folder. Two notes with one name both get a page,
@@ -88,129 +114,162 @@ for (const note of all)
       incoming.get(target).push({ note, key });
     }
 
-// A key such as `Bag size (g)` reads as the label "Bag size" and the unit "g".
-// A label as HTML: carbonate formulas get their subscript, CaCO3 → CaCO₃.
-const labelHtml = (label) => esc(label).replace(/(CO)3\b/g, "$1<sub>3</sub>");
-const split = (key) => {
-  const [, label = key, unit] = key.match(/^(.*?)\s*\(([^)]+)\)$/) ?? [];
-  return { label: LABELS[label] ?? label, unit };
-};
-function longDate(s) {
-  return new Date(`${s}T00:00:00Z`)
-    .toLocaleDateString("en-US", { timeZone: "UTC", month: "long", day: "numeric", year: "numeric" });
+// A key such as `Bag size (g)` reads as "Bag size, g": the unit goes once in
+// the label, and the value is bare.
+function label(key) {
+  const [, name = key, unit] = key.match(/^(.*?)\s*\(([^)]+)\)$/) ?? [];
+  return (LABELS[name] ?? name) + (unit ? `, ${unit}` : "");
 }
 
 // Escape the text around wikilinks, not the link targets: escaping first
 // would turn [[S&W Craft Roasting]] into a name no note has.
-function value(from, v, unit) {
+function value(from, v) {
   if (Array.isArray(v)) return v.map((x) => value(from, x)).join(", ");
   const s = String(v);
   if (/^https?:\/\/\S+$/.test(s)) return `<a href="${esc(s)}">${esc(new URL(s).hostname.replace(/^www\./, ""))}</a>`;
-  if (DATE.test(s)) return esc(longDate(s));
   let html = "";
   let last = 0;
   for (const m of s.matchAll(WIKILINK)) {
     html += text(s.slice(last, m.index)) + link(from, m[1], m[2] ?? m[1]);
     last = m.index + m[0].length;
   }
-  html += text(s.slice(last));
-  if (!unit) return html;
-  return unit === "$" ? `$${html}` : `${html} ${esc(unit)}`;
+  return html + text(s.slice(last));
 }
 
-// Render the body without the leading H1 (the page prints the name), the
-// embed of the photo the page already shows, comments, and empty sections.
+// A table of records when `head` is given; otherwise a table of fields, each
+// row a field name in a th and its value. A column of numbers is right-aligned.
+function table(head, rows) {
+  const plain = (c) => c.replace(/<[^>]+>/g, "").trim();
+  const num = (head ?? rows[0]).map((_, i) => {
+    const cells = rows.map((r) => plain(r[i])).filter(Boolean);
+    return cells.length > 0 && cells.every((c) => NUMBER.test(c));
+  });
+  const cell = (tag, c, i) => `<${tag}${num[i] ? " class=num" : ""}>${c}</${tag}>`;
+  return "<table>" +
+    (head ? `<thead><tr>${head.map((h, i) => cell("th", h, i)).join("")}</tr></thead>` : "") +
+    `<tbody>${rows.map((r) => `<tr>${r.map((c, i) => cell(!head && i === 0 ? "th" : "td", c, i)).join("")}</tr>`).join("")}</tbody></table>`;
+}
+
+// A note's properties: up to five fields form one row, more form a table of
+// fields. Empty when the note has none.
+function fieldTable(from, props) {
+  const fields = Object.entries(props).filter(([k, v]) => k !== "Photo" && !isEmpty(v));
+  if (!fields.length) return "";
+  const names = fields.map(([k]) => esc(label(k)));
+  const values = fields.map(([, v]) => value(from, v));
+  return fields.length <= 5 ? table(names, [values]) : table(null, names.map((n, i) => [n, values[i]]));
+}
+
+// A table of notes: the name links to the note, `columns` are properties.
+// A column that no note fills is left out.
+function noteTable(from, list, columns) {
+  columns = columns.filter((k) => list.some((n) => !isEmpty(n.props[k])));
+  return table(["Name", ...columns.map((k) => esc(label(k)))], list.map((n) =>
+    [noteLink(from, n), ...columns.map((k) => isEmpty(n.props[k]) ? "" : value(from, n.props[k]))]));
+}
+
+// A page's content: HTML strings and sections, { title, items }. Empty
+// sections go, and a lone section hands its items to its parent, because a
+// level holds two or more sections. Each section's heading level is its depth.
+const filled = (it) => (typeof it === "string" ? it !== "" : it.items.some(filled));
+const slug = (s) => s.replace(/<[^>]+>/g, "").toLowerCase().replace(/[^\p{L}\p{N}]+/gu, "-").replace(/^-|-$/g, "");
+function render(items, depth = 2) {
+  for (;;) {
+    items = items.filter(filled);
+    const sections = items.filter((it) => typeof it !== "string");
+    if (sections.length !== 1) break;
+    items = items.flatMap((it) => (it === sections[0] ? it.items : [it]));
+  }
+  return items.map((it) => typeof it === "string" ? it
+    : `<section id="${slug(it.title)}"><h${depth}>${it.title}</h${depth}>\n${render(it.items, depth + 1)}\n</section>`)
+    .join("\n");
+}
+
+// The body as content items, without its H1 (the page prints the name), the
+// embed of the photo the page already shows, and comments. Each heading opens
+// a section that runs to the next heading of its level or higher.
 function body(from, md, photo) {
   md = md
     .replace(/%%[\s\S]*?%%/g, "")
     .replace(/!\[\[([^\]|]+)(?:\|[^\]]*)?\]\]/g, (_, n) => {
       const url = n === photo ? "" : href(from, n);
-      return !url ? "" : IMAGE.test(n) ? `![](${url})` : `[${n}](${url})`;
+      return !url ? "" : IMAGE.test(n) ? `![${n}](${url})` : `[${n}](${url})`;
     })
     .replace(WIKILINK, (_, n, alias) => {
       const url = href(from, n);
       return url ? `[${alias ?? n}](${url})` : alias ?? n;
     });
   const tokens = marked.lexer(md);
-  marked.walkTokens(tokens, typoToken);
-  const blocks = tokens.filter((t) => t.type !== "space");
-  if (blocks[0]?.type === "heading" && blocks[0].depth === 1) blocks.shift();
-  // Walk backwards, so a section emptied by dropping its subsection goes too.
-  const kept = [];
-  for (const t of blocks.reverse()) {
-    const next = kept[0];
-    if (t.type === "heading" && (!next || (next.type === "heading" && next.depth <= t.depth))) continue;
-    kept.unshift(t);
+  const top = { depth: 1, items: [] };
+  const open = [top];
+  for (const t of tokens) {
+    if (t.type === "space" || (t.type === "heading" && t.depth === 1)) continue;
+    if (t.type === "heading") {
+      while (open.at(-1).depth >= t.depth) open.pop();
+      const section = { title: marked.parseInline(t.text), depth: t.depth, items: [] };
+      open.at(-1).items.push(section);
+      open.push(section);
+    } else {
+      marked.walkTokens([t], typoToken);
+      open.at(-1).items.push(marked.parser(Object.assign([t], { links: tokens.links })));
+    }
   }
-  // The page's name is its h2, so the note's own ## sections render as h3.
-  for (const t of kept) if (t.type === "heading") t.depth += 1;
-  kept.links = tokens.links;
-  return marked.parser(kept);
+  return top.items;
 }
 
-const table = (head, rows) =>
-  `<div class="table"><table>` +
-  (head ? `<thead><tr>${head.map((h) => `<th>${h}</th>`).join("")}</tr></thead>` : "") +
-  `<tbody>${rows.map((r) => `<tr>${r.map((c) => `<td>${c}</td>`).join("")}</tr>`).join("")}</tbody></table></div>`;
-
-// A table of notes: the name links to the note, `columns` are properties.
-// A column that no note fills is left out.
-function noteTable(from, list, columns) {
-  columns = columns.filter((k) => list.some((n) => !isEmpty(n.props[k])));
-  const head = ["Name", ...columns.map((k) => labelHtml(split(k).label))];
-  return table(head, list.map((n) =>
-    [noteLink(from, n), ...columns.map((k) => isEmpty(n.props[k]) ? "" : value(from, n.props[k], split(k).unit))]));
+// The index: the home page, then each folder that has notes. `current` is
+// the folder the page belongs to, or "" on the home page.
+function index(from, current) {
+  // "page" on the page itself, "true" on a note inside the folder.
+  const item = (target, name, on) =>
+    `<li><a href="${rel(from, target)}"${on ? ` aria-current="${target === from ? "page" : "true"}"` : ""}>${esc(name)}</a></li>`;
+  const folders = FOLDERS.filter((f) => byFolder[f]).map((f) => item(`${f}/index.html`, f, f === current));
+  return `<nav class=index><ol>${item("index.html", "Coffee Log", !current)}${folders.join("")}</ol></nav>`;
 }
 
-// The menu: the site name, then each folder that has notes, with its count.
-// `current` is the folder the page belongs to, or "" on the home page.
-function menu(from, current) {
-  // "page" on the folder's own page, "true" on a note inside it.
-  const mark = (on, page) => (on ? ` aria-current="${page === from ? "page" : "true"}"` : "");
-  const items = FOLDERS.filter((f) => byFolder[f]).map((f) =>
-    `<li><a href="${rel(from, `${f}/index.html`)}"${mark(f === current, `${f}/index.html`)}>${esc(f)} <span>${byFolder[f].length}</span></a></li>`);
-  // The site name is every page's h1; the page's own name is its h2.
-  return `<nav class="menu"><h1><a class="site" href="${rel(from, "index.html")}"${mark(!current, "index.html")}>Coffee Log</a></h1>` +
-    `<ul>${items.join("")}</ul></nav>`;
-}
-
-const layout = (from, pageTitle, main, current) => `<!doctype html>
-<html lang="en">
+const layout = (from, title, main, current, css = "") => `<!doctype html>
+<html lang=en>
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>${text(pageTitle)}</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap">
-<link rel="stylesheet" href="${rel(from, "style.css")}">
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width, initial-scale=1">
+<title>${text(title)}</title>
+<link rel=stylesheet href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap">
+<style>${BASE_CSS}</style>${css && `\n<style>${css}</style>`}
 </head>
 <body>
-${menu(from, current)}
+${index(from, current)}
 <main>
+<header><h1>${text(title)}</h1></header>
 ${main}
 </main>
+<script>${PAGE_JS}</script>
 </body>
 </html>
 `;
 
+// A note: its photo, the body before the first heading, its properties, the
+// body's sections, and the notes that link here, by folder.
 function notePage(note) {
   const { page, props, folder } = note;
   const { photo, src } = photoOf(page, note);
-  const rows = Object.entries(props)
-    .filter(([k, v]) => k !== "Photo" && !isEmpty(v))
-    .map(([k, v]) => [labelHtml(split(k).label), value(page, v, split(k).unit)]);
-  let html = `<h2>${text(note.name)}</h2>`;
-  if (src) html += `<img class="photo" src="${src}" alt="">`;
-  if (rows.length) html += table(null, rows);
-  html += `<div class="prose">${body(page, note.body, photo)}</div>`;
+  const items = body(page, note.body, photo);
+  const first = items.findIndex((it) => typeof it !== "string");
+  const intro = first < 0 ? items.splice(0) : items.splice(0, first);
   const linked = notes.get(note.name) === note ? incoming.get(note.name) ?? [] : [];
-  const byFolder = Object.groupBy(linked, ({ note: n }) => n.folder);
-  for (const [group, list] of Object.entries(byFolder)) {
+  const groups = Object.entries(Object.groupBy(linked, ({ note: n }) => n.folder)).map(([group, list]) => {
     // The key that links here would repeat this page's name in every row.
     const keys = new Set(list.map(({ key }) => key));
     const columns = (COLUMNS[group] ?? []).filter((k) => !keys.has(k));
-    html += `<h3>${esc(group)}</h3>${noteTable(page, list.map(({ note: n }) => n), columns)}`;
-  }
-  return layout(page, note.name, html, folder);
+    return { title: esc(group), items: [noteTable(page, list.map(({ note: n }) => n), columns)] };
+  });
+  const content = [
+    src ? `<figure><img src="${src}" alt="The bag of ${text(note.name)}"></figure>` : "",
+    ...intro,
+    { title: "Properties", items: [fieldTable(page, props)] },
+    ...items,
+    ...groups,
+  ];
+  return layout(page, note.name, render(content), folder);
 }
 
 // When each note file was first committed, keyed by its path in the vault.
@@ -241,13 +300,14 @@ function newest(folder, key, dates) {
     .map(({ n }) => n);
 }
 
-const card = (note, photoNote, cardTitle, description) => {
+// A card on the home page: the photo of `photoNote`, a title and a description.
+const card = (note, photoNote, title, description) => {
   const { src } = photoOf("index.html", photoNote);
-  return `<a class="card" href="${rel("index.html", note.page)}">` +
-    (src ? `<img src="${src}" alt="">` : "") +
-    `<div class="card-body"><div class="card-title">${text(cardTitle)}</div>` +
-    `<div class="card-description">${description}</div></div></a>`;
+  return `<li><a href="${rel("index.html", note.page)}">` +
+    (src ? `<img src="${src}" alt="The bag of ${text(photoNote.name)}">` : "") +
+    `<p>${text(title)}</p><p>${description}</p></a></li>`;
 };
+const cards = (list) => (list.length ? `<ol class=cards>${list.join("")}</ol>` : "");
 
 // A folder's page: every note in it, newest first for Bags and Brews and
 // alphabetical for the rest.
@@ -255,7 +315,7 @@ function folderPage(folder) {
   const from = `${folder}/index.html`;
   const list = folder === "Bags" ? newest("Bags", "", dates) : folder === "Brews" ? newest("Brews", "Date", dates)
     : byFolder[folder].toSorted((a, b) => a.name.localeCompare(b.name));
-  return layout(from, folder, `<h2>${esc(folder)}</h2>${noteTable(from, list, COLUMNS[folder] ?? [])}`, folder);
+  return layout(from, folder, noteTable(from, list, COLUMNS[folder] ?? []), folder);
 }
 
 function homePage() {
@@ -266,12 +326,10 @@ function homePage() {
     return card(n, bag ?? n, bag ? bag.name : n.name, text([when, brewer].filter(Boolean).join(", ")));
   });
   // Bags are ordered by date added only: most have no roast date.
-  const bags = newest("Bags", "", dates);
-  const bagCards = bags.slice(0, 3).map((n) => card(n, n, n.name, text(links(n.props.Roaster ?? "")[0] ?? "")));
-  let html = "";
-  if (brews.length) html += `<h2>Last brews</h2><div class="cards">${brews.join("")}</div>`;
-  html += `<h2>Last bags</h2><div class="cards">${bagCards.join("")}</div>`;
-  return layout("index.html", "Coffee Log", html, "");
+  const bags = newest("Bags", "", dates).slice(0, 3)
+    .map((n) => card(n, n, n.name, text(links(n.props.Roaster ?? "")[0] ?? "")));
+  const content = [{ title: "Last brews", items: [cards(brews)] }, { title: "Last bags", items: [cards(bags)] }];
+  return layout("index.html", "Coffee Log", render(content), "", CARD_CSS);
 }
 
 // Fail the build when a page links to a file that the build did not write.
@@ -280,7 +338,7 @@ function checkLinks() {
   for (const file of fs.readdirSync(out, { recursive: true }).filter((f) => f.endsWith(".html"))) {
     const html = fs.readFileSync(path.join(out, file), "utf8");
     for (const [, ref] of html.matchAll(/(?:href|src)="([^"]+)"/g)) {
-      if (/^(https?:|#|mailto:)/.test(ref)) continue;
+      if (/^(https?:|#|mailto:|data:)/.test(ref)) continue;
       const target = path.join(out, path.dirname(file), decodeURIComponent(ref));
       if (!fs.existsSync(target)) missing.push(`${file} -> ${ref}`);
     }
@@ -297,6 +355,5 @@ for (const folder of Object.keys(byFolder)) fs.writeFileSync(path.join(out, fold
 fs.writeFileSync(path.join(out, "index.html"), homePage());
 fs.cpSync(path.join(vault, "Attachments"), path.join(out, "Attachments"),
   { recursive: true, filter: (s) => !path.basename(s).startsWith(".") });
-fs.copyFileSync(path.join(import.meta.dirname, "style.css"), path.join(out, "style.css"));
 checkLinks();
 console.log(`Wrote ${all.length} notes, ${Object.keys(byFolder).length} folder pages and the home page to ${out}`);
