@@ -1,6 +1,9 @@
 ---
 Parent:
   - "[[Roasted]]"
+Wheel:
+  - Roasted
+  - Tobacco
 aliases:
 ---
 

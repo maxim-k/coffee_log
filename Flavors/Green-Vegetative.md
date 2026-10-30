@@ -1,5 +1,7 @@
 ---
 Parent:
+Wheel:
+  - Green/Vegetative
 aliases:
   - "Green/Vegetative"
 ---

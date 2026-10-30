@@ -1,6 +1,10 @@
 ---
 Parent:
   - "[[Berry]]"
+Wheel:
+  - Fruity
+  - Berry
+  - Strawberry
 aliases:
 ---
 

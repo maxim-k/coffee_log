@@ -1,6 +1,8 @@
 ---
 Parent:
   - "[[Taste Basics]]"
+Wheel:
+  - Sweet
 aliases:
 ---
 

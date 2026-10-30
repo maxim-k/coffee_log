@@ -1,6 +1,7 @@
 ---
 Parent:
   - "[[Alcohol-Fermented]]"
+Wheel:
 aliases:
 ---
 

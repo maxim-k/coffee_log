@@ -1,6 +1,10 @@
 ---
 Parent:
   - "[[Chemical]]"
+Wheel:
+  - Other
+  - Chemical
+  - Skunky
 aliases:
 ---
 

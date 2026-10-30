@@ -1,5 +1,8 @@
 ---
 Parent:
+Wheel:
+  - Sour/Fermented
+  - Sour
 aliases:
   - "Sour/Acid"
 ---

@@ -1,6 +1,7 @@
 ---
 Parent:
   - "[[Green-Vegetative]]"
+Wheel:
 aliases:
 ---
 

@@ -1,6 +1,10 @@
 ---
 Parent:
   - "[[Earthy]]"
+Wheel:
+  - Other
+  - Papery/Musty
+  - Meaty Brothy
 aliases:
   - "Meaty/Brothy"
 ---

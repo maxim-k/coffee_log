@@ -1,5 +1,8 @@
 ---
 Parent:
+Wheel:
+  - Sour/Fermented
+  - Alcohol/Fermented
 aliases:
   - "Alcohol/Fermented"
 ---

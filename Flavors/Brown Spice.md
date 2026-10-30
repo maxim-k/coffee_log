@@ -1,6 +1,9 @@
 ---
 Parent:
   - "[[Spices]]"
+Wheel:
+  - Spices
+  - Brown Spice
 aliases:
 ---
 

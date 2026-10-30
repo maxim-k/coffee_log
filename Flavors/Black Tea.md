@@ -1,6 +1,9 @@
 ---
 Parent:
   - "[[Floral]]"
+Wheel:
+  - Floral
+  - Black Tea
 aliases:
 ---
 

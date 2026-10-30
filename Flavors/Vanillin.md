@@ -1,6 +1,9 @@
 ---
 Parent:
   - "[[Sweet]]"
+Wheel:
+  - Sweet
+  - Vanillin
 aliases:
 ---
 

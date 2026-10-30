@@ -1,6 +1,9 @@
 ---
 Parent:
   - "[[Green-Vegetative]]"
+Wheel:
+  - Green/Vegetative
+  - Beany
 aliases:
 ---
 

@@ -1,6 +1,10 @@
 ---
 Parent:
   - "[[Nutty]]"
+Wheel:
+  - Nutty/Cocoa
+  - Nutty
+  - Almond
 aliases:
 ---
 

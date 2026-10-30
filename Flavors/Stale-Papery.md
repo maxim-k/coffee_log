@@ -1,5 +1,6 @@
 ---
 Parent:
+Wheel:
 aliases:
   - "Stale/Papery"
 ---

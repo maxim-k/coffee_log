@@ -33,6 +33,8 @@ folders show up there as untracked.
   bags. The user wants roaster data kept and technical details neat.
 - `Flavors/` is the WCR Sensory Lexicon, fixed: a Bag's `Tasting notes` keep
   the roaster's words and link the Flavor each one names (rules in `add-bag`).
+  A Flavor's `Parent` follows the lexicon and its `Wheel` the SCA flavor
+  wheel (`docs/adr/0004`).
 - `Attachments/WCR_Coffee_Varieties_Catalog.pdf` is © World Coffee Research,
   CC BY-NC-ND 4.0: share it unchanged and credit WCR. Variety notes copy its
   facts and cite it. `Attachments/WCR_Sensory_Lexicon_2.0.pdf` is all rights
