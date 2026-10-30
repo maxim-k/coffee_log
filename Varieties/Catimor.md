@@ -3,7 +3,7 @@ Parent:
   - "[[Timor Hybrid]]"
   - "[[Caturra]]"
 aliases:
-Genetic group:
+Genetic group: Introgressed (Catimor related)
 Breeder:
 ---
 
