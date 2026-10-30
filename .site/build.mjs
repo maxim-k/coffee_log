@@ -228,6 +228,7 @@ const layout = (from, title, main, current, css = "") => `<!doctype html>
 <meta charset=utf-8>
 <meta name=viewport content="width=device-width, initial-scale=1">
 <title>${text(title)}</title>
+<link rel=icon href="${rel(from, "favicon.gif")}">
 <link rel=stylesheet href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap">
 <style>${BASE_CSS}</style>${css && `\n<style>${css}</style>`}
 </head>
@@ -350,5 +351,6 @@ for (const folder of Object.keys(byFolder)) fs.writeFileSync(path.join(out, fold
 fs.writeFileSync(path.join(out, "index.html"), homePage());
 fs.cpSync(path.join(vault, "Attachments"), path.join(out, "Attachments"),
   { recursive: true, filter: (s) => !path.basename(s).startsWith(".") });
+fs.copyFileSync(path.join(site, "favicon.gif"), path.join(out, "favicon.gif"));
 checkLinks();
 console.log(`Wrote ${all.length} notes, ${Object.keys(byFolder).length} folder pages and the home page to ${out}`);
