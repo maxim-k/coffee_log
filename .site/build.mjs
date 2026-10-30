@@ -16,9 +16,7 @@ const FOLDERS = ["Bags", "Brews", "Roasters", "Producers", "Varieties", "Flavors
 const COLUMNS = { Bags: ["Roaster", "Country", "Process", "Rating"], Brews: ["Date", "Bag", "Rating"],
   Roasters: ["City", "Country"], Producers: ["Country", "Region"], Varieties: ["Genetic group", "Parent"],
   Flavors: ["Parent"] };
-const LABELS = { aliases: "Also known as" };
 const WIKILINK = /\[\[([^\]|]+)(?:\|([^\]]+))?\]\]/g;
-const IMAGE = /\.(png|jpe?g|gif|webp|svg)$/i;
 const NUMBER = /^[−-]?\d[\d,]*(\.\d+)?$/;
 
 const esc = (s) =>
@@ -99,7 +97,7 @@ function link(from, name, label) {
 const noteLink = (from, note) => `<a href="${rel(from, note.page)}">${text(note.name)}</a>`;
 const photoOf = (from, note) => {
   const photo = links(note.props.Photo ?? "")[0];
-  return { photo, src: photo && href(from, photo) };
+  return photo && href(from, photo);
 };
 
 const byFolder = Object.groupBy(all, (n) => n.folder);
@@ -118,7 +116,7 @@ for (const note of all)
 // the label, and the value is bare.
 function label(key) {
   const [, name = key, unit] = key.match(/^(.*?)\s*\(([^)]+)\)$/) ?? [];
-  return (LABELS[name] ?? name) + (unit ? `, ${unit}` : "");
+  return (name === "aliases" ? "Also known as" : name) + (unit ? `, ${unit}` : "");
 }
 
 // Escape the text around wikilinks, not the link targets: escaping first
@@ -172,7 +170,6 @@ function noteTable(from, list, columns) {
 // sections go, and a lone section hands its items to its parent, because a
 // level holds two or more sections. Each section's heading level is its depth.
 const filled = (it) => (typeof it === "string" ? it !== "" : it.items.some(filled));
-const slug = (s) => s.replace(/<[^>]+>/g, "").toLowerCase().replace(/[^\p{L}\p{N}]+/gu, "-").replace(/^-|-$/g, "");
 function render(items, depth = 2) {
   for (;;) {
     items = items.filter(filled);
@@ -181,20 +178,18 @@ function render(items, depth = 2) {
     items = items.flatMap((it) => (it === sections[0] ? it.items : [it]));
   }
   return items.map((it) => typeof it === "string" ? it
-    : `<section id="${slug(it.title)}"><h${depth}>${it.title}</h${depth}>\n${render(it.items, depth + 1)}\n</section>`)
+    : `<section><h${depth}>${it.title}</h${depth}>\n${render(it.items, depth + 1)}\n</section>`)
     .join("\n");
 }
 
-// The body as content items, without its H1 (the page prints the name), the
-// embed of the photo the page already shows, and comments. Each heading opens
+// The body as content items, without its H1 (the page prints the name),
+// embeds (the page shows the photo itself), and comments. Each heading opens
 // a section that runs to the next heading of its level or higher.
-function body(from, md, photo) {
+function body(from, md) {
   md = md
     .replace(/%%[\s\S]*?%%/g, "")
-    .replace(/!\[\[([^\]|]+)(?:\|[^\]]*)?\]\]/g, (_, n) => {
-      const url = n === photo ? "" : href(from, n);
-      return !url ? "" : IMAGE.test(n) ? `![${n}](${url})` : `[${n}](${url})`;
-    })
+    // ponytail: the only embeds are bag photos, so every embed goes; render them if notes start embedding other files.
+    .replace(/!\[\[[^\]]*\]\]\n?/g, "")
     .replace(WIKILINK, (_, n, alias) => {
       const url = href(from, n);
       return url ? `[${alias ?? n}](${url})` : alias ?? n;
@@ -211,7 +206,7 @@ function body(from, md, photo) {
       open.push(section);
     } else {
       marked.walkTokens([t], typoToken);
-      open.at(-1).items.push(marked.parser(Object.assign([t], { links: tokens.links })));
+      open.at(-1).items.push(marked.parser([t]));
     }
   }
   return top.items;
@@ -251,8 +246,8 @@ ${main}
 // body's sections, and the notes that link here, by folder.
 function notePage(note) {
   const { page, props, folder } = note;
-  const { photo, src } = photoOf(page, note);
-  const items = body(page, note.body, photo);
+  const src = photoOf(page, note);
+  const items = body(page, note.body);
   const first = items.findIndex((it) => typeof it !== "string");
   const intro = first < 0 ? items.splice(0) : items.splice(0, first);
   const linked = notes.get(note.name) === note ? incoming.get(note.name) ?? [] : [];
@@ -293,7 +288,7 @@ function addedDates() {
 const dates = addedDates();
 
 // A folder's notes, newest first: by `key` (a date), then by date added.
-function newest(folder, key, dates) {
+function newest(folder, key) {
   return all.filter((n) => n.folder === folder)
     .map((n) => ({ n, added: dates.get(`${folder}/${n.name}.md`) ?? Infinity, date: String(n.props[key] ?? "") }))
     .sort((a, b) => b.date.localeCompare(a.date) || b.added - a.added)
@@ -302,7 +297,7 @@ function newest(folder, key, dates) {
 
 // A card on the home page: the photo of `photoNote`, a title and a description.
 const card = (note, photoNote, title, description) => {
-  const { src } = photoOf("index.html", photoNote);
+  const src = photoOf("index.html", photoNote);
   return `<li><a href="${rel("index.html", note.page)}">` +
     (src ? `<img src="${src}" alt="The bag of ${text(photoNote.name)}">` : "") +
     `<p>${text(title)}</p><p>${description}</p></a></li>`;
@@ -313,20 +308,20 @@ const cards = (list) => (list.length ? `<ol class=cards>${list.join("")}</ol>` :
 // alphabetical for the rest.
 function folderPage(folder) {
   const from = `${folder}/index.html`;
-  const list = folder === "Bags" ? newest("Bags", "", dates) : folder === "Brews" ? newest("Brews", "Date", dates)
+  const list = folder === "Bags" ? newest("Bags", "") : folder === "Brews" ? newest("Brews", "Date")
     : byFolder[folder].toSorted((a, b) => a.name.localeCompare(b.name));
   return layout(from, folder, noteTable(from, list, COLUMNS[folder] ?? []), folder);
 }
 
 function homePage() {
-  const brews = newest("Brews", "Date", dates).slice(0, 3).map((n) => {
+  const brews = newest("Brews", "Date").slice(0, 3).map((n) => {
     const bag = notes.get(links(n.props.Bag ?? "")[0]);
     const brewer = links(n.props.Brewer ?? "")[0];
     const when = n.props.Date || n.name;
     return card(n, bag ?? n, bag ? bag.name : n.name, text([when, brewer].filter(Boolean).join(", ")));
   });
   // Bags are ordered by date added only: most have no roast date.
-  const bags = newest("Bags", "", dates).slice(0, 3)
+  const bags = newest("Bags", "").slice(0, 3)
     .map((n) => card(n, n, n.name, text(links(n.props.Roaster ?? "")[0] ?? "")));
   const content = [{ title: "Last brews", items: [cards(brews)] }, { title: "Last bags", items: [cards(bags)] }];
   return layout("index.html", "Coffee Log", render(content), "", CARD_CSS);
