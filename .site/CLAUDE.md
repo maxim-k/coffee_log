@@ -19,6 +19,11 @@ one template. The only build dependency is `marked`.
   the home page and the folders instead of a table of contents, and the home
   page adds `card.css`, a Card after shadcn/ui's, cut to an image, a title
   and a description.
+- A third departure, also the user's choice: the Varieties and Flavors folder
+  pages draw a zoomable sunburst above their table (`SUNBURSTS` in
+  `build.mjs`, drawn by `sunburst.js` with d3 from jsDelivr, only on those
+  two pages). Varieties branch by `Genetic group`, Flavors by `Wheel`, and
+  each top-level arc takes its own hue instead of the `--chart` tokens.
 - This folder and `.github/` exist only on the `site` branch, which
   `.github/workflows/pages.yml` deploys on every push. Vault changes come
   from `main` by merge (see the root `CLAUDE.md`).

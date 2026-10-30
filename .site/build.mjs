@@ -9,13 +9,27 @@ import { marked } from "marked";
 const site = import.meta.dirname;
 const vault = path.resolve(site, "..");
 const out = path.resolve(site, "dist");
-const [BASE_CSS, PAGE_JS, CARD_CSS] = ["base.css", "page.js", "card.css"]
+const [BASE_CSS, PAGE_JS, CARD_CSS, SUNBURST_JS] = ["base.css", "page.js", "card.css", "sunburst.js"]
   .map((f) => fs.readFileSync(path.join(site, f), "utf8"));
 const FOLDERS = ["Bags", "Brews", "Roasters", "Producers", "Varieties", "Flavors", "Grinders", "Brewers", "Waters"];
 // The properties shown as columns when a table lists notes of a folder.
 const COLUMNS = { Bags: ["Roaster", "Country", "Process", "Rating"], Brews: ["Date", "Bag", "Rating"],
   Roasters: ["City", "Country"], Producers: ["Country", "Region"], Varieties: ["Genetic group", "Parent"],
   Flavors: ["Parent"] };
+// The folders drawn as a sunburst above their table: the chart's title, and
+// each note's path of labels from the centre out. A note with no path is
+// left out of the chart.
+const SUNBURSTS = {
+  Varieties: {
+    title: "Varieties by genetic group",
+    // "Introgressed (Catimor related)" is a group and its subgroup.
+    path: (n) => {
+      const group = n.props["Genetic group"] || "No group";
+      return [...(group.match(/^(.*?)\s*\((.*)\)$/)?.slice(1) ?? [group]), n.name];
+    },
+  },
+  Flavors: { title: "Flavors on the SCA flavor wheel", path: (n) => [n.props.Wheel].flat().filter(Boolean) },
+};
 const WIKILINK = /\[\[([^\]|]+)(?:\|([^\]]+))?\]\]/g;
 const NUMBER = /^[−-]?\d[\d,]*(\.\d+)?$/;
 
@@ -222,7 +236,7 @@ function index(from, current) {
   return `<nav class=index><ol>${item("index.html", "Coffee Log", !current)}${folders.join("")}</ol></nav>`;
 }
 
-const layout = (from, title, main, current, css = "") => `<!doctype html>
+const layout = (from, title, main, current, css = "", js = "") => `<!doctype html>
 <html lang=en>
 <head>
 <meta charset=utf-8>
@@ -238,7 +252,7 @@ ${index(from, current)}
 <header><h1>${text(title)}</h1></header>
 ${main}
 </main>
-<script>${PAGE_JS}</script>
+<script>${PAGE_JS}</script>${js}
 </body>
 </html>
 `;
@@ -311,7 +325,32 @@ function folderPage(folder) {
   const from = `${folder}/index.html`;
   const list = folder === "Bags" ? newest("Bags", "") : folder === "Brews" ? newest("Brews", "Date")
     : byFolder[folder].toSorted((a, b) => a.name.localeCompare(b.name));
-  return layout(from, folder, noteTable(from, list, COLUMNS[folder] ?? []), folder);
+  const table = noteTable(from, list, COLUMNS[folder] ?? []);
+  const chart = SUNBURSTS[folder];
+  if (!chart) return layout(from, folder, table, folder);
+  const tree = sunburst(from, list.map((note) => ({ note, path: chart.path(note) })).filter((e) => e.path.length));
+  const figure = `<figure data-title="${esc(chart.title)}" data-tree="${esc(JSON.stringify(tree))}"></figure>\n`;
+  const js = `\n<script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>\n<script>${SUNBURST_JS}</script>`;
+  return layout(from, folder, figure + table, folder, "", js);
+}
+
+// A sunburst's tree, { name, href, children }: each note sits at the end of
+// its path, and paths that share labels share nodes. Children go in
+// alphabetical order, since the notes don't record the wheel's.
+function sunburst(from, entries) {
+  const root = { name: "", children: [] };
+  for (const { note, path } of entries) {
+    let node = root;
+    for (const name of path) {
+      let child = node.children.find((c) => c.name === name);
+      if (!child) node.children.push((child = { name, children: [] }));
+      node = child;
+    }
+    node.href = rel(from, note.page);
+  }
+  const sort = (n) => n.children.sort((a, b) => a.name.localeCompare(b.name)).forEach(sort);
+  sort(root);
+  return root;
 }
 
 function homePage() {
