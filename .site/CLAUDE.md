@@ -3,14 +3,14 @@
 `build.mjs` writes one static HTML page per note into `dist/`, a page per
 folder listing all its notes, and a home page with the last three Brews and
 Bags as cards. Every page comes from one layout and follows the
-`design-system` skill: `base.css` goes inline verbatim in a `<style>`, and
-`page.js` (vanilla, it makes long tables searchable and sortable) in a
-`<script>`. No framework: the user rejected Quartz and a React app as far
+`design-system` skill: `base.css` goes inline in a `<style>`, and `page.js`
+(vanilla, it makes long tables searchable and sortable) in a `<script>`. No framework: the user rejected Quartz and a React app as far
 too heavy for one template. The only build dependency is `marked`.
 
-- `base.css` and `page.js` are verbatim copies of the skill's files. Never
-  edit them here; when the skill changes, copy them again.
-- Two departures from the skill, both the user's choice: `nav.index` lists
+- `base.css` is a verbatim copy of the skill's file: never edit it here, and
+  copy it again when the skill changes. `page.js` is the skill's file without
+  the fingerprint and the table-of-contents scroll tracking, which this site
+  doesn't use; when the skill changes, copy it again and make the same cut.- Two departures from the skill, both the user's choice: `nav.index` lists
   the home page and the folders instead of a table of contents, and the home
   page adds `card.css`, a Card after shadcn/ui's, cut to an image, a title
   and a description.
