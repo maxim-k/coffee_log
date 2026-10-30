@@ -9,26 +9,33 @@ import { marked } from "marked";
 const site = import.meta.dirname;
 const vault = path.resolve(site, "..");
 const out = path.resolve(site, "dist");
-const [BASE_CSS, PAGE_JS, CARD_CSS, SUNBURST_JS] = ["base.css", "page.js", "card.css", "sunburst.js"]
+const [BASE_CSS, PAGE_JS, CARD_CSS, SUNBURST_JS, CHORD_JS] = ["base.css", "page.js", "card.css", "sunburst.js", "chord.js"]
   .map((f) => fs.readFileSync(path.join(site, f), "utf8"));
 const FOLDERS = ["Bags", "Brews", "Roasters", "Producers", "Varieties", "Flavors", "Grinders", "Brewers", "Waters"];
 // The properties shown as columns when a table lists notes of a folder.
 const COLUMNS = { Bags: ["Roaster", "Country", "Process", "Rating"], Brews: ["Date", "Bag", "Rating"],
   Roasters: ["City", "Country"], Producers: ["Country", "Region"], Varieties: ["Genetic group", "Parent"],
   Flavors: ["Parent"] };
-// The folders drawn as a sunburst above their table: the chart's title, and
-// each note's path of labels from the centre out. A note with no path is
-// left out of the chart.
-const SUNBURSTS = {
+// The folders drawn as a chart above their table: the chart's title, its
+// script, and the data its figure carries, each key as a data- attribute.
+const CHARTS = {
   Varieties: {
-    title: "Varieties by genetic group",
-    // "Introgressed (Catimor related)" is a group and its subgroup.
-    path: (n) => {
-      const group = n.props["Genetic group"] || "No group";
-      return [...(group.match(/^(.*?)\s*\((.*)\)$/)?.slice(1) ?? [group]), n.name];
-    },
+    title: "Parentage of coffee varieties",
+    js: CHORD_JS,
+    data: (from, list) => ({ chord: chord(from, list) }),
   },
-  Flavors: { title: "Flavors on the SCA flavor wheel", path: (n) => [n.props.Wheel].flat().filter(Boolean) },
+  Flavors: {
+    title: "Flavors on the SCA flavor wheel",
+    js: SUNBURST_JS,
+    // A flavor's Wheel is its path from the centre out; a flavor off the wheel
+    // has none. The families take the rainbow's hues in this order, so
+    // Green/Vegetative gets the green.
+    data: (from, list) => ({
+      tree: sunburst(from, list.map((note) => ({ note, path: [note.props.Wheel].flat().filter(Boolean) }))
+        .filter((e) => e.path.length)),
+      hues: ["Floral", "Fruity", "Roasted", "Nutty/Cocoa", "Other", "Green/Vegetative", "Sour/Fermented", "Spices", "Sweet"],
+    }),
+  },
 };
 const WIKILINK = /\[\[([^\]|]+)(?:\|([^\]]+))?\]\]/g;
 const NUMBER = /^[−-]?\d[\d,]*(\.\d+)?$/;
@@ -326,12 +333,29 @@ function folderPage(folder) {
   const list = folder === "Bags" ? newest("Bags", "") : folder === "Brews" ? newest("Brews", "Date")
     : byFolder[folder].toSorted((a, b) => a.name.localeCompare(b.name));
   const table = noteTable(from, list, COLUMNS[folder] ?? []);
-  const chart = SUNBURSTS[folder];
+  const chart = CHARTS[folder];
   if (!chart) return layout(from, folder, table, folder);
-  const tree = sunburst(from, list.map((note) => ({ note, path: chart.path(note) })).filter((e) => e.path.length));
-  const figure = `<figure data-title="${esc(chart.title)}" data-tree="${esc(JSON.stringify(tree))}"></figure>\n`;
-  const js = `\n<script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>\n<script>${SUNBURST_JS}</script>`;
+  const data = Object.entries(chart.data(from, list)).map(([k, v]) => ` data-${k}="${esc(JSON.stringify(v))}"`);
+  const figure = `<figure data-title="${esc(chart.title)}"${data.join("")}></figure>\n`;
+  const js = `\n<script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>\n<script>${chart.js}</script>`;
   return layout(from, folder, figure + table, folder, "", js);
+}
+
+// A chord diagram's data, { names, groups, hrefs, matrix }: the varieties
+// that have a parent or offspring, sorted by group so each group forms one
+// band, and matrix[parent][offspring] = 1. A group is the text before its
+// parenthesis: "Introgressed (Catimor related)" is "Introgressed".
+function chord(from, list) {
+  const group = (n) => (n.props["Genetic group"] || "Ungrouped").replace(/\s*\(.*$/, "");
+  const edges = list.flatMap((n) => [n.props.Parent ?? []].flat().flatMap(links)
+    .map((p) => notes.get(p)).filter(Boolean).map((p) => [p, n]));
+  const linked = new Set(edges.flat());
+  const nodes = list.filter((n) => linked.has(n))
+    .sort((a, b) => group(a).localeCompare(group(b)) || a.name.localeCompare(b.name));
+  const index = new Map(nodes.map((n, i) => [n, i]));
+  const matrix = nodes.map(() => nodes.map(() => 0));
+  for (const [p, c] of edges) matrix[index.get(p)][index.get(c)] = 1;
+  return { names: nodes.map((n) => n.name), groups: nodes.map(group), hrefs: nodes.map((n) => rel(from, n.page)), matrix };
 }
 
 // A sunburst's tree, { name, href, children }: each note sits at the end of

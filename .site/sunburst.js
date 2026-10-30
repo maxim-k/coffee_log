@@ -5,9 +5,11 @@
 for (const figure of document.querySelectorAll("figure[data-tree]")) {
   const data = JSON.parse(figure.dataset.tree);
   const width = 928;
-  const radius = width / 6;
-  // Each top-level arc takes a hue; its descendants are tints of it.
-  const color = d3.scaleOrdinal(d3.quantize(d3.interpolateRainbow, data.children.length + 1));
+  const radius = width / 8;
+  // Each top-level arc takes a hue, in the order data-hues gives when the
+  // figure has one; its descendants are tints of it.
+  const hues = figure.dataset.hues ? JSON.parse(figure.dataset.hues) : data.children.map((d) => d.name);
+  const color = d3.scaleOrdinal(hues, d3.quantize(d3.interpolateRainbow, hues.length + 1));
   const hierarchy = d3.hierarchy(data).count();
   const root = d3.partition().size([2 * Math.PI, hierarchy.height + 1])(hierarchy);
   root.each((d) => (d.current = d));
@@ -19,8 +21,8 @@ for (const figure of document.querySelectorAll("figure[data-tree]")) {
     .padRadius(radius * 1.5)
     .innerRadius((d) => d.y0 * radius)
     .outerRadius((d) => Math.max(d.y0 * radius, d.y1 * radius - 1));
-  // Two rings show at a time, as in the original.
-  const arcVisible = (d) => d.y1 <= 3 && d.y0 >= 1 && d.x1 > d.x0;
+  // Three rings show at a time, one more than the original: the whole wheel.
+  const arcVisible = (d) => d.y1 <= 4 && d.y0 >= 1 && d.x1 > d.x0;
   const labelVisible = (d) => arcVisible(d) && (d.y1 - d.y0) * (d.x1 - d.x0) > 0.03;
   const labelTransform = (d) => {
     const x = (((d.x0 + d.x1) / 2) * 180) / Math.PI;
