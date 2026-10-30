@@ -1,6 +1,6 @@
 ---
-Kind: tap
-Base: "[[NYC Tap Adjusted]]"
+Kind: recipe
+Base: "[[NYC Tap]]"
 Hardness as CaCO3 (mg/L): 72
 Alkalinity as CaCO3 (mg/L): 25
 Calcium (mg/L): 12
