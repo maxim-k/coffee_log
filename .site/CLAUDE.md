@@ -4,15 +4,18 @@
 folder listing all its notes, and a home page with the last three Brews and
 Bags as cards. Every page comes from one layout and follows the
 `design-system` skill: `base.css` goes inline in a `<style>`, and `page.js`
-(vanilla, it makes long tables searchable and sortable) in a `<script>`. No framework: the user rejected Quartz and a React app as far
-too heavy for one template. The only build dependency is `marked`.
+(vanilla, it makes long tables searchable and sortable) in a `<script>`.
+No framework: the user rejected Quartz and a React app as far too heavy for
+one template. The only build dependency is `marked`.
 
 - `base.css` is a verbatim copy of the skill's file: never edit it here, and
   copy it again when the skill changes. `page.js` is the skill's file without
   the fingerprint and the table-of-contents scroll tracking, which this site
   doesn't use; when the skill changes, copy it again and make the same cut.
-- The favicon is `favicon.gif`: a looping 1-bit pixel-art V60 with steam,
-  64 px, 12 frames. Chrome and Safari show its first frame only.- Two departures from the skill, both the user's choice: `nav.index` lists
+- The favicon is `favicon.gif`: a looping 1-bit pixel-art V60 with steam on a
+  transparent ground, 64 px, 12 frames. Chrome and Safari show its first
+  frame only.
+- Two departures from the skill, both the user's choice: `nav.index` lists
   the home page and the folders instead of a table of contents, and the home
   page adds `card.css`, a Card after shadcn/ui's, cut to an image, a title
   and a description.
