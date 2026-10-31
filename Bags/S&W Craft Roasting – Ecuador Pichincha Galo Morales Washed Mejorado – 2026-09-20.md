@@ -2,9 +2,9 @@
 Roaster: "[[S&W Craft Roasting]]"
 Name: Ecuador Pichincha Galo Morales Washed Mejorado
 Product page: https://www.swroasting.coffee/product/ecuador-pichincha-galo-morales-washed-mejorado/65
-Photo: "[[S&W Craft Roasting – Ecuador Pichincha Galo Morales Washed Mejorado.jpeg]]"
-Roast date:
-Open date:
+Photo: "[[S&W Craft Roasting – Ecuador Pichincha Galo Morales Washed Mejorado – 2026-09-20.jpeg]]"
+Roast date: 2026-09-20
+Open date: 2026-10-11
 Bag size (g): 300
 Price paid ($): 21.68
 Rating:
@@ -27,9 +27,9 @@ Tasting notes:
   - "[[Floral|floral]]"
 ---
 
-# S&W Craft Roasting – Ecuador Pichincha Galo Morales Washed Mejorado
+# S&W Craft Roasting – Ecuador Pichincha Galo Morales Washed Mejorado – 2026-09-20
 
-![[S&W Craft Roasting – Ecuador Pichincha Galo Morales Washed Mejorado.jpeg]]
+![[S&W Craft Roasting – Ecuador Pichincha Galo Morales Washed Mejorado – 2026-09-20.jpeg]]
 
 ## Story
 
