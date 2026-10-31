@@ -2,9 +2,9 @@
 Roaster: "[[S&W Craft Roasting]]"
 Name: Costa Rica Hacienda Sonora Diego Guardia Dwarf Caturra Natural
 Product page: https://www.swroasting.coffee/product/costa-rica-hacienda-sonora-diego-guardia-dwarf-caturra-natural/EWTVVRZX6G6JD2EZP2DFGAPI
-Photo: "[[S&W Craft Roasting – Costa Rica Hacienda Sonora Diego Guardia Dwarf Caturra Natural.jpeg]]"
-Roast date:
-Open date:
+Photo: "[[S&W Craft Roasting – Costa Rica Hacienda Sonora Diego Guardia Dwarf Caturra Natural – 2026-09-13.jpeg]]"
+Roast date: 2026-09-13
+Open date: 2026-10-18
 Bag size (g): 100
 Price paid ($): 9.65
 Rating:
@@ -26,9 +26,9 @@ Tasting notes:
   - "[[Winey|wine]]"
 ---
 
-# S&W Craft Roasting – Costa Rica Hacienda Sonora Diego Guardia Dwarf Caturra Natural
+# S&W Craft Roasting – Costa Rica Hacienda Sonora Diego Guardia Dwarf Caturra Natural – 2026-09-13
 
-![[S&W Craft Roasting – Costa Rica Hacienda Sonora Diego Guardia Dwarf Caturra Natural.jpeg]]
+![[S&W Craft Roasting – Costa Rica Hacienda Sonora Diego Guardia Dwarf Caturra Natural – 2026-09-13.jpeg]]
 
 ## Story
 

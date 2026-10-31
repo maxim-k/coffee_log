@@ -4,7 +4,7 @@ Name: Chiroso Lot 7
 Product page: https://regaliacoffee.com/products/el-jardin-chiroso-lot-7
 Photo: "[[Regalia Coffee – Chiroso Lot 7 – 2026-09-30.png]]"
 Roast date: 2026-09-30
-Open date:
+Open date: 2026-10-30
 Bag size (g): 150
 Price paid ($): 23
 Rating:
