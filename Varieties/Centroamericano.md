@@ -3,6 +3,7 @@ Parent:
   - "[[T5296]]"
   - "[[Rume Sudan]]"
 aliases:
+  - H1
 Genetic group: F1 hybrid (introgressed)
 Breeder: CIRAD-CATIE-ICAFE-IHCAFE-PROCAFE-ANACAFE
 ---
