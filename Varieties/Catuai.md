@@ -4,6 +4,8 @@ Parent:
   - "[[Caturra]]"
 aliases:
   - Catuaí
+  - Red Catuaí
+  - Yellow Catuai
 Genetic group: Bourbon-Typica group (Typica and Bourbon related)
 Breeder: Instituto Agronômico (IAC), Brazil
 ---

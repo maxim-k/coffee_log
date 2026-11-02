@@ -4,6 +4,7 @@ Parent:
   - "[[Rume Sudan]]"
 aliases:
   - H1
+  - H1 Hybrid
 Genetic group: F1 hybrid (introgressed)
 Breeder: CIRAD-CATIE-ICAFE-IHCAFE-PROCAFE-ANACAFE
 ---
