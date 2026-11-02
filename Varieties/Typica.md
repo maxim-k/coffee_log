@@ -6,6 +6,7 @@ aliases:
   - Arábigo
   - Plume Hidalgo
   - Sumatra
+  - Typica Americana
 Genetic group: Bourbon-Typica group (Typica related)
 Breeder:
 ---

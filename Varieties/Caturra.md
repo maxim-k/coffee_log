@@ -2,6 +2,8 @@
 Parent:
   - "[[Bourbon]]"
 aliases:
+  - Yellow Caturra
+  - Red Caturra
 Genetic group: Bourbon-Typica group (Bourbon related)
 Breeder: Instituto Agronômico (IAC), Brazil
 ---

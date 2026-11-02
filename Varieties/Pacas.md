@@ -2,6 +2,7 @@
 Parent:
   - "[[Bourbon]]"
 aliases:
+  - Yellow Pacas
 Genetic group: Bourbon-Typica group (Bourbon related)
 Breeder: Instituto Salvadoreño de Investigaciones del Café (ISIC)
 ---
