@@ -16,7 +16,7 @@ Region: Carrillos Alto de Poás, Alajuela
 Farm: Hacienda Sonora
 Lot:
 Variety:
-  - "[[Dwarf Caturra]]"
+  - "[[Caturra]]"
 Process: Natural process, dried in warehouse and mechanical (using renewable energy)
 Elevation: 1300 MASL
 Roast level:
@@ -56,5 +56,9 @@ Hacienda Sonora Estate has been in Alberto's family for more than a century. In 
 At Hacienda Sonora, hand-picked cherries are first dunked in water for floater separation, before the beans are dried inside the fruit (rather than after the fruit has been removed, as is the case with wet-processed or “washed” coffees). The cherries are dried on a black tarp on top of grass for 12 days using different layers depending on the drying stage (always covered at night). These controls keep temperatures low which preserves cup quality and shelf life of the coffee. After 12 days, the coffee is moved to the warehouse to rest for 3 days (at 14% humidity) before getting a final dry in a mechanical dryer (which allows better uniformity) at temperatures that never exceed 35C. Once the coffee reaches a humidity of 10.5%, it rests for 2 Months before being hauled out of the dry husk and then going through weight, screen, density and color sorting.
 
 Don Alberto also became living proof of how unique varieties could create different levels of complexity in the cup. Nowadays, Hacienda Sonora has more than 20 different varieties of plants in 80 hectares of coffee (plus 20 hectares of forest reserve) and is known to be a welcoming place for coffee lovers.
+
+## Details
+
+Variety: Dwarf Caturra
 
 ## Comments
