@@ -13,8 +13,8 @@ const [BASE_CSS, PAGE_JS, CARD_CSS, SUNBURST_JS, CHORD_JS] = ["base.css", "page.
   .map((f) => fs.readFileSync(path.join(site, f), "utf8"));
 const FOLDERS = ["Bags", "Brews", "Roasters", "Producers", "Varieties", "Flavors", "Grinders", "Brewers", "Waters"];
 // The properties shown as columns when a table lists notes of a folder.
-const COLUMNS = { Bags: ["Roaster", "Country", "Process", "Rating"], Brews: ["Date", "Bag", "Rating"],
-  Roasters: ["City", "Country"], Producers: ["Country", "Region"], Varieties: ["Genetic group", "Parent"],
+const COLUMNS = { Bags: ["Roaster", "Roast date", "Country", "Process", "Rating"], Brews: ["Date", "Bag", "Rating"],
+  Roasters: ["City", "Country"], Producers: ["Country", "Region", "Farm"], Varieties: ["Genetic group", "Parent"],
   Flavors: ["Parent"] };
 // The folders drawn as a chart above their table: the chart's title, its
 // script, and the data its figure carries, each key as a data- attribute.
@@ -115,7 +115,9 @@ function link(from, name, label) {
   const url = href(from, name);
   return url ? `<a href="${url}">${text(label)}</a>` : text(label);
 }
-const noteLink = (from, note) => `<a href="${rel(from, note.page)}">${text(note.name)}</a>`;
+// A link to a Bag shows the coffee's `Name`, not its long file name.
+const noteLink = (from, note) =>
+  `<a href="${rel(from, note.page)}">${text(isEmpty(note.props.Name) ? note.name : String(note.props.Name))}</a>`;
 const photoOf = (from, note) => {
   const photo = links(note.props.Photo ?? "")[0];
   return photo && href(from, photo);
