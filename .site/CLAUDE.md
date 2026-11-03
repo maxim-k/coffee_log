@@ -20,13 +20,14 @@ one template. The only build dependency is `marked`.
   page adds `card.css`, a Card after shadcn/ui's, cut to an image, a title
   and a description.
 - A third departure, also the user's choice: two folder pages draw a chart
-  above their table (`CHARTS` in `build.mjs`, with d3 from jsDelivr, only on
-  those pages). Flavors is a zoomable sunburst of the SCA wheel by `Wheel`
-  (`sunburst.js`), its families placed and colored in the order `hues`
-  gives.
-  Varieties is a chord diagram of `Parent` links (`chord.js`), colored by
-  genetic group. Neither uses the `--chart` tokens: five can't tell nine
-  families or six groups apart.
+  (`CHARTS` in `build.mjs`, with d3 from jsDelivr, only on those pages).
+  Flavors is a zoomable sunburst of the SCA wheel by `Wheel` (`sunburst.js`)
+  above its table, its families placed and colored in the order `hues`
+  gives. Varieties is an arc diagram of `Parent` links (`parentage.js`) in
+  place of its table: one row per variety, genetic groups as bands, rows
+  sorted by family so arcs come in runs of a like shape (the sort's rules are
+  in the script's comment). Neither uses the `--chart` tokens: five can't
+  tell nine families or six groups apart.
 - This folder and `.github/` exist only on the `site` branch, which
   `.github/workflows/pages.yml` deploys on every push. Vault changes come
   from `main` by merge (see the root `CLAUDE.md`).
