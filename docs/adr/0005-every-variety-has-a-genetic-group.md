@@ -11,7 +11,10 @@ introduction where it speaks of the variety, or else a genetic study or a
 breeding institute. A variety no credible source places stays empty.
 
 When two credible sources disagree, the note cites both, and `Parent` and
-`Genetic group` stay empty until the sources agree. Farm varieties such as
+`Genetic group` stay empty until the sources agree. When they disagree only
+on the sub-label inside one group, such as Yellow Bourbon's `(Bourbon
+related)` against `(Typica and Bourbon related)`, the note fills the group
+with the more common reading and keeps the other in its body. Farm varieties such as
 Pink Bourbon, Chiroso and Ají came from no breeding program, and seed sold
 under one name is often a mix, so two tests can sample different plants.
 Cenicafé's 2025 fingerprinting matched these three to Colombian lines and
