@@ -80,8 +80,10 @@ for (const figure of document.querySelectorAll("figure[data-parentage]")) {
     const svg = d3.create("svg").attr("viewBox", [0, 0, width, height]).attr("width", width).attr("height", height)
       .style("font-size", narrow ? "11px" : null);
     svg.append("title").text(figure.dataset.title);
-    svg.append("defs").append("marker").attr("id", "arrow").attr("viewBox", "-4 -4 8 8").attr("markerWidth", 6).attr("markerHeight", 6).attr("orient", "auto")
-      .append("path").attr("d", "M-4,-3.5L2,0L-4,3.5Z").attr("fill", "context-stroke");
+    // One arrowhead per group colour: Safari doesn't support context-stroke.
+    svg.append("defs").selectAll("marker").data(groups).join("marker").attr("id", (g, i) => `arrow${i}`)
+      .attr("viewBox", "-4 -4 8 8").attr("markerWidth", 6).attr("markerHeight", 6).attr("orient", "auto")
+      .append("path").attr("d", "M-4,-3.5L2,0L-4,3.5Z").attr("fill", (g) => color(g));
     const bands = svg.append("g").selectAll("g").data(d3.groups(nodes, group)).join("g");
     bands.append("rect").attr("x", 0).attr("width", 3).attr("y", ([, ns]) => y(ns[0]) - 9)
       .attr("height", ([, ns]) => y(ns.at(-1)) - y(ns[0]) + 18).attr("fill", ([g]) => color(g));
@@ -89,7 +91,7 @@ for (const figure of document.querySelectorAll("figure[data-parentage]")) {
       .text(([g]) => g.toUpperCase());
     const edge = svg.append("g").attr("fill", "none").attr("stroke-width", 1.3).attr("stroke-opacity", 0.55)
       .selectAll("path").data(edges).join("path")
-      .attr("stroke", (d) => color(group(d.p))).attr("marker-end", "url(#arrow)")
+      .attr("stroke", (d) => color(group(d.p))).attr("marker-end", (d) => `url(#arrow${band(d.p)})`)
       .attr("d", ({ p, c }) => {
         const a = y(p), b = y(c), ry = Math.abs(b - a) / 2, rx = Math.min(ry, maxRx);
         return `M${x0 + 4},${a}A${rx},${ry} 0 0,${b > a ? 1 : 0} ${x0 + 4},${b}`;
