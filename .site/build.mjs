@@ -36,10 +36,8 @@ const CHARTS = {
         "are the first generation of a cross between two distinct Arabica parents.") + `</p>\n<p>` +
       text("The catalog doesn't cover every variety that roasters sell, so some notes cite other sources, such as " +
         "genetic studies and breeding institutes. A variety joins a catalog group when a credible source places it " +
-        "there. If sources disagree only on details inside one group, the variety still joins that group: both " +
-        "accounts of Yellow Bourbon's origin lead to Bourbon-Typica. If sources name different groups, or no credible " +
-        "source names one, the variety stays Ungrouped. For Pink Bourbon, two labs found an Ethiopian landrace, and " +
-        "Cenicafé found it close to the offspring of Variedad Colombia.") + `</p>\n`,
+        "there. If sources disagree only on details inside one group, the variety still joins that group. If sources " +
+        "name different groups, or no credible source names one, the variety stays Ungrouped.") + `</p>\n`,
     data: (from, list) => ({ parentage: parentage(from, list) }),
   },
   Flavors: {
