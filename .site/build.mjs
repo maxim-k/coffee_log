@@ -19,11 +19,21 @@ const COLUMNS = { Bags: ["Roaster", "Roast date", "Country", "Process", "Rating"
 // The folders drawn as a chart: the chart's title, its script, and the data
 // its figure carries, each key as a data- attribute. The chart goes above the
 // folder's table, or replaces it (`alone`) when it lists every note itself.
+// `intro` is a paragraph before the figure, as HTML for the page at `from`.
 const CHARTS = {
   Varieties: {
     title: "Parentage of coffee varieties",
     js: PARENTAGE_JS,
     alone: true,
+    intro: (from) => text("Parents and genetic groups come from ") +
+      link(from, "WCR_Coffee_Varieties_Catalog.pdf", "World Coffee Research's Coffee Varieties Catalog") +
+      text(" (2025). A parent is the variety that this one was selected or mutated from, or both parents of a cross. " +
+        "The arrow points at the offspring. The groups are the catalog's. Bourbon-Typica holds the pure Arabica lines. " +
+        "Introgressed holds the lines that carry genes from another species, nearly always Robusta through Timor Hybrid, " +
+        "whichever their other parent is. F1 hybrid holds first-generation crosses, which don't breed true from seed. " +
+        "A variety that the catalog doesn't list takes the group that a genetic study or its breeder places it in, " +
+        "and its note cites the source. A variety stays ungrouped when no source places it, or when sources disagree, " +
+        "as they do for Pink Bourbon and Chiroso."),
     data: (from, list) => ({ parentage: parentage(from, list) }),
   },
   Flavors: {
@@ -341,8 +351,9 @@ function folderPage(folder) {
   if (!chart) return layout(from, folder, table, folder);
   const data = Object.entries(chart.data(from, list)).map(([k, v]) => ` data-${k}="${esc(JSON.stringify(v))}"`);
   const figure = `<figure data-title="${esc(chart.title)}"${data.join("")}></figure>\n`;
+  const intro = chart.intro ? `<p>${chart.intro(from)}</p>\n` : "";
   const js = `\n<script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>\n<script>${chart.js}</script>`;
-  return layout(from, folder, figure + (chart.alone ? "" : table), folder, "", js);
+  return layout(from, folder, intro + figure + (chart.alone ? "" : table), folder, "", js);
 }
 
 // An arc diagram's data: every variety as { name, group, href, parents },
