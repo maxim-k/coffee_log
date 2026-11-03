@@ -85,7 +85,7 @@ for (const figure of document.querySelectorAll("figure[data-parentage]")) {
     const bands = svg.append("g").selectAll("g").data(d3.groups(nodes, group)).join("g");
     bands.append("rect").attr("x", 0).attr("width", 3).attr("y", ([, ns]) => y(ns[0]) - 9)
       .attr("height", ([, ns]) => y(ns.at(-1)) - y(ns[0]) + 18).attr("fill", ([g]) => color(g));
-    bands.append("text").attr("x", 10).attr("y", ([, ns]) => y(ns[0]) - 17).attr("font-size", "0.8em").attr("letter-spacing", "0.04em")
+    bands.append("text").attr("x", 10).attr("y", ([, ns]) => y(ns[0]) - 17).attr("letter-spacing", "0.04em")
       .text(([g]) => g.toUpperCase());
     const edge = svg.append("g").attr("fill", "none").attr("stroke-width", 1.3).attr("stroke-opacity", 0.55)
       .selectAll("path").data(edges).join("path")
@@ -103,19 +103,22 @@ for (const figure of document.querySelectorAll("figure[data-parentage]")) {
     node.append("title").text((n) =>
       `${n}, ${group(n)}\nParents: ${parents(n).join(", ") || "none"}\nOffspring: ${children(n).join(", ") || "none"}`);
 
-    // Keep one variety's arcs and relatives, fading the rest. On a touch
-    // screen a tap on a name does this; a second tap on it opens the note.
-    let picked = null;
+    // Keep one variety's arcs and relatives, fading the rest, the variety
+    // itself in the link colour. On a touch
+    // screen a tap on a name does this (mouseenter fires before click), and
+    // only a second tap on the same name follows the link.
+    let tapped = null;
     const keep = (n) => {
-      picked = n;
+      if (!n) tapped = null;
       const set = n && new Set([n, ...nbrs(n)]);
       edge.attr("opacity", n ? ({ p, c }) => (p === n || c === n ? 1 : 0.06) : null);
       node.select("text").attr("opacity", n ? (o) => (set.has(o) ? 1 : 0.35) : null)
-        .attr("font-weight", n ? (o) => (set.has(o) ? 600 : null) : null);
+        .attr("font-weight", n ? (o) => (set.has(o) ? 600 : null) : null)
+        .attr("fill", (o) => (o === n ? "var(--link)" : "currentColor"));
     };
     node.on("mouseenter", (e, n) => keep(n)).on("mouseleave", () => keep(null))
       .on("focusin", (e, n) => keep(n)).on("focusout", () => keep(null))
-      .on("click", (e, n) => { if (touch && picked !== n) { e.preventDefault(); keep(n); } });
+      .on("click", (e, n) => { if (touch && tapped !== n) { e.preventDefault(); keep(n); tapped = n; } });
     svg.on("click", (e) => { if (e.target === svg.node()) keep(null); });
 
     figure.replaceChildren(svg.node());

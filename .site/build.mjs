@@ -18,15 +18,12 @@ const COLUMNS = { Bags: ["Roaster", "Roast date", "Country", "Process", "Rating"
   Flavors: ["Parent"] };
 // The folders drawn as a chart: the chart's title, its script, and the data
 // its figure carries, each key as a data- attribute. The chart goes above the
-// folder's table, or replaces it (`alone`) when it lists every note itself,
-// with `intro` as a paragraph before it.
+// folder's table, or replaces it (`alone`) when it lists every note itself.
 const CHARTS = {
   Varieties: {
     title: "Parentage of coffee varieties",
     js: PARENTAGE_JS,
     alone: true,
-    intro: "Each band is a genetic group, each arc runs from a parent to its offspring, and a family stacks under " +
-      "its parent. Hover a name to see only its relatives; on a phone, tap it, and tap again to open it.",
     data: (from, list) => ({ parentage: parentage(from, list) }),
   },
   Flavors: {
@@ -344,9 +341,8 @@ function folderPage(folder) {
   if (!chart) return layout(from, folder, table, folder);
   const data = Object.entries(chart.data(from, list)).map(([k, v]) => ` data-${k}="${esc(JSON.stringify(v))}"`);
   const figure = `<figure data-title="${esc(chart.title)}"${data.join("")}></figure>\n`;
-  const intro = chart.intro ? `<p>${text(chart.intro)}</p>\n` : "";
   const js = `\n<script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>\n<script>${chart.js}</script>`;
-  return layout(from, folder, intro + figure + (chart.alone ? "" : table), folder, "", js);
+  return layout(from, folder, figure + (chart.alone ? "" : table), folder, "", js);
 }
 
 // An arc diagram's data: every variety as { name, group, href, parents },
