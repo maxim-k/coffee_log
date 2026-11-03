@@ -19,21 +19,27 @@ const COLUMNS = { Bags: ["Roaster", "Roast date", "Country", "Process", "Rating"
 // The folders drawn as a chart: the chart's title, its script, and the data
 // its figure carries, each key as a data- attribute. The chart goes above the
 // folder's table, or replaces it (`alone`) when it lists every note itself.
-// `intro` is a paragraph before the figure, as HTML for the page at `from`.
+// `intro` is the text before the figure, as HTML for the page at `from`.
 const CHARTS = {
   Varieties: {
     title: "Parentage of coffee varieties",
     js: PARENTAGE_JS,
     alone: true,
-    intro: (from) => text("Parents and genetic groups come from ") +
+    intro: (from) => `<p>${text("Most of this chart comes from ")}` +
       link(from, "WCR_Coffee_Varieties_Catalog.pdf", "World Coffee Research's Coffee Varieties Catalog") +
-      text(" (2025). A parent is the variety that this one was selected or mutated from, or both parents of a cross. " +
-        "The arrow points at the offspring. The groups are the catalog's. Bourbon-Typica holds the pure Arabica lines. " +
-        "Introgressed holds the lines that carry genes from another species, nearly always Robusta through Timor Hybrid, " +
-        "whichever their other parent is. F1 hybrid holds first-generation crosses, which don't breed true from seed. " +
-        "A variety that the catalog doesn't list takes the group that a genetic study or its breeder places it in, " +
-        "and its note cites the source. A variety stays ungrouped when no source places it, or when sources disagree, " +
-        "as they do for Pink Bourbon and Chiroso."),
+      text(" (2025), which says what each variety descends from and sorts varieties into groups by their genes. " +
+        "Each arrow points from a variety to one that came from it, by crossing two plants, by a mutation, or by " +
+        "growers picking out the best plants. Ethiopian landraces are traditional varieties from the forests where " +
+        "Arabica evolved. The Bourbon-Typica group descends from the few trees taken out of Yemen from the late 1600s. " +
+        "Introgressed varieties carry genes from another species, mostly Robusta. A cross of Caturra and Timor Hybrid " +
+        "is Introgressed, although Caturra is Bourbon-Typica, because Timor Hybrid carries Robusta genes. F1 hybrids " +
+        "are the first generation of a cross between two distinct Arabica parents.") + `</p>\n<p>` +
+      text("The catalog doesn't cover every variety that roasters sell, so some notes cite other sources, such as " +
+        "genetic studies and breeding institutes. A variety joins a catalog group when a credible source places it " +
+        "there. If sources disagree only on details inside one group, the variety still joins that group: both " +
+        "accounts of Yellow Bourbon's origin lead to Bourbon-Typica. If sources name different groups, or no credible " +
+        "source names one, the variety stays Ungrouped. For Pink Bourbon, two labs found an Ethiopian landrace, and " +
+        "Cenicafé found it close to the offspring of Variedad Colombia.") + `</p>\n`,
     data: (from, list) => ({ parentage: parentage(from, list) }),
   },
   Flavors: {
@@ -351,7 +357,7 @@ function folderPage(folder) {
   if (!chart) return layout(from, folder, table, folder);
   const data = Object.entries(chart.data(from, list)).map(([k, v]) => ` data-${k}="${esc(JSON.stringify(v))}"`);
   const figure = `<figure data-title="${esc(chart.title)}"${data.join("")}></figure>\n`;
-  const intro = chart.intro ? `<p>${chart.intro(from)}</p>\n` : "";
+  const intro = chart.intro?.(from) ?? "";
   const js = `\n<script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>\n<script>${chart.js}</script>`;
   return layout(from, folder, intro + figure + (chart.alone ? "" : table), folder, "", js);
 }
