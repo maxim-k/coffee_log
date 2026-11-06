@@ -9,20 +9,36 @@ import { marked } from "marked";
 const site = import.meta.dirname;
 const vault = path.resolve(site, "..");
 const out = path.resolve(site, "dist");
-const [BASE_CSS, PAGE_JS, CARD_CSS, SUNBURST_JS, CHORD_JS] = ["base.css", "page.js", "card.css", "sunburst.js", "chord.js"]
+const [BASE_CSS, PAGE_JS, CARD_CSS, SUNBURST_JS, PARENTAGE_JS] = ["base.css", "page.js", "card.css", "sunburst.js", "parentage.js"]
   .map((f) => fs.readFileSync(path.join(site, f), "utf8"));
 const FOLDERS = ["Bags", "Brews", "Roasters", "Producers", "Varieties", "Flavors", "Grinders", "Brewers", "Waters"];
 // The properties shown as columns when a table lists notes of a folder.
-const COLUMNS = { Bags: ["Roaster", "Country", "Process", "Rating"], Brews: ["Date", "Bag", "Rating"],
-  Roasters: ["City", "Country"], Producers: ["Country", "Region"], Varieties: ["Genetic group", "Parent"],
+const COLUMNS = { Bags: ["Roaster", "Roast date", "Country", "Process", "Rating"], Brews: ["Date", "Bag", "Rating"],
+  Roasters: ["City", "Country"], Producers: ["Country", "Region", "Farm"], Varieties: ["Genetic group", "Parent"],
   Flavors: ["Parent"] };
-// The folders drawn as a chart above their table: the chart's title, its
-// script, and the data its figure carries, each key as a data- attribute.
+// The folders drawn as a chart: the chart's title, its script, and the data
+// its figure carries, each key as a data- attribute. The chart goes above the
+// folder's table, or replaces it (`alone`) when it lists every note itself.
+// `intro` is the text before the figure, as HTML for the page at `from`.
 const CHARTS = {
   Varieties: {
     title: "Parentage of coffee varieties",
-    js: CHORD_JS,
-    data: (from, list) => ({ chord: chord(from, list) }),
+    js: PARENTAGE_JS,
+    alone: true,
+    intro: (from) => `<p>${text("Most of this chart comes from ")}` +
+      link(from, "WCR_Coffee_Varieties_Catalog.pdf", "World Coffee Research's Coffee Varieties Catalog") +
+      text(" (2025), which says what each variety descends from and sorts varieties into groups by their genes. " +
+        "Each arrow points from a variety to one that came from it, by crossing two plants, by a mutation, or by " +
+        "growers picking out the best plants. Ethiopian landraces are traditional varieties from the forests where " +
+        "Arabica evolved. The Bourbon-Typica group descends from the few trees taken out of Yemen from the late 1600s. " +
+        "Introgressed varieties carry genes from another species, mostly Robusta. A cross of Caturra and Timor Hybrid " +
+        "is Introgressed, although Caturra is Bourbon-Typica, because Timor Hybrid carries Robusta genes. F1 hybrids " +
+        "are the first generation of a cross between two distinct Arabica parents.") + `</p>\n<p>` +
+      text("The catalog doesn't cover every variety that roasters sell, so some notes cite other sources, such as " +
+        "genetic studies and breeding institutes. A variety joins a catalog group when a credible source places it " +
+        "there. If sources disagree only on details inside one group, the variety still joins that group. If sources " +
+        "name different groups, or no credible source names one, the variety stays Ungrouped.") + `</p>\n`,
+    data: (from, list) => ({ parentage: parentage(from, list) }),
   },
   Flavors: {
     title: "Flavors on the SCA flavor wheel",
@@ -115,7 +131,9 @@ function link(from, name, label) {
   const url = href(from, name);
   return url ? `<a href="${url}">${text(label)}</a>` : text(label);
 }
-const noteLink = (from, note) => `<a href="${rel(from, note.page)}">${text(note.name)}</a>`;
+// A link to a Bag shows the coffee's `Name`, not its long file name.
+const noteLink = (from, note) =>
+  `<a href="${rel(from, note.page)}">${text(isEmpty(note.props.Name) ? note.name : String(note.props.Name))}</a>`;
 const photoOf = (from, note) => {
   const photo = links(note.props.Photo ?? "")[0];
   return photo && href(from, photo);
@@ -337,25 +355,23 @@ function folderPage(folder) {
   if (!chart) return layout(from, folder, table, folder);
   const data = Object.entries(chart.data(from, list)).map(([k, v]) => ` data-${k}="${esc(JSON.stringify(v))}"`);
   const figure = `<figure data-title="${esc(chart.title)}"${data.join("")}></figure>\n`;
+  const intro = chart.intro?.(from) ?? "";
   const js = `\n<script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>\n<script>${chart.js}</script>`;
-  return layout(from, folder, figure + table, folder, "", js);
+  return layout(from, folder, intro + figure + (chart.alone ? "" : table), folder, "", js);
 }
 
-// A chord diagram's data, { names, groups, hrefs, matrix }: the varieties
-// that have a parent or offspring, sorted by group so each group forms one
-// band, and matrix[parent][offspring] = 1. A group is the text before its
-// parenthesis: "Introgressed (Catimor related)" is "Introgressed".
-function chord(from, list) {
-  const group = (n) => (n.props["Genetic group"] || "Ungrouped").replace(/\s*\(.*$/, "");
-  const edges = list.flatMap((n) => [n.props.Parent ?? []].flat().flatMap(links)
-    .map((p) => notes.get(p)).filter(Boolean).map((p) => [p, n]));
-  const linked = new Set(edges.flat());
-  const nodes = list.filter((n) => linked.has(n))
-    .sort((a, b) => group(a).localeCompare(group(b)) || a.name.localeCompare(b.name));
-  const index = new Map(nodes.map((n, i) => [n, i]));
-  const matrix = nodes.map(() => nodes.map(() => 0));
-  for (const [p, c] of edges) matrix[index.get(p)][index.get(c)] = 1;
-  return { names: nodes.map((n) => n.name), groups: nodes.map(group), hrefs: nodes.map((n) => rel(from, n.page)), matrix };
+// An arc diagram's data: every variety as { name, group, href, parents },
+// parents being the names of its Parent links that are varieties. A group is
+// the text before its parenthesis: "Introgressed (Catimor related)" is
+// "Introgressed"; a variety without one is "Ungrouped". The script sorts them.
+function parentage(from, list) {
+  const names = new Set(list.map((n) => n.name));
+  return list.map((n) => ({
+    name: n.name,
+    group: (n.props["Genetic group"] || "Ungrouped").replace(/\s*\(.*$/, ""),
+    href: rel(from, n.page),
+    parents: [n.props.Parent ?? []].flat().flatMap(links).map((p) => notes.get(p)?.name).filter((p) => names.has(p)),
+  }));
 }
 
 // A sunburst's tree, { name, href, children }: each note sits at the end of
