@@ -98,7 +98,8 @@ Set `Roaster` and `Producer` to `"[[Name]]"`, using the names as the roaster
 writes them; several producers become a list of links. For each name with no
 note in `Roasters/` or `Producers/`, create one from its template. Fill a
 Roaster's `Website`, `City` and `Country` from its site, and a Producer's
-`Country` and `Region` from the product page.
+`Country` and `Region` from the product page. Add the Bag's `Farm` to the
+`Farm` list of each linked Producer that doesn't list it yet.
 
 `Varieties/` is the dictionary of varieties. Split the roaster's variety text
 into its parts:

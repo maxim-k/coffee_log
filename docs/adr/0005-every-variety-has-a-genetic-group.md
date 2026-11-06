@@ -10,6 +10,16 @@ source places it in, and its note cites that source: the catalog's own
 introduction where it speaks of the variety, or else a genetic study or a
 breeding institute. A variety no credible source places stays empty.
 
+When two credible sources disagree, the note cites both, and `Parent` and
+`Genetic group` stay empty until the sources agree. When they disagree only
+on the sub-label inside one group, such as Yellow Bourbon's `(Bourbon
+related)` against `(Typica and Bourbon related)`, the note fills the group
+with the more common reading and keeps the other in its body. Farm varieties such as
+Pink Bourbon, Chiroso and Ají came from no breeding program, and seed sold
+under one name is often a mix, so two tests can sample different plants.
+Cenicafé's 2025 fingerprinting matched these three to Colombian lines and
+Red Bourbon, while other tests found Ethiopian landraces.
+
 The catalog's Robusta groups (Congo, Guinea, Uganda) say nothing of the
 species, so a Robusta's group reads `Robusta (<catalog group>)`, and
 Robusta itself is `Robusta`. Nemaya, which the catalog places in Unknown,

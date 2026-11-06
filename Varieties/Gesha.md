@@ -4,6 +4,8 @@ Parent:
 aliases:
   - Geisha
   - Geisha (Panama)
+  - Yellow Gesha
+  - Red Gesha
 Genetic group: Ethiopian landrace
 Breeder:
 ---

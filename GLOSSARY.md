@@ -8,7 +8,8 @@ from them, so I can see which coffees, roasters and brewing setups I like.
 **Bag**:
 One physical bag of coffee I bought, from one roast on one roast date. Roasts
 of the same coffee vary, so the Bag, not the product, is the unit I rate and
-brew from.
+brew from. A coffee I had at a café can be a Bag too, without size, price
+or roast date.
 _Avoid_: Coffee (when meaning the thing I bought), purchase
 
 **Rating**:
@@ -38,8 +39,9 @@ SCA flavor wheel, which groups the lexicon into nine families.
 _Avoid_: Note (when meaning a Flavor), descriptor
 
 **Brew**:
-One cup I made from a Bag, with its brewing parameters: dose, water
-temperature, grind setting, Grinder, Brewer, Water and total brew time.
+One cup from a Bag: a pour-over or an espresso I made, with its brewing
+parameters (dose, water temperature, grind setting, Grinder, Brewer, Water
+and brew time), or a cup I had at a café, with the drink and the place.
 _Avoid_: Cup, session, recipe
 
 **Grinder**:
@@ -69,8 +71,8 @@ gap by roughly 11 µm, by my own estimate.
 _Avoid_: Grind size, burr travel
 
 **Brewer**:
-The device I make a Brew with, such as a Hario V60 or an Orea O1; it stands
-for the brewing method.
+The device I make a Brew with, such as a Hario V60, an Orea O1 or an
+espresso machine; it stands for the brewing method.
 _Avoid_: Dripper, method
 
 **Water**:

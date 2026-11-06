@@ -4,7 +4,7 @@ Name: Faver Ninco Pink Bourbon
 Product page: https://september.coffee/en-us/products/faver-ninco-washed-colombia-pink-bourbon
 Photo: "[[September Coffee – Faver Ninco Pink Bourbon – 2026-10-06.jpg]]"
 Roast date: 2026-10-06
-Open date:
+Open date: 2026-11-03
 Bag size (g): 250
 Price paid ($): 25
 Rating:
