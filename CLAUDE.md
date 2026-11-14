@@ -49,6 +49,7 @@ folders show up there as untracked.
 ## Skills
 
 - `add-bag` for every new Bag.
+- `add-brew` for every new Brew.
 - `conventional-commit` for every commit; no scope until a `SCOPES.md` exists.
 
 ## Not now
