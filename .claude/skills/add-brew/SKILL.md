@@ -49,6 +49,9 @@ Pour-over`, `Brew - Espresso` or `Brew - Cafe`, and keep its property order.
   as `1:<water or yield ÷ dose>`. Round it to one decimal place and drop a
   trailing `.0`.
 - `Grind` holds the dial as set (`1-0-5`). Derive nothing from it.
+- `Pour` is the user's rough split of the water, so it need not add up to `Water
+  weight (g)`. Never flag the gap.
+- "Drawdown" means `Total time`.
 - A property neither the source nor the user fills stays empty.
 
 Name the note `Brews/YYYY-MM-DD - N.md`, where N is 1 plus the number of
