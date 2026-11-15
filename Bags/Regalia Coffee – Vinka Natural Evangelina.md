@@ -21,7 +21,9 @@ Process: Controlled fermentation Natural
 Elevation: 1640 MASL
 Roast level:
 Tasting notes:
-  - "[[Fruity|layered fruit]]"
+  - "[[Other Fruit|cantaloupe]]"
+  - "[[Jasmine|jasmine]]"
+  - silky
 ---
 
 # Regalia Coffee – Vinka Natural Evangelina
@@ -43,5 +45,7 @@ This slow and controlled drying stabilized water activity and supported a cup wi
 ## Details
 
 Process: Controlled Fermentation, Natural
+
+Label: Cantaloupe, Jasmine, Silky
 
 ## Comments
